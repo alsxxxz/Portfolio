@@ -11,19 +11,19 @@
        --bg: 배경색
        --surface: 카드/모달 배경
        --border: 선 색상
-       --accent: 메인 포인트 (화이트)
-       --accent2: 서브 포인트 (실버)
+       --accent: 메인 포인트 (블루)
+       --accent2: 서브 포인트 (미디엄 블루)
        --text: 기본 텍스트
        --muted: 흐린 텍스트 (날짜, 설명)
     ============================================= */
     :root {
-      --bg: #22232b;
-      --surface: #2c2d38;
-      --border: #3e3f4e;
-      --accent: #f4f4ff;
-      --accent2: #8890b0;
-      --text: #dddde8;
-      --muted: #7a7b8e;
+      --bg: #ffffff;
+      --surface: #f4f7fb;
+      --border: #dde3ed;
+      --accent: #1a56db;
+      --accent2: #3b7de8;
+      --text: #111827;
+      --muted: #5a6782;
       --heading: 'Playfair Display', serif;
       --body: 'DM Sans', sans-serif;
       --mono: 'JetBrains Mono', monospace;
@@ -55,7 +55,7 @@
       justify-content: flex-end;
       gap: 2rem;
       padding: 1.4rem 3rem;
-      background: rgba(34,35,43,0.88);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -158,6 +158,7 @@
       font-family: var(--mono);
       font-size: 0.7rem;
       gap: 0.5rem;
+      border: 1px solid var(--border);
     }
 
     /* 좌측 하단 "scroll to explore" 힌트 */
@@ -234,10 +235,10 @@
     .about-bio {
       font-size: 1rem;
       line-height: 1.85;
-      color: #b0b0c8;
+      color: #374151;
     }
 
-    .about-bio strong { color: var(--text); font-weight: 500; }
+    .about-bio strong { color: var(--text); font-weight: 600; }
 
     /* GitHub / 이메일 / HuggingFace 링크 목록 */
     .about-links {
@@ -284,7 +285,7 @@
     /* 기술 스택 각 항목 (› 불릿 포함) */
     .skill-group ul li {
       font-size: 0.88rem;
-      color: #9a9a92;
+      color: #475569;
       padding-left: 1rem;
       position: relative;
     }
@@ -299,10 +300,10 @@
     /* 프로그래밍 언어 행 (Skilled / Familiar) */
     .lang-row {
       font-size: 0.88rem;
-      color: #9a9a92;
+      color: #475569;
     }
 
-    .lang-row strong { color: var(--text); font-weight: 500; }
+    .lang-row strong { color: var(--text); font-weight: 600; }
 
     /* =============================================
        History 섹션
@@ -468,7 +469,7 @@
     .portfolio-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(14,14,18,0.88);
+      background: rgba(26,86,219,0.88);
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -484,7 +485,7 @@
       font-family: var(--mono);
       font-size: 0.62rem;
       letter-spacing: 0.2em;
-      color: var(--accent);
+      color: #a5c8ff;
       text-transform: uppercase;
       margin-bottom: 0.3rem;
     }
@@ -493,7 +494,7 @@
     .portfolio-name {
       font-size: 0.92rem;
       font-weight: 500;
-      color: var(--text);
+      color: #ffffff;
     }
 
     /* =============================================
@@ -576,7 +577,7 @@
     /* 모달 본문 텍스트 / 리스트 */
     .modal-section p, .modal-section ul {
       font-size: 0.9rem;
-      color: #9a9a92;
+      color: #374151;
       line-height: 1.75;
     }
 
@@ -606,8 +607,8 @@
     /* 모달 내 성과 배지 (F1-Score 0.87 등) */
     .modal-stat {
       display: inline-block;
-      background: rgba(232, 232, 240, 0.08);
-      border: 1px solid rgba(232, 232, 240, 0.2);
+      background: rgba(26, 86, 219, 0.08);
+      border: 1px solid rgba(26, 86, 219, 0.25);
       color: var(--accent);
       font-family: var(--mono);
       font-size: 0.78rem;
@@ -824,7 +825,7 @@
   <div class="portfolio-grid" id="portfolioGrid">
 
     <div class="portfolio-card" data-cat="nlp" onclick="openModal('snatch')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#2a2d3e,#1e2030);">🔍</div>
+      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#dbeafe,#eff6ff);">🔍</div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">NLP · Pipeline</div>
         <div class="portfolio-name">SNATCH — F&B 트렌드 분석</div>
@@ -832,7 +833,7 @@
     </div>
 
     <div class="portfolio-card" data-cat="others" onclick="openModal('lipreading')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#3a2d2a,#2e2020);">🎤</div>
+      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#e0e7ff,#f0f4ff);">🎤</div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">AI · Computer Vision</div>
         <div class="portfolio-name">립리딩 스마트 자막 · 장관상</div>
@@ -840,7 +841,7 @@
     </div>
 
     <div class="portfolio-card" data-cat="data" onclick="openModal('esb')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#242838,#1a1e30);">⚙️</div>
+      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#bfdbfe,#e0f2fe);">⚙️</div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">ML · Log Analysis</div>
         <div class="portfolio-name">ESB 로그 시계열 오류 감지</div>
@@ -848,7 +849,7 @@
     </div>
 
     <div class="portfolio-card" data-cat="data" onclick="openModal('mentalhealth')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#2d2a3e,#1e202e);">💚</div>
+      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#d1fae5,#e0f7ef);">💚</div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">Data Analysis · NLP</div>
         <div class="portfolio-name">정신건강 서비스 · 만족도 87%</div>
@@ -856,7 +857,7 @@
     </div>
 
     <div class="portfolio-card" data-cat="data" onclick="openModal('sqlpipeline')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#263038,#1e2830);">🗄️</div>
+      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#e0f2fe,#f0f9ff);">🗄️</div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">SQL · Automation</div>
         <div class="portfolio-name">SQL 자동화 파이프라인</div>
