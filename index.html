@@ -606,12 +606,16 @@
       object-fit: cover;
     }
 
-    /* 여러 이미지 나열 (선택) */
+    /* 여러 이미지 나열 */
     .modal-images {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
       margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .modal-images { grid-template-columns: 1fr; }
     }
 
     .modal-images .modal-image {
@@ -960,11 +964,8 @@
       <div class="modal-title">SNATCH — F&B 트렌드 분석 대시보드</div>
 
       <div class="modal-image">
-        <img src="https://picsum.photos/seed/snatch/860/484" alt="SNATCH 대시보드 메인">
+        <img src="images/snatch_main.png" alt="SNATCH 대시보드 메인">
       </div>
-      <p style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);margin-top:-2rem;margin-bottom:2rem;text-align:center;letter-spacing:0.05em;">
-        ↑ 실제 스크린샷으로 교체하세요
-      </p>
 
       <p class="modal-desc">
         빠른 F&B 트렌드 변화를 알아채기 어려운 편의점 운영자를 위해 댓글 기반 소비자 분석 대시보드를 개발했습니다.
@@ -986,10 +987,10 @@
       <div class="modal-section">
         <h4>상세 이미지</h4>
         <div class="modal-images">
-          <div class="modal-image"><img src="https://picsum.photos/seed/snatch2/430/242" alt="파이프라인 구조"></div>
-          <div class="modal-image"><img src="https://picsum.photos/seed/snatch3/430/242" alt="감성분석 결과"></div>
+          <div class="modal-image"><img src="images/snatch_1.png" alt="스크린샷 1"></div>
+          <div class="modal-image"><img src="images/snatch_2.png" alt="스크린샷 2"></div>
+          <div class="modal-image"><img src="images/snatch_3.png" alt="스크린샷 3"></div>
         </div>
-        <p style="font-size:0.7rem;color:var(--muted);font-family:var(--mono);text-align:center;letter-spacing:0.05em;">↑ 실제 스크린샷으로 교체하세요</p>
       </div>
 
       <div class="modal-section">
