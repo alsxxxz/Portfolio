@@ -870,7 +870,7 @@
             <div class="timeline-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
             <div class="timeline-desc">Safety Code 우수 평가자 선정</div>
           </div>
-    
+        </div>
       </div>
     </div>
   </div>
@@ -1222,27 +1222,6 @@
       </div>
     `
   };
-        <div>
-          <span class="modal-stat">수작업 전처리 → 전자동화</span>
-          <span class="modal-stat">Random Forest 위험군 분류</span>
-          <span class="modal-stat">전체 연구 속도 향상</span>
-        </div>
-      </div>
-      <div class="modal-section">
-        <h4>주요 작업</h4>
-        <ul>
-          <li>IoT 라이프로그 데이터(걸음수·사진수·조도·스트레스 지수) 수집 및 전처리</li>
-          <li>협력사 SQL Server와 Python 모델 직접 연동</li>
-          <li>데이터 추출 → 분류 → 결과 저장 일괄 자동화 시스템 완성</li>
-          <li>수작업 시간을 분석 고도화에 재배분 → 연구 속도 전반 향상</li>
-        </ul>
-      </div>
-      <div class="modal-section">
-        <h4>기술 스택</h4>
-        <p>Python · SQL Server · Random Forest · IoT 라이프로그 데이터</p>
-      </div>
-    `
-  };
 
   // ==============================
   // 프로젝트 상세 페이지 열기
@@ -1277,4 +1256,11 @@
     document.querySelectorAll('.portfolio-card').forEach(card => {
       if (cat === 'all' || card.dataset.cat === cat) {
         card.style.display = '';
-      } el
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>
