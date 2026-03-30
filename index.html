@@ -757,6 +757,113 @@
       .detail-nav { padding: 0.8rem 1.2rem; }
     }
     /* =============================================
+       스킬 배지 (Skilled / Familiar)
+    ============================================= */
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; margin-bottom: 1.2rem; }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      padding: 0.3rem 0.75rem;
+      letter-spacing: 0.05em;
+    }
+    .skill-tag.skilled { background: var(--accent); color: #fff; }
+    .skill-tag.familiar { border: 1px solid var(--accent2); color: var(--accent2); }
+
+    /* 자격증 / 어학 배지 */
+    .cert-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+    }
+    .cert-badge {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      padding: 0.3rem 0.8rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+
+    /* 개인정보 칩 목록 */
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .profile-meta span { display: flex; gap: 0.6rem; }
+    .profile-meta strong { color: var(--text); min-width: 4rem; }
+
+    /* =============================================
+       단일 수직 타임라인 (History)
+    ============================================= */
+    .single-timeline {
+      position: relative;
+      padding-left: 2.2rem;
+    }
+    .single-timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 6px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 2.2rem;
+      transition: transform 0.2s;
+    }
+    .tl-item:hover { transform: translateX(4px); }
+    .tl-dot {
+      position: absolute;
+      left: -2.2rem;
+      top: 0.45rem;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--accent);
+      transition: transform 0.2s;
+    }
+    .tl-item:hover .tl-dot { transform: scale(1.4); }
+    .tl-type {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.1rem 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .tl-type.edu   { background: rgba(26,86,219,0.1);  color: #1a56db; }
+    .tl-type.career{ background: rgba(59,125,232,0.12); color: #2563eb; }
+    .tl-type.research{ background: rgba(5,150,105,0.1); color: #059669; }
+    .tl-type.award { background: rgba(217,119,6,0.1);  color: #d97706; }
+    .tl-date {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--muted);
+      margin-bottom: 0.15rem;
+    }
+    .tl-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+    .tl-desc {
+      font-size: 0.87rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* =============================================
        애니메이션
        - fadeUp: 아래에서 위로 등장
        - fadeIn: 서서히 등장
@@ -806,9 +913,9 @@
 
 <!-- HERO -->
 <div id="section-home" style="position:relative; overflow:hidden;">
-  <div class="hero-tag">✦ Data Analyst · AI Engineer · IT Planner</div>
-  <h1 class="hero-title">Hello, I'm<br><span>Minjoo Park</span></h1>
-  <p class="hero-sub">and this is <span>My Rezume</span></p>
+  <div class="hero-tag">✦ Data Analyst · IT Planner · AI Engineer</div>
+  <h1 class="hero-title">문제의 핵심을<br>파고드는 <span>기획자</span></h1>
+  <p class="hero-sub"><span>박민주</span> · Minjoo Park</p>
 
   <div class="hero-img-wrap">
     <div class="hero-img-placeholder">
@@ -825,121 +932,175 @@
 
 <!-- ==============================
      ABOUT 섹션
-     좌: 자기소개 + 링크
-     우: 기술 스택 카드
 ============================== -->
 <section id="section-about">
   <div class="section-label">01 — About</div>
   <h2 class="section-title">About <em>Me</em></h2>
 
   <div class="about-grid">
-    <!-- 좌측: 자기소개 텍스트 + GitHub/이메일 링크 -->
+    <!-- 좌측: 개인정보 + 바이오 + 링크 -->
     <div>
+      <div class="profile-meta">
+        <span><strong>생년월일</strong> 2001.01.10</span>
+        <span><strong>전공</strong> 산업시스템공학 + 데이터사이언스</span>
+        <span><strong>E-mail</strong> abcmin42@gmail.com</span>
+      </div>
+
       <p class="about-bio">
-        <strong>데이터 분석/IT 기획</strong><br><br>
-        동국대학교 산업시스템공학과 + 데이터사이언스 연계전공 졸업.<br><br>
-        산업AI연구센터 학부연구원으로 NLP 파이프라인부터, LLM 데이터 안전성 평가까지 다양한 실무 경험을 쌓았습니다.
+        산업AI연구센터 학부연구원으로 NLP 파이프라인부터 LLM 데이터 안전성 평가까지 다양한 실무 경험을 쌓았습니다.
         데이터로 비즈니스 문제를 정의하고, 인사이트를 행동으로 연결하는 분석가가 되는 것이 목표입니다.
       </p>
 
       <div class="about-links">
         <span>Github : <a href="https://github.com/" target="_blank">Link</a></span>
-        <span>E-mail : <a href="/cdn-cgi/l/email-protection#c2afabaca8adad82a7afa3abaeeca1adaf"><span class="__cf_email__" data-cfemail="95f8fcfbfffafad5f0f8f4fcf9bbf6faf8">[email&#160;protected]</span></a></span>
         <span>HuggingFace : <a href="https://huggingface.co/" target="_blank">SNATCH 모델</a></span>
       </div>
     </div>
 
-    <!-- 우측: 기술 스택 카드 3개 (Data Science / Engineering / Languages) -->
+    <!-- 우측: 스킬 시각화 + 자격증 + 어학 -->
     <div class="skills-block">
+
       <div class="skill-group">
         <h4>Data Science / NLP</h4>
-        <ul>
-          <li>HDBSCAN 기반 클러스터링 · KcELECTRA 감성분석</li>
-          <li>LLM 안전성 평가 · Red-teaming</li>
-          <li>Random Forest · 행동 데이터 기반 분류</li>
-          <li>BeautifulSoup · Selenium 웹 크롤링</li>
-        </ul>
+        <div class="skill-tags">
+          <span class="skill-tag skilled">HDBSCAN</span>
+          <span class="skill-tag skilled">KcELECTRA</span>
+          <span class="skill-tag skilled">Random Forest</span>
+          <span class="skill-tag skilled">LLM 평가</span>
+          <span class="skill-tag familiar">Selenium</span>
+          <span class="skill-tag familiar">BeautifulSoup</span>
+        </div>
       </div>
+
       <div class="skill-group">
         <h4>Engineering / Dev</h4>
-        <ul>
-          <li>SQL · NoSQL · ERP 시스템</li>
-          <li>Docker · WSL2 · NVIDIA Container</li>
-          <li>Java (SSAFY) · Python · JavaScript</li>
-          <li>HuggingFace 배포 경험</li>
-        </ul>
+        <div class="skill-tags">
+          <span class="skill-tag skilled">SQL</span>
+          <span class="skill-tag skilled">Python</span>
+          <span class="skill-tag familiar">Java</span>
+          <span class="skill-tag familiar">Docker</span>
+          <span class="skill-tag familiar">NoSQL</span>
+          <span class="skill-tag familiar">HuggingFace</span>
+        </div>
       </div>
+
       <div class="skill-group">
         <h4>Programming Languages</h4>
-        <p class="lang-row"><strong>Skilled</strong> : Python, SQL</p>
-        <p class="lang-row"><strong>Familiar</strong> : Java, NoSQL(MongoDB)</p>
+        <p style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:0.4rem;">Skilled</p>
+        <div class="skill-tags">
+          <span class="skill-tag skilled">Python</span>
+          <span class="skill-tag skilled">SQL</span>
+          <span class="skill-tag skilled">PPT</span>
+        </div>
+        <p style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:0.4rem;margin-top:0.6rem;">Familiar</p>
+        <div class="skill-tags">
+          <span class="skill-tag familiar">Java</span>
+          <span class="skill-tag familiar">Excel</span>
+        </div>
       </div>
+
+      <div class="skill-group">
+        <h4>Certifications & Language</h4>
+        <div class="cert-row">
+          <span class="cert-badge">빅데이터 분석기사</span>
+          <span class="cert-badge">OPIc IH</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ==============================
      HISTORY 섹션
-     좌: Education + Career 타임라인
-     우: Research & Experience 타임라인
-     → 항목에 마우스 올리면 오른쪽으로 슬라이드
+     단일 수직 타임라인 (시간순)
 ============================== -->
 <section id="section-resume">
   <div class="section-label">02 — History</div>
   <h2 class="section-title"><em>History</em></h2>
 
-  <div class="history-cols">
-    <div>
-      <div class="history-col">
-        <h3>Education</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2020.03 — 2025.02</div>
-            <div class="timeline-title">동국대학교 (Dongguk University)</div>
-            <div class="timeline-desc">산업시스템공학과 + 데이터사이언스 복수전공</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2025.01 — 현재</div>
-            <div class="timeline-title">SSAFY 15기</div>
-            <div class="timeline-desc">삼성 청년 소프트웨어 아카데미<br>Java 전공 · 알고리즘 · 웹 개발</div>
-          </div>
-        </div>
-      </div>
+  <div class="single-timeline">
 
-      <div class="history-col" style="margin-top:2.5rem;">
-        <h3>Career</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2025.9 ~ 2025.11</div>
-            <div class="timeline-title">Flitto — LLM 안전성 평가/어노테이터</div>
-            <div class="timeline-desc">Red-teaming 기반 AI 안전성 평가 <br>안전 카테고리별 구조화된 평가 방법론 적용</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2023.1 ~ 2023.2</div>
-            <div class="timeline-title">영림원소프트랩 ERP 기업 인턴</div>
-            <div class="timeline-desc">NoSQL 기반 제조 공정 데이터 분석<br>ERP 시스템 워크플로우 설계 참여</div>
-          </div>
-        </div>
-      </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type edu">Education</span>
+      <div class="tl-date">2020.03 — 2025.02</div>
+      <div class="tl-title">동국대학교 (Dongguk University)</div>
+      <div class="tl-desc">산업시스템공학과 + 데이터사이언스 복수전공</div>
     </div>
 
-    <div>
-      <div class="history-col">
-        <h3>Research & Experience</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-date">2024.12 — 2026.1</div>
-            <div class="timeline-title">산업AI연구센터 — 학부연구생</div>
-            <div class="timeline-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-date">2025.9 ~ 2025.11</div>
-            <div class="timeline-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
-            <div class="timeline-desc">Safety Code 우수 평가자 선정</div>
-          </div>
-        </div>
-      </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type career">Career</span>
+      <div class="tl-date">2022.01 — 2022.02</div>
+      <div class="tl-title">영림원소프트랩 — ERP 기업 인턴</div>
+      <div class="tl-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</div>
     </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type award">Award</span>
+      <div class="tl-date">2023.11</div>
+      <div class="tl-title">2023 캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
+      <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화 — 동국대학교</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type award">Award</span>
+      <div class="tl-date">2024.05</div>
+      <div class="tl-title">2024 춘계 학술대회 입선 · 캡스톤디자인대회 동상</div>
+      <div class="tl-desc">KDE를 이용한 강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type career">Career</span>
+      <div class="tl-date">2024.06 — 2024.12</div>
+      <div class="tl-title">씨너렉스 — 인턴</div>
+      <div class="tl-desc">홈페이지 리뉴얼 및 유지보수 · 지출 결의 담당 · 제품 카탈로그 디자인</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type research">Research</span>
+      <div class="tl-date">2024.07 — 2024.12</div>
+      <div class="tl-title">PI-lab — 동국대학교 산업시스템공학과 시계열 예측 연구실</div>
+      <div class="tl-desc">학부연구생</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type award">Award</span>
+      <div class="tl-date">2024.10</div>
+      <div class="tl-title">대한산업공학회 추계학술대회 대상 (장관상)</div>
+      <div class="tl-desc">립리딩 서비스를 활용한 청각 장애인을 위한 스마트 자막 알고리즘</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type research">Research</span>
+      <div class="tl-date">2024.12 — 2026.01</div>
+      <div class="tl-title">동국대학교 산업AI연구센터 — 학부연구원</div>
+      <div class="tl-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type edu">Education</span>
+      <div class="tl-date">2025.01 — 현재</div>
+      <div class="tl-title">SSAFY 15기</div>
+      <div class="tl-desc">삼성 청년 소프트웨어 아카데미 · Java 전공 · 알고리즘 · 웹 개발</div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <span class="tl-type research">Research</span>
+      <div class="tl-date">2025.09 — 2025.11</div>
+      <div class="tl-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
+      <div class="tl-desc">Safety Code 우수 평가자 선정</div>
+    </div>
+
   </div>
 </section>
 
