@@ -864,15 +864,88 @@
     }
 
     /* =============================================
+       Hero + About 합친 홈 그리드
+    ============================================= */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: start;
+      min-height: 100vh;
+      padding: 8rem 3rem 5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .home-divider {
+      width: 2rem;
+      height: 1px;
+      background: var(--border);
+      margin: 1.8rem 0;
+    }
+
+    /* =============================================
+       가운데 수직 타임라인
+       3열 그리드: 왼쪽 | 도트 | 오른쪽
+    ============================================= */
+    .center-timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 20px 1fr;
+      row-gap: 2rem;
+    }
+
+    /* 가운데 세로선 */
+    .center-timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: var(--border);
+      transform: translateX(-50%);
+    }
+
+    .ct-left  { text-align: right; padding-right: 1.4rem; padding-top: 0.1rem; }
+    .ct-right { text-align: left;  padding-left: 1.4rem;  padding-top: 0.1rem; }
+    .ct-empty { opacity: 0; pointer-events: none; }
+
+    /* 도트 열 */
+    .ct-mid {
+      display: flex;
+      justify-content: center;
+      padding-top: 0.45rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ct-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1.5px var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+    }
+    .center-timeline > *:hover .ct-dot { transform: scale(1.5); }
+
+    /* 타임라인 내용 공통 */
+    .ct-left .tl-type,
+    .ct-right .tl-type  { display: inline-block; margin-bottom: 0.2rem; }
+    .ct-left .tl-date,
+    .ct-right .tl-date  { font-family: var(--mono); font-size: 0.72rem; color: var(--muted); }
+    .ct-left .tl-title,
+    .ct-right .tl-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin: 0.15rem 0; }
+    .ct-left .tl-desc,
+    .ct-right .tl-desc  { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+    /* =============================================
        애니메이션
-       - fadeUp: 아래에서 위로 등장
-       - fadeIn: 서서히 등장
     ============================================= */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes fadeIn {
       from { opacity: 0; }
       to   { opacity: 1; }
@@ -881,18 +954,19 @@
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; gap: 1.2rem; }
-      #section-home { padding: 5rem 1.5rem 3rem !important; }
       section { padding: 4rem 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .history-cols { grid-template-columns: 1fr; gap: 0; }
-      .history-col { margin-top: 2rem; }
+      .home-grid { grid-template-columns: 1fr; gap: 2.5rem; min-height: auto; padding: 6rem 1.5rem 3rem; }
       .portfolio-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
       .hero-img-wrap { display: none; }
-      .hero-title { font-size: 2.8rem; }
+      .hero-title { font-size: 2.5rem; }
       .section-title { font-size: 2rem; }
-      .timeline-title { font-size: 1rem; }
-      .timeline-desc { font-size: 0.88rem; }
-      .history-cols > div + div { margin-top: 0; }
+      /* 모바일에서 타임라인을 좌측 정렬로 */
+      .center-timeline { grid-template-columns: 20px 1fr; }
+      .center-timeline::before { left: 9px; transform: none; }
+      .ct-left  { display: none; }
+      .ct-mid   { grid-column: 1; }
+      .ct-right { grid-column: 2; text-align: left; padding-left: 1rem; }
+      .ct-empty { display: none; }
     }
 
     @media (max-width: 480px) {
@@ -911,35 +985,18 @@
   <a href="#section-portfolio">Portfolio</a>
 </nav>
 
-<!-- HERO -->
-<div id="section-home" style="position:relative; overflow:hidden;">
-  <div class="hero-tag">✦ Data Analyst · IT Planner · AI Engineer</div>
-  <h1 class="hero-title">문제의 핵심을<br>파고드는 <span>기획자</span></h1>
-  <p class="hero-sub"><span>박민주</span> · Minjoo Park</p>
+<!-- HOME + ABOUT 합친 섹션 -->
+<div id="section-home">
+  <div class="home-grid">
 
-  <div class="hero-img-wrap">
-    <div class="hero-img-placeholder">
-      <span style="font-size:2rem;">🌿</span>
-      <span>Profile Photo</span>
-    </div>
-  </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-line"></div>
-    scroll to explore
-  </div>
-</div>
-
-<!-- ==============================
-     ABOUT 섹션
-============================== -->
-<section id="section-about">
-  <div class="section-label">01 — About</div>
-  <h2 class="section-title">About <em>Me</em></h2>
-
-  <div class="about-grid">
-    <!-- 좌측: 개인정보 + 바이오 + 링크 -->
+    <!-- 좌: 헤로 타이틀 + 바이오 + 링크 -->
     <div>
+      <div class="hero-tag">✦ Data Analyst · IT Planner · AI Engineer</div>
+      <h1 class="hero-title">문제의 핵심을<br>파고드는 <span>기획자</span></h1>
+      <p class="hero-sub"><span>박민주</span> · Minjoo Park</p>
+
+      <div class="home-divider"></div>
+
       <div class="profile-meta">
         <span><strong>생년월일</strong> 2001.01.10</span>
         <span><strong>전공</strong> 산업시스템공학 + 데이터사이언스</span>
@@ -951,150 +1008,173 @@
         데이터로 비즈니스 문제를 정의하고, 인사이트를 행동으로 연결하는 분석가가 되는 것이 목표입니다.
       </p>
 
-      <div class="about-links">
+      <div class="about-links" style="margin-top:1.2rem;">
         <span>Github : <a href="https://github.com/" target="_blank">Link</a></span>
         <span>HuggingFace : <a href="https://huggingface.co/" target="_blank">SNATCH 모델</a></span>
       </div>
+
+      <div class="scroll-hint" style="position:static; margin-top:3rem; opacity:1; animation:none;">
+        <div class="scroll-line"></div>
+        scroll to explore
+      </div>
     </div>
 
-    <!-- 우측: 스킬 시각화 + 자격증 + 어학 -->
-    <div class="skills-block">
-
-      <div class="skill-group">
-        <h4>Data Science / NLP</h4>
-        <div class="skill-tags">
-          <span class="skill-tag skilled">HDBSCAN</span>
-          <span class="skill-tag skilled">KcELECTRA</span>
-          <span class="skill-tag skilled">Random Forest</span>
-          <span class="skill-tag skilled">LLM 평가</span>
-          <span class="skill-tag familiar">Selenium</span>
-          <span class="skill-tag familiar">BeautifulSoup</span>
+    <!-- 우: 프로필 사진 + 스킬 + 자격증 -->
+    <div>
+      <div class="hero-img-wrap" style="position:static; margin-bottom:2rem; width:100%; height:220px;">
+        <div class="hero-img-placeholder">
+          <span style="font-size:2rem;">🌿</span>
+          <span>Profile Photo</span>
         </div>
       </div>
 
-      <div class="skill-group">
-        <h4>Engineering / Dev</h4>
-        <div class="skill-tags">
-          <span class="skill-tag skilled">SQL</span>
-          <span class="skill-tag skilled">Python</span>
-          <span class="skill-tag familiar">Java</span>
-          <span class="skill-tag familiar">Docker</span>
-          <span class="skill-tag familiar">NoSQL</span>
-          <span class="skill-tag familiar">HuggingFace</span>
+      <div class="skills-block">
+        <div class="skill-group">
+          <h4>Data Science / NLP</h4>
+          <div class="skill-tags">
+            <span class="skill-tag skilled">HDBSCAN</span>
+            <span class="skill-tag skilled">KcELECTRA</span>
+            <span class="skill-tag skilled">Random Forest</span>
+            <span class="skill-tag skilled">LLM 평가</span>
+            <span class="skill-tag familiar">Selenium</span>
+            <span class="skill-tag familiar">BeautifulSoup</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Programming Languages</h4>
+          <p style="font-size:0.72rem;color:var(--muted);font-family:var(--mono);margin-bottom:0.35rem;">Skilled</p>
+          <div class="skill-tags">
+            <span class="skill-tag skilled">Python</span>
+            <span class="skill-tag skilled">SQL</span>
+            <span class="skill-tag skilled">PPT</span>
+          </div>
+          <p style="font-size:0.72rem;color:var(--muted);font-family:var(--mono);margin-top:0.5rem;margin-bottom:0.35rem;">Familiar</p>
+          <div class="skill-tags">
+            <span class="skill-tag familiar">Java</span>
+            <span class="skill-tag familiar">Excel</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <h4>Certifications & Language</h4>
+          <div class="cert-row">
+            <span class="cert-badge">빅데이터 분석기사</span>
+            <span class="cert-badge">OPIc IH</span>
+          </div>
         </div>
       </div>
-
-      <div class="skill-group">
-        <h4>Programming Languages</h4>
-        <p style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:0.4rem;">Skilled</p>
-        <div class="skill-tags">
-          <span class="skill-tag skilled">Python</span>
-          <span class="skill-tag skilled">SQL</span>
-          <span class="skill-tag skilled">PPT</span>
-        </div>
-        <p style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);margin-bottom:0.4rem;margin-top:0.6rem;">Familiar</p>
-        <div class="skill-tags">
-          <span class="skill-tag familiar">Java</span>
-          <span class="skill-tag familiar">Excel</span>
-        </div>
-      </div>
-
-      <div class="skill-group">
-        <h4>Certifications & Language</h4>
-        <div class="cert-row">
-          <span class="cert-badge">빅데이터 분석기사</span>
-          <span class="cert-badge">OPIc IH</span>
-        </div>
-      </div>
-
     </div>
+
   </div>
-</section>
+</div>
+
+<!-- anchor for nav -->
+<div id="section-about"></div>
 
 <!-- ==============================
-     HISTORY 섹션
-     단일 수직 타임라인 (시간순)
+     HISTORY 섹션 — 가운데 수직 타임라인
 ============================== -->
 <section id="section-resume">
   <div class="section-label">02 — History</div>
   <h2 class="section-title"><em>History</em></h2>
 
-  <div class="single-timeline">
+  <div class="center-timeline">
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 1: 동국대 (왼쪽) -->
+    <div class="ct-left">
       <span class="tl-type edu">Education</span>
       <div class="tl-date">2020.03 — 2025.02</div>
-      <div class="tl-title">동국대학교 (Dongguk University)</div>
+      <div class="tl-title">동국대학교</div>
       <div class="tl-desc">산업시스템공학과 + 데이터사이언스 복수전공</div>
     </div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right ct-empty"></div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 2: 영림원 인턴 (오른쪽) -->
+    <div class="ct-left ct-empty"></div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right">
       <span class="tl-type career">Career</span>
       <div class="tl-date">2022.01 — 2022.02</div>
-      <div class="tl-title">영림원소프트랩 — ERP 기업 인턴</div>
+      <div class="tl-title">영림원소프트랩 — ERP 인턴</div>
       <div class="tl-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</div>
     </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 3: 2023 수상 (왼쪽) -->
+    <div class="ct-left">
       <span class="tl-type award">Award</span>
       <div class="tl-date">2023.11</div>
-      <div class="tl-title">2023 캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
-      <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화 — 동국대학교</div>
+      <div class="tl-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
+      <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</div>
     </div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right ct-empty"></div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 4: 2024.05 수상 (오른쪽) -->
+    <div class="ct-left ct-empty"></div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right">
       <span class="tl-type award">Award</span>
       <div class="tl-date">2024.05</div>
-      <div class="tl-title">2024 춘계 학술대회 입선 · 캡스톤디자인대회 동상</div>
-      <div class="tl-desc">KDE를 이용한 강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</div>
+      <div class="tl-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</div>
+      <div class="tl-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</div>
     </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 5: 씨너렉스 인턴 (왼쪽) -->
+    <div class="ct-left">
       <span class="tl-type career">Career</span>
       <div class="tl-date">2024.06 — 2024.12</div>
       <div class="tl-title">씨너렉스 — 인턴</div>
-      <div class="tl-desc">홈페이지 리뉴얼 및 유지보수 · 지출 결의 담당 · 제품 카탈로그 디자인</div>
+      <div class="tl-desc">홈페이지 리뉴얼 · 지출 결의 담당 · 제품 카탈로그 디자인</div>
     </div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right ct-empty"></div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 6: PI-lab (오른쪽) -->
+    <div class="ct-left ct-empty"></div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right">
       <span class="tl-type research">Research</span>
       <div class="tl-date">2024.07 — 2024.12</div>
-      <div class="tl-title">PI-lab — 동국대학교 산업시스템공학과 시계열 예측 연구실</div>
-      <div class="tl-desc">학부연구생</div>
+      <div class="tl-title">PI-lab — 시계열 예측 연구실</div>
+      <div class="tl-desc">동국대학교 산업시스템공학과 · 학부연구생</div>
     </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 7: 장관상 (왼쪽) -->
+    <div class="ct-left">
       <span class="tl-type award">Award</span>
       <div class="tl-date">2024.10</div>
       <div class="tl-title">대한산업공학회 추계학술대회 대상 (장관상)</div>
-      <div class="tl-desc">립리딩 서비스를 활용한 청각 장애인을 위한 스마트 자막 알고리즘</div>
+      <div class="tl-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</div>
     </div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right ct-empty"></div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 8: 산업AI연구센터 (오른쪽) -->
+    <div class="ct-left ct-empty"></div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right">
       <span class="tl-type research">Research</span>
       <div class="tl-date">2024.12 — 2026.01</div>
       <div class="tl-title">동국대학교 산업AI연구센터 — 학부연구원</div>
       <div class="tl-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</div>
     </div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 9: SSAFY (왼쪽) -->
+    <div class="ct-left">
       <span class="tl-type edu">Education</span>
       <div class="tl-date">2025.01 — 현재</div>
       <div class="tl-title">SSAFY 15기</div>
-      <div class="tl-desc">삼성 청년 소프트웨어 아카데미 · Java 전공 · 알고리즘 · 웹 개발</div>
+      <div class="tl-desc">삼성 청년 소프트웨어 아카데미 · Java 전공</div>
     </div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right ct-empty"></div>
 
-    <div class="tl-item">
-      <div class="tl-dot"></div>
+    <!-- 10: Naver HyperCLOVA (오른쪽) -->
+    <div class="ct-left ct-empty"></div>
+    <div class="ct-mid"><div class="ct-dot"></div></div>
+    <div class="ct-right">
       <span class="tl-type research">Research</span>
       <div class="tl-date">2025.09 — 2025.11</div>
       <div class="tl-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
