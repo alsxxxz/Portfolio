@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hello, I'm Minjoo Park</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     /* =============================================
        전역 디자인 변수 (색상, 폰트)
@@ -24,8 +25,8 @@
       --accent2: #3b7de8;
       --text: #111827;
       --muted: #5a6782;
-      --heading: 'Playfair Display', serif;
-      --body: 'DM Sans', sans-serif;
+      --heading: 'Pretendard', sans-serif;
+      --body: 'Pretendard', sans-serif;
       --mono: 'JetBrains Mono', monospace;
     }
 
@@ -38,7 +39,7 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--body);
-      font-weight: 300;
+      font-weight: 400;
       line-height: 1.7;
     }
 
@@ -106,7 +107,7 @@
       font-family: var(--heading);
       font-size: clamp(3rem, 7vw, 6rem);
       line-height: 1.05;
-      font-weight: 900;
+      font-weight: 800;
       opacity: 0;
       animation: fadeUp 0.7s 0.35s forwards;
     }
@@ -209,7 +210,7 @@
     .section-title {
       font-family: var(--heading);
       font-size: clamp(2rem, 4vw, 3.2rem);
-      font-weight: 900;
+      font-weight: 800;
       margin-bottom: 3rem;
       line-height: 1.1;
     }
@@ -575,7 +576,7 @@
     .modal-title {
       font-family: var(--heading);
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 900;
+      font-weight: 800;
       color: var(--text);
       line-height: 1.15;
       margin-bottom: 2rem;
@@ -584,43 +585,82 @@
     /* 히어로 이미지 영역 */
     .modal-image {
       width: 100%;
-      aspect-ratio: 16/9;
       background: var(--surface);
-      border: 1px dashed var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      letter-spacing: 0.05em;
+      border: 1px solid var(--border);
       margin-bottom: 2.5rem;
       overflow: hidden;
-      gap: 0.6rem;
     }
 
     .modal-image img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      display: block;
     }
 
-    /* 여러 이미지 나열 */
-    .modal-images {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0.8rem;
+    /* 메인 썸네일 크기 살짝 축소 */
+    .modal-image-main {
+      max-width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 이미지 슬라이더 래퍼 */
+    .slider-wrap {
+      position: relative;
       margin-bottom: 2.5rem;
     }
 
-    @media (max-width: 600px) {
-      .modal-images { grid-template-columns: 1fr; }
+    .modal-images {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 0.6rem;
+      cursor: grab;
+      scrollbar-width: none;
     }
+    .modal-images:active { cursor: grabbing; }
+    .modal-images::-webkit-scrollbar { display: none; }
 
     .modal-images .modal-image {
+      flex: 0 0 85%;
+      scroll-snap-align: center;
       margin-bottom: 0;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.15);
+      border-radius: 4px;
+      overflow: hidden;
     }
+
+    /* 화살표 버튼 */
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-60%);
+      width: 42px;
+      height: 42px;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 50%;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.13);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      font-size: 1rem;
+      color: var(--text);
+      transition: background 0.2s, box-shadow 0.2s;
+      user-select: none;
+    }
+    .slider-arrow:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 6px 18px rgba(26,86,219,0.25);
+    }
+    .slider-arrow.prev { left: -18px; }
+    .slider-arrow.next { right: -18px; }
 
     /* 프로젝트 소개 단락 */
     .modal-desc {
@@ -675,6 +715,29 @@
     .modal-links a:hover {
       background: var(--accent);
       color: #fff;
+    }
+
+    /* 시연 영상 큰 버튼 */
+    .demo-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--body);
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .demo-btn:hover {
+      background: #1446b8;
+      transform: translateY(-2px);
     }
 
     /* 성과 배지 */
@@ -963,16 +1026,18 @@
       <div class="modal-tag">NLP · Pipeline · 졸업프로젝트 · 2025.03 — 2025.07</div>
       <div class="modal-title">SNATCH — F&B 트렌드 분석 대시보드</div>
 
-      <div class="modal-image">
+      <div class="modal-image modal-image-main">
         <img src="images/snatch_main.png" alt="SNATCH 대시보드 메인">
       </div>
+
+      <a href="https://www.youtube.com/watch?v=XcTPIbSz6eI" target="_blank" class="demo-btn">
+        ▶&nbsp; 시연 영상 보기
+      </a>
 
       <p class="modal-desc">
         빠른 F&B 트렌드 변화를 알아채기 어려운 편의점 운영자를 위해 댓글 기반 소비자 분석 대시보드를 개발했습니다.
         주 연령대가 이용하는 유튜브·틱톡 등 SNS 댓글을 수집해 전처리, 카테고리 분류, 감성 분석까지 End-to-End 파이프라인을 설계해
         '가격', '맛' 같은 카테고리에서 어떤 평가가 내려지는지 키워드·그래프로 한눈에 확인할 수 있도록 완성했습니다.
-        한국어 특유의 구어체 변이를 처리하기 위해 모델 튜닝과 병행해 매일 밤 데이터 전처리 단계를 업그레이드했습니다.
-        고된 일정 속에서도 필터링이 촘촘해지며 데이터가 정제될수록, 날 것의 데이터에서 소비자의 의도가 선명하게 드러나는 과정이 흥미로웠습니다.
       </p>
 
       <div class="modal-section">
@@ -986,10 +1051,14 @@
 
       <div class="modal-section">
         <h4>상세 이미지</h4>
-        <div class="modal-images">
-          <div class="modal-image"><img src="images/snatch_1.png" alt="스크린샷 1"></div>
-          <div class="modal-image"><img src="images/snatch_2.png" alt="스크린샷 2"></div>
-          <div class="modal-image"><img src="images/snatch_3.png" alt="스크린샷 3"></div>
+        <div class="slider-wrap">
+          <button class="slider-arrow prev" onclick="slideImages(this,-1)">&#8592;</button>
+          <div class="modal-images" id="snatchSlider">
+            <div class="modal-image"><img src="images/snatch1.png" alt="스크린샷 1"></div>
+            <div class="modal-image"><img src="images/snatch2.png" alt="스크린샷 2"></div>
+            <div class="modal-image"><img src="images/snatch3.png" alt="스크린샷 3"></div>
+          </div>
+          <button class="slider-arrow next" onclick="slideImages(this,1)">&#8594;</button>
         </div>
       </div>
 
@@ -997,7 +1066,7 @@
         <h4>주요 작업</h4>
         <ul>
           <li>YouTube · TikTok · 인스티즈 크롤링 및 데이터 수집</li>
-          <li>한국어 구어체 처리를 위한 모델 튜닝 + 매일 밤 전처리 자동 업그레이드</li>
+          <li>한국어 구어체 처리를 위한 모델 튜닝</li>
           <li>Python + AI 기반 EDA 자동화 및 반복 업무 자동화</li>
           <li>카테고리 분류 → 감성 분석 End-to-End 파이프라인 설계</li>
         </ul>
@@ -1009,7 +1078,6 @@
       </div>
 
       <div class="modal-links">
-        <a href="https://www.youtube.com/watch?v=XcTPIbSz6eI" target="_blank">▶ 시연 영상</a>
         <a href="https://github.com/" target="_blank">GitHub</a>
       </div>
     `,
@@ -1228,6 +1296,12 @@
   // 프로젝트 상세 페이지 열기
   // - history.pushState로 뒤로가기 지원
   // ==============================
+  function slideImages(btn, dir) {
+    const slider = btn.parentElement.querySelector('.modal-images');
+    const itemWidth = slider.querySelector('.modal-image').offsetWidth + 16;
+    slider.scrollBy({ left: dir * itemWidth, behavior: 'smooth' });
+  }
+
   function openModal(key) {
     if (!modals[key]) return;
     document.getElementById('modalBody').innerHTML = modals[key];
