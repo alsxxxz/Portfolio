@@ -1070,6 +1070,84 @@
       to   { opacity: 1; }
     }
 
+    /* =============================================
+       History 뷰 토글 버튼
+    ============================================= */
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .history-header .section-title { margin-bottom: 0; }
+    .view-toggle {
+      display: flex;
+      gap: 0.4rem;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      padding: 0.25rem;
+    }
+    .view-toggle-btn {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      padding: 0.35rem 0.9rem;
+      border: none;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .view-toggle-btn.active {
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* =============================================
+       PDF 뷰 — 컴팩트 테이블 형태
+    ============================================= */
+    .pdf-timeline { display: none; }
+    .pdf-timeline.active { display: block; }
+    .center-timeline.hidden { display: none; }
+
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .pdf-table tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .pdf-table tr:first-child { border-top: 1px solid var(--border); }
+    .pdf-table tr:hover { background: var(--surface); }
+    .pdf-table td {
+      padding: 0.7rem 0.8rem;
+      vertical-align: middle;
+      font-size: 0.88rem;
+    }
+    .pdf-table .pdf-td-badge { width: 90px; }
+    .pdf-table .pdf-td-date  {
+      width: 130px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .pdf-table .pdf-td-title {
+      font-weight: 600;
+      color: var(--text);
+      word-break: keep-all;
+    }
+    .pdf-table .pdf-td-desc  {
+      color: var(--muted);
+      font-size: 0.82rem;
+      word-break: keep-all;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; gap: 1.2rem; }
@@ -1195,9 +1273,84 @@
 ============================== -->
 <section id="section-resume">
   <div class="section-label">02 — History</div>
-  <h2 class="section-title"><em>History</em></h2>
+  <div class="history-header">
+    <h2 class="section-title"><em>History</em></h2>
+    <div class="view-toggle">
+      <button class="view-toggle-btn active" onclick="setHistoryView('timeline', this)">⏱ 타임라인</button>
+      <button class="view-toggle-btn" onclick="setHistoryView('pdf', this)">📄 PDF 보기</button>
+    </div>
+  </div>
 
-  <div class="center-timeline">
+  <!-- PDF 컴팩트 뷰 -->
+  <div class="pdf-timeline" id="pdfTimeline">
+    <table class="pdf-table">
+      <tbody>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type edu">Education</span></td>
+          <td class="pdf-td-date">2021.03 — 2026.02</td>
+          <td class="pdf-td-title">동국대학교</td>
+          <td class="pdf-td-desc">산업시스템공학과 + 데이터사이언스 복수전공</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-date">2023.01 — 2023.02</td>
+          <td class="pdf-td-title">영림원소프트랩 — ERP 인턴</td>
+          <td class="pdf-td-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-date">2023.11</td>
+          <td class="pdf-td-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</td>
+          <td class="pdf-td-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-date">2024.05</td>
+          <td class="pdf-td-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</td>
+          <td class="pdf-td-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-date">2024.06 — 2024.12</td>
+          <td class="pdf-td-title">씨너렉스 — 인턴</td>
+          <td class="pdf-td-desc">홈페이지 리뉴얼 · 지출 결의 담당 · 제품 카탈로그 디자인</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type research">Research</span></td>
+          <td class="pdf-td-date">2024.07 — 2024.12</td>
+          <td class="pdf-td-title">PI-lab — 시계열 예측 연구실</td>
+          <td class="pdf-td-desc">동국대 산업AI연구센터 · ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-date">2024.10</td>
+          <td class="pdf-td-title">대한산업공학회 추계학술대회 대상 (장관상)</td>
+          <td class="pdf-td-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type research">Research</span></td>
+          <td class="pdf-td-date">2024.12 — 2026.01</td>
+          <td class="pdf-td-title">동국대학교 산업AI연구센터 — 학부연구원</td>
+          <td class="pdf-td-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-date">2025.09 — 2025.11</td>
+          <td class="pdf-td-title">Naver HyperCLOVA 안전성 데이터 어노테이션</td>
+          <td class="pdf-td-desc">LLM Safety Code 데이터 어노테이션 · 우수 평가자 선정</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type edu">Education</span></td>
+          <td class="pdf-td-date">2026.01 — 현재</td>
+          <td class="pdf-td-title">SSAFY 15기</td>
+          <td class="pdf-td-desc">삼성 청년 소프트웨어 아카데미 · Java 전공 · 알고리즘 · 웹 개발</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 타임라인 뷰 (기존) -->
+  <div class="center-timeline" id="centerTimeline">
 
     <!-- 1: 동국대 (왼쪽) -->
     <div class="ct-left">
@@ -1706,6 +1859,20 @@
   });
 
   // 포트폴리오 카테고리 필터: 선택한 카테고리 외 카드 숨기기
+  function setHistoryView(view, btn) {
+    document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const pdf = document.getElementById('pdfTimeline');
+    const tl  = document.getElementById('centerTimeline');
+    if (view === 'pdf') {
+      pdf.classList.add('active');
+      tl.classList.add('hidden');
+    } else {
+      pdf.classList.remove('active');
+      tl.classList.remove('hidden');
+    }
+  }
+
   function filterCards(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
