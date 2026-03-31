@@ -592,7 +592,7 @@
     .detail-body {
       max-width: 860px;
       margin: 0 auto;
-      padding: 3rem 2rem 6rem;
+      padding: 2rem 2rem 4rem;
     }
 
     /* 모달 상단 카테고리 태그 */
@@ -602,17 +602,17 @@
       letter-spacing: 0.2em;
       color: var(--accent);
       text-transform: uppercase;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.4rem;
     }
 
     /* 프로젝트 제목 */
     .modal-title {
       font-family: var(--heading);
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 900;
       color: var(--text);
-      line-height: 1.15;
-      margin-bottom: 2rem;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
     }
 
     /* 히어로 이미지 영역 */
@@ -789,8 +789,8 @@
        포트폴리오 5섹션 구조
     ============================================= */
     .pf-section {
-      margin-bottom: 2.4rem;
-      padding-bottom: 2.4rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
       border-bottom: 1px solid var(--border);
     }
     .pf-section:last-child { border-bottom: none; }
@@ -798,7 +798,7 @@
       display: flex;
       align-items: baseline;
       gap: 0.7rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.6rem;
     }
     .pf-num {
       font-family: var(--mono);
@@ -826,12 +826,12 @@
       letter-spacing: 0.05em;
     }
     .pf-body {
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       color: #374151;
-      line-height: 1.9;
+      line-height: 1.75;
     }
     .pf-body ul { padding-left: 1.1rem; }
-    .pf-body li { margin-bottom: 0.35rem; }
+    .pf-body li { margin-bottom: 0.2rem; }
     .pf-body strong { color: var(--text); }
 
     @media (max-width: 768px) {
@@ -1302,7 +1302,9 @@
   <div class="portfolio-grid" id="portfolioGrid">
 
     <div class="portfolio-card" data-cat="nlp" onclick="openModal('snatch')">
-      <div class="portfolio-card-placeholder" style="background:linear-gradient(135deg,#dbeafe,#eff6ff);">🔍</div>
+      <div class="portfolio-card-placeholder" style="background:#e8eef8; padding:0; overflow:hidden;">
+        <img src="images/snatch_main.png" alt="SNATCH" style="width:100%;height:100%;object-fit:cover;">
+      </div>
       <div class="portfolio-overlay">
         <div class="portfolio-tag">NLP · Pipeline</div>
         <div class="portfolio-name">SNATCH — F&B 트렌드 분석</div>
@@ -1371,8 +1373,15 @@
       <div class="modal-tag">NLP · Pipeline · 졸업프로젝트</div>
       <div class="modal-title">SNATCH — F&B 트렌드 분석 대시보드</div>
 
-      <div class="modal-image modal-image-main">
-        <img src="images/snatch_main.png" alt="SNATCH 대시보드 메인">
+      <div class="slider-wrap" style="margin-bottom:1.4rem;">
+        <button class="slider-arrow prev" onclick="slideImages(this,-1)">&#8592;</button>
+        <div class="modal-images" id="snatchSlider">
+            <div class="modal-image"><img src="images/snatch1.png" alt="스크린샷 1"></div>
+            <div class="modal-image"><img src="images/snatch2.png" alt="스크린샷 2"></div>
+            <div class="modal-image"><img src="images/snatch3.png" alt="스크린샷 3"></div>
+          </div>
+          <button class="slider-arrow next" onclick="slideImages(this,1)">&#8594;</button>
+        </div>
       </div>
 
       <a href="https://www.youtube.com/watch?v=XcTPIbSz6eI" target="_blank" class="demo-btn">
@@ -1410,10 +1419,10 @@
           <span class="pf-section-sub">배경 · 문제 · 핵심 · 해결</span>
         </div>
         <div class="pf-body">
-          주 연령대가 이용하는 유튜브·틱톡 등 SNS 댓글을 수집해 전처리, 클러스터링을 통한 카테고리 분류,
+          유튜브·틱톡 등 SNS 댓글을 수집해 전처리, 클러스터링 기반 카테고리 분류,
           감성 분석까지 End-to-End 파이프라인을 설계했습니다.
-          '가격', '맛' 같은 카테고리에서 어떤 평가가 내려지는지 Figma로 대시보드를 제작해
-          키워드·그래프·쇼츠 좋아요 추이 등 피드백을 한눈에 확인할 수 있도록 완성했습니다.
+          '가격', '맛' 카테고리별 평가를 Figma 대시보드로 시각화해
+          키워드·그래프·쇼츠 좋아요 추이를 한눈에 확인할 수 있도록 완성했습니다.
         </div>
       </div>
 
@@ -1426,9 +1435,9 @@
         <div class="pf-body">
           <ul>
             <li>YouTube · TikTok · 인스티즈 크롤링 및 데이터 수집</li>
-            <li>한국어 구어체 처리를 위한 KcELECTRA 모델 튜닝</li>
+            <li>한국어 구어체 처리를 위한 KcELECTRA 모델 파인튜닝</li>
             <li>Python + AI 기반 EDA 자동화 및 반복 업무 자동화</li>
-            <li>HDBSCAN 클러스터링 → 카테고리 분류 → 감성 분석 End-to-End 파이프라인 설계</li>
+            <li>HDBSCAN 클러스터링 → 카테고리 분류 → 감성 분석 파이프라인 설계</li>
           </ul>
         </div>
       </div>
@@ -1440,12 +1449,12 @@
           <span class="pf-section-sub">최종 성과 + 핵심 포인트</span>
         </div>
         <div class="pf-body">
-          <div style="margin-bottom:0.8rem;">
+          <div style="margin-bottom:0.6rem;">
             <span class="modal-stat">F1-Score (Macro) 0.87</span>
             <span class="modal-stat">추론 최대 0.03초 / 댓글</span>
             <span class="modal-stat">End-to-End 파이프라인</span>
           </div>
-          검색 한 번으로 SNS 댓글 수집부터 감성 분석·대시보드 시각화까지 전 과정을 자동화했습니다.
+          검색 한 번으로 댓글 수집 → 감성 분석 → 대시보드 시각화까지 전 과정 자동화
         </div>
       </div>
 
@@ -1454,29 +1463,12 @@
           <span class="pf-num">+</span>
           <span class="pf-section-title">기술 스택</span>
         </div>
-        <div class="pf-body">
-          Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma
-        </div>
-      </div>
-
-      <div class="pf-section">
-        <div class="pf-section-header">
-          <span class="pf-num">+</span>
-          <span class="pf-section-title">상세 이미지</span>
-        </div>
-        <div class="slider-wrap">
-          <button class="slider-arrow prev" onclick="slideImages(this,-1)">&#8592;</button>
-          <div class="modal-images" id="snatchSlider">
-            <div class="modal-image"><img src="images/snatch1.png" alt="스크린샷 1"></div>
-            <div class="modal-image"><img src="images/snatch2.png" alt="스크린샷 2"></div>
-            <div class="modal-image"><img src="images/snatch3.png" alt="스크린샷 3"></div>
-          </div>
-          <button class="slider-arrow next" onclick="slideImages(this,1)">&#8594;</button>
-        </div>
+        <div class="pf-body">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</div>
       </div>
 
       <div class="modal-links">
         <a href="https://github.com/" target="_blank">GitHub</a>
+        <a href="https://www.youtube.com/watch?v=XcTPIbSz6eI" target="_blank">▶ 시연 영상 (YouTube)</a>
       </div>
     `,
 
