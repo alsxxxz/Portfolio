@@ -1151,6 +1151,85 @@
       word-break: keep-all;
     }
 
+    /* =============================================
+       Portfolio — PDF 보기 뷰
+    ============================================= */
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.2rem;
+    }
+    .portfolio-header .section-title { margin-bottom: 0; }
+    .portfolio-pdf-view { display: none; }
+    .portfolio-pdf-view.active { display: block; }
+
+    .pdf-proj-page {
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem 2.4rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 18px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      min-height: 480px;
+    }
+    .pdf-toc-page {
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0;
+      min-height: 360px;
+    }
+    .pdf-toc-hero { margin-bottom: 2rem; }
+    .pdf-toc-hero-title { font-size: 1.8rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+    .pdf-toc-hero-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; }
+    .pdf-toc-list { width: 100%; max-width: 680px; display: flex; flex-direction: column; gap: 0.45rem; }
+    .pdf-toc-item {
+      display: flex; align-items: center; gap: 1.1rem;
+      padding: 0.8rem 1.2rem;
+      border: 1.5px solid var(--border); border-radius: 8px; background: var(--surface); text-align: left;
+    }
+    .pdf-toc-item-num { font-family: var(--mono); font-size: 1rem; font-weight: 800; color: var(--accent); min-width: 1.8rem; }
+    .pdf-toc-item-name { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
+    .pdf-toc-item-tag { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.03em; }
+
+    .pdf-proj-hdr {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding-bottom: 0.9rem; margin-bottom: 1rem;
+      border-bottom: 2px solid var(--accent);
+    }
+    .pdf-proj-badge {
+      font-family: var(--mono); font-size: 0.63rem; font-weight: 700;
+      color: #166534; background: #f0fdf4; border: 1.5px solid #86efac;
+      border-radius: 999px; padding: 0.1rem 0.6rem;
+      display: inline-block; margin-bottom: 0.45rem;
+    }
+    .pdf-proj-num-title { display: flex; align-items: baseline; gap: 0.55rem; }
+    .pdf-proj-pnum { font-family: var(--mono); font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .pdf-proj-ptitle { font-size: 1.3rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.15; }
+    .pdf-proj-psub { font-size: 0.8rem; color: var(--muted); margin-top: 0.12rem; font-family: var(--mono); }
+    .pdf-proj-hdr-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+    .pdf-proj-stat-pill {
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      background: #f0fdf4; color: #166534; border: 1.5px solid #86efac;
+      border-radius: 999px; white-space: nowrap;
+    }
+    .pdf-proj-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; flex: 1; }
+    .pdf-proj-col { display: flex; flex-direction: column; gap: 0.7rem; }
+    .pdf-proj-sec-lbl {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2);
+      padding-bottom: 0.2rem; border-bottom: 1px solid var(--border);
+    }
+    .pdf-proj-text { font-size: 0.83rem; color: var(--text); line-height: 1.7; margin: 0; }
+    .pdf-proj-ul { margin: 0; padding-left: 1.1rem; font-size: 0.8rem; color: var(--text); line-height: 1.75; }
+    .pdf-proj-ul li { margin-bottom: 0.1rem; }
+    .pdf-proj-stack { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); line-height: 1.65; margin: 0; }
+    .pdf-proj-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; gap: 1.2rem; }
@@ -1244,36 +1323,23 @@
       .pdf-table .pdf-td-desc { font-size: 7.5pt; }
       .tl-type { font-size: 6.5pt; padding: 0.5mm 2mm; }
 
-      /* Portfolio — 카드 대신 텍스트 2열 그리드 */
-      .portfolio-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4mm;
-      }
-      .portfolio-card {
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        display: flex;
-        flex-direction: column;
-        break-inside: avoid;
-        box-shadow: none;
-        transform: none !important;
-      }
-      .portfolio-card-placeholder { display: none; }
-      .card-info {
-        padding: 4mm;
-        border-top: none;
-        flex: 1;
-      }
-      .card-info-tag { font-size: 6.5pt; margin-bottom: 1mm; }
-      .card-info-name { font-size: 9pt; font-weight: 700; }
-      /* 인쇄용 프로젝트 설명 표시 */
-      .card-print-desc {
-        font-size: 7.5pt;
-        color: #555;
-        margin-top: 1.5mm;
-        line-height: 1.5;
-      }
+      /* Portfolio — 카드 뷰 숨기고 PDF 뷰 표시 */
+      #portfolioCardView, .portfolio-grid, .portfolio-toggle { display: none !important; }
+      #portfolioPdfView { display: block !important; }
+      .pdf-proj-page { break-after: page; box-shadow: none; border: none; border-radius: 0; padding: 0; min-height: auto; }
+      .pdf-toc-page { break-after: page; }
+      .pdf-proj-hdr { border-bottom-color: #5cb531; }
+      .pdf-proj-sec-lbl { font-size: 6.5pt; }
+      .pdf-proj-text { font-size: 8pt; }
+      .pdf-proj-ul { font-size: 7.5pt; }
+      .pdf-proj-stack { font-size: 6.5pt; }
+      .pdf-proj-stat-pill { font-size: 6.5pt; padding: 0.5mm 2mm; }
+      .pdf-proj-pnum { font-size: 14pt; }
+      .pdf-proj-ptitle { font-size: 14pt; }
+      .pdf-toc-hero-title { font-size: 18pt; }
+      .pdf-toc-item { padding: 3mm 5mm; }
+      .pdf-toc-item-name { font-size: 9pt; }
+      .pdf-toc-item-tag { font-size: 7pt; }
     }
   </style>
 </head>
@@ -1391,61 +1457,61 @@
     <table class="pdf-table">
       <tbody>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type edu">Education</span></td>
+          <td class="pdf-td-badge"><span class="tl-type edu">🎓 Education</span></td>
           <td class="pdf-td-date">2021.03 — 2026.02</td>
           <td class="pdf-td-title">동국대학교</td>
           <td class="pdf-td-desc">산업시스템공학과 + 데이터사이언스 복수전공</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
           <td class="pdf-td-date">2023.01 — 2023.02</td>
           <td class="pdf-td-title">영림원소프트랩 — ERP 인턴</td>
           <td class="pdf-td-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2023.11</td>
           <td class="pdf-td-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</td>
           <td class="pdf-td-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2024.05</td>
           <td class="pdf-td-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</td>
           <td class="pdf-td-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
           <td class="pdf-td-date">2024.06 — 2024.12</td>
           <td class="pdf-td-title">씨너렉스 — 인턴</td>
           <td class="pdf-td-desc">홈페이지 리뉴얼 · 지출 결의 담당 · 제품 카탈로그 디자인</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type research">Research</span></td>
+          <td class="pdf-td-badge"><span class="tl-type research">🔬 Research</span></td>
           <td class="pdf-td-date">2024.07 — 2024.12</td>
           <td class="pdf-td-title">PI-lab — 시계열 예측 연구실</td>
           <td class="pdf-td-desc">동국대 산업AI연구센터 · ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type award">Award</span></td>
+          <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2024.10</td>
           <td class="pdf-td-title">대한산업공학회 추계학술대회 대상 (장관상)</td>
           <td class="pdf-td-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type research">Research</span></td>
+          <td class="pdf-td-badge"><span class="tl-type research">🔬 Research</span></td>
           <td class="pdf-td-date">2024.12 — 2026.01</td>
           <td class="pdf-td-title">동국대학교 산업AI연구센터 — 학부연구원</td>
           <td class="pdf-td-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type career">Career</span></td>
+          <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
           <td class="pdf-td-date">2025.09 — 2025.11</td>
           <td class="pdf-td-title">Naver HyperCLOVA 안전성 데이터 어노테이션</td>
           <td class="pdf-td-desc">LLM Safety Code 데이터 어노테이션 · 우수 평가자 선정</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type edu">Education</span></td>
+          <td class="pdf-td-badge"><span class="tl-type edu">🎓 Education</span></td>
           <td class="pdf-td-date">2026.01 — 현재</td>
           <td class="pdf-td-title">SSAFY 15기</td>
           <td class="pdf-td-desc">삼성 청년 소프트웨어 아카데미 · Java 전공 · 알고리즘 · 웹 개발</td>
@@ -1459,7 +1525,7 @@
 
     <!-- 1: 동국대 (왼쪽) -->
     <div class="ct-left">
-      <span class="tl-type edu">Education</span>
+      <span class="tl-type edu">🎓 Education</span>
       <div class="tl-date">2021.03 — 2026.02</div>
       <div class="tl-title">동국대학교</div>
       <div class="tl-desc">산업시스템공학과 + 데이터사이언스 복수전공</div>
@@ -1471,7 +1537,7 @@
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type career">Career</span>
+      <span class="tl-type career">💼 Career</span>
       <div class="tl-date">2023.01 — 2023.02</div>
       <div class="tl-title">영림원소프트랩 — ERP 인턴</div>
       <div class="tl-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</div>
@@ -1479,7 +1545,7 @@
 
     <!-- 3: 2023 수상 (왼쪽) -->
     <div class="ct-left">
-      <span class="tl-type award">Award</span>
+      <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2023.11</div>
       <div class="tl-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
       <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</div>
@@ -1491,7 +1557,7 @@
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type award">Award</span>
+      <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2024.05</div>
       <div class="tl-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</div>
       <div class="tl-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</div>
@@ -1499,7 +1565,7 @@
 
     <!-- 5: 씨너렉스 인턴 (왼쪽) -->
     <div class="ct-left">
-      <span class="tl-type career">Career</span>
+      <span class="tl-type career">💼 Career</span>
       <div class="tl-date">2024.06 — 2024.12</div>
       <div class="tl-title">씨너렉스 — 인턴</div>
       <div class="tl-desc">홈페이지 리뉴얼 · 지출 결의 담당 · 제품 카탈로그 디자인</div>
@@ -1511,7 +1577,7 @@
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type research">Research</span>
+      <span class="tl-type research">🔬 Research</span>
       <div class="tl-date">2024.07 — 2024.12</div>
       <div class="tl-title">PI-lab — 시계열 예측 연구실</div>
       <div class="tl-desc">동국대 산업AI연구센터 · ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</div>
@@ -1519,7 +1585,7 @@
 
     <!-- 7: 장관상 (왼쪽) -->
     <div class="ct-left">
-      <span class="tl-type award">Award</span>
+      <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2024.10</div>
       <div class="tl-title">대한산업공학회 추계학술대회 대상 (장관상)</div>
       <div class="tl-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</div>
@@ -1531,7 +1597,7 @@
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type research">Research</span>
+      <span class="tl-type research">🔬 Research</span>
       <div class="tl-date">2024.12 — 2026.01</div>
       <div class="tl-title">동국대학교 산업AI연구센터 — 학부연구원</div>
       <div class="tl-desc">NLP 데이터 전처리 · 파이프라인 개발 총괄</div>
@@ -1541,7 +1607,7 @@
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type career">Career</span>
+      <span class="tl-type career">💼 Career</span>
       <div class="tl-date">2025.09 — 2025.11</div>
       <div class="tl-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
       <div class="tl-desc">LLM Safety Code 데이터 어노테이션 · 우수 평가자 선정</div>
@@ -1549,7 +1615,7 @@
 
     <!-- 10: SSAFY (왼쪽) -->
     <div class="ct-left">
-      <span class="tl-type edu">Education</span>
+      <span class="tl-type edu">🎓 Education</span>
       <div class="tl-date">2026.01 — 현재</div>
       <div class="tl-title">SSAFY 15기</div>
       <div class="tl-desc">삼성 청년 소프트웨어 아카데미 · Java 전공 · 알고리즘 · 웹 개발</div>
@@ -1568,15 +1634,23 @@
 ============================== -->
 <section id="section-portfolio">
   <div class="section-label">03 — Portfolio</div>
-  <h2 class="section-title">Featured <em>Portfolio</em></h2>
-  <p style="color:var(--muted); font-size:0.85rem; margin-bottom:2rem; font-family:var(--mono);">(Click images to show details)</p>
+  <div class="portfolio-header">
+    <h2 class="section-title">Featured <em>Portfolio</em></h2>
+    <div class="view-toggle" id="portfolioToggle">
+      <button class="view-toggle-btn active" onclick="setPortfolioView('card', this)">🗂 카드 뷰</button>
+      <button class="view-toggle-btn" onclick="setPortfolioView('pdf', this)">📄 PDF 보기</button>
+    </div>
+  </div>
 
-  <div class="filter-bar">
-    <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-    <button class="filter-btn" onclick="filterCards('nlp', this)">NLP</button>
-    <button class="filter-btn" onclick="filterCards('data', this)">Data Analysis</button>
-    <button class="filter-btn" onclick="filterCards('web', this)">Web/Dev</button>
-    <button class="filter-btn" onclick="filterCards('others', this)">Others</button>
+  <div id="portfolioCardView">
+    <p style="color:var(--muted); font-size:0.85rem; margin-bottom:2rem; font-family:var(--mono);">(Click images to show details)</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+      <button class="filter-btn" onclick="filterCards('nlp', this)">NLP</button>
+      <button class="filter-btn" onclick="filterCards('data', this)">Data Analysis</button>
+      <button class="filter-btn" onclick="filterCards('web', this)">Web/Dev</button>
+      <button class="filter-btn" onclick="filterCards('others', this)">Others</button>
+    </div>
   </div>
 
   <div class="portfolio-grid" id="portfolioGrid">
@@ -1635,7 +1709,236 @@
       </div>
     </div>
 
-  </div>
+  </div><!-- /portfolioGrid -->
+
+  <!-- ===== Portfolio PDF 보기 뷰 ===== -->
+  <div id="portfolioPdfView" class="portfolio-pdf-view">
+
+    <!-- 목차 -->
+    <div class="pdf-proj-page pdf-toc-page">
+      <div class="pdf-toc-hero">
+        <div class="pdf-toc-hero-title">Portfolio</div>
+        <div class="pdf-toc-hero-sub">박민주 · Minjoo Park · Data Analyst · Data Modeler</div>
+      </div>
+      <div class="pdf-toc-list">
+        <div class="pdf-toc-item">
+          <div class="pdf-toc-item-num">01</div>
+          <div>
+            <div class="pdf-toc-item-name">SNATCH — F&amp;B 트렌드 분석 대시보드</div>
+            <div class="pdf-toc-item-tag">NLP · Pipeline · 2025.03—07 · 졸업프로젝트 · 4인 팀</div>
+          </div>
+        </div>
+        <div class="pdf-toc-item">
+          <div class="pdf-toc-item-num">02</div>
+          <div>
+            <div class="pdf-toc-item-name">립리딩 기반 스마트 자막 서비스</div>
+            <div class="pdf-toc-item-tag">AI · Computer Vision · 대한산업공학회 장관상 · 2024.10</div>
+          </div>
+        </div>
+        <div class="pdf-toc-item">
+          <div class="pdf-toc-item-num">03</div>
+          <div>
+            <div class="pdf-toc-item-name">ESB 로그 시계열 패턴화 오류 감지</div>
+            <div class="pdf-toc-item-tag">ML · Log Analysis · 산학협력 · PI-lab</div>
+          </div>
+        </div>
+        <div class="pdf-toc-item">
+          <div class="pdf-toc-item-num">04</div>
+          <div>
+            <div class="pdf-toc-item-name">MZ세대 정신건강 서비스 — 챗봇 &amp; 위험군 분류</div>
+            <div class="pdf-toc-item-tag">NLP · ML · IoT · 4개 기관 협력 · 1년 프로젝트</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 01: SNATCH -->
+    <div class="pdf-proj-page">
+      <div class="pdf-proj-hdr">
+        <div class="pdf-proj-hdr-left">
+          <div class="pdf-proj-badge">NLP · Pipeline · 졸업프로젝트</div>
+          <div class="pdf-proj-num-title">
+            <span class="pdf-proj-pnum">01</span>
+            <span class="pdf-proj-ptitle">SNATCH</span>
+          </div>
+          <div class="pdf-proj-psub">F&amp;B 트렌드 분석 대시보드 · 2025.03 — 2025.07 · 4인 팀</div>
+        </div>
+        <div class="pdf-proj-hdr-right">
+          <span class="pdf-proj-stat-pill">F1-Score 0.87</span>
+          <span class="pdf-proj-stat-pill">추론 0.03s / 댓글</span>
+          <span class="pdf-proj-stat-pill">End-to-End 파이프라인</span>
+        </div>
+      </div>
+      <div class="pdf-proj-body">
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">개요</div>
+            <p class="pdf-proj-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해 SNS 댓글 기반 소비자 분석 대시보드를 개발.</p>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">진행한 일</div>
+            <p class="pdf-proj-text">유튜브·틱톡 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 카테고리별 평가를 Figma 대시보드로 시각화.</p>
+          </div>
+        </div>
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">주요 액션</div>
+            <ul class="pdf-proj-ul">
+              <li>YouTube · TikTok · 인스티즈 크롤링 및 수집</li>
+              <li>한국어 구어체 KcELECTRA 파인튜닝</li>
+              <li>HDBSCAN 클러스터링 → 감성분석 파이프라인 설계</li>
+              <li>Python + AI 기반 EDA 자동화</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 02: 립리딩 -->
+    <div class="pdf-proj-page">
+      <div class="pdf-proj-hdr">
+        <div class="pdf-proj-hdr-left">
+          <div class="pdf-proj-badge">AI · Computer Vision · 대한산업공학회</div>
+          <div class="pdf-proj-num-title">
+            <span class="pdf-proj-pnum">02</span>
+            <span class="pdf-proj-ptitle">립리딩 기반 스마트 자막</span>
+          </div>
+          <div class="pdf-proj-psub">청각 장애인을 위한 화자 인식 자막 서비스 · 2024.10</div>
+        </div>
+        <div class="pdf-proj-hdr-right">
+          <span class="pdf-proj-stat-pill">대한산업공학회 장관상</span>
+          <span class="pdf-proj-stat-pill">"논문 주제로 발전 가능"</span>
+          <span class="pdf-proj-stat-pill">4 모델 비교 선정</span>
+        </div>
+      </div>
+      <div class="pdf-proj-body">
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">개요</div>
+            <p class="pdf-proj-text">OTT 다중 화자 환경에서 화자를 구분하지 못하는 기존 자막 시스템의 한계를 인식. 청각 장애인 학습·사회 참여 개선을 목표로 립리딩 기반 스마트 자막 서비스 제안.</p>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">진행한 일</div>
+            <p class="pdf-proj-text">Inception · ResNet 등 4가지 딥러닝 모델 정확도 비교 → 최적 모델 선정. 안면 랜드마크로 화자 자동 탐지, 말풍선 형태 화자별 자막 배치 UX 구현.</p>
+          </div>
+        </div>
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">주요 액션</div>
+            <ul class="pdf-proj-ul">
+              <li>Inception · ResNet 등 4 모델 정확도 실험 비교</li>
+              <li>최적 모델 선정 및 파인튜닝</li>
+              <li>안면 랜드마크 기반 화자 자동 탐지 구현</li>
+              <li>말풍선 형태 화자별 자막 배치 UX</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · OpenCV · Inception · ResNet · Face Landmark Detection · MediaPipe</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 03: ESB -->
+    <div class="pdf-proj-page">
+      <div class="pdf-proj-hdr">
+        <div class="pdf-proj-hdr-left">
+          <div class="pdf-proj-badge">ML · Log Analysis · 산학협력 · PI-lab</div>
+          <div class="pdf-proj-num-title">
+            <span class="pdf-proj-pnum">03</span>
+            <span class="pdf-proj-ptitle">ESB 로그 시계열 오류 감지</span>
+          </div>
+          <div class="pdf-proj-psub">대규모 엔터프라이즈 서비스버스 장애 원인 자동 추론 · 2024</div>
+        </div>
+        <div class="pdf-proj-hdr-right">
+          <span class="pdf-proj-stat-pill">DB Lock 자동 감지</span>
+          <span class="pdf-proj-stat-pill">Disk I/O 병목 탐지</span>
+          <span class="pdf-proj-stat-pill">인과관계 규칙화</span>
+        </div>
+      </div>
+      <div class="pdf-proj-body">
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">개요</div>
+            <p class="pdf-proj-text">대규모 ESB 로그를 분석해 장애 원인 추론 시스템 개발. 기존 수동 확인으로 인한 복구 지연 문제를 데이터 기반 자동 감지 규칙으로 전환.</p>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">진행한 일</div>
+            <p class="pdf-proj-text">시계열 로그 데이터를 Random Forest로 패턴화, PC 알고리즘으로 지표 간 인과관계 분석. DB Lock · Disk I/O 병목 등 구체적 원인 판단 알림 규칙 시스템화.</p>
+          </div>
+        </div>
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">주요 액션</div>
+            <ul class="pdf-proj-ul">
+              <li>ESB 로그 시계열 데이터 Random Forest 패턴화</li>
+              <li>PC 알고리즘 지표 간 인과관계 분석</li>
+              <li>DB Lock · Disk I/O 병목 원인 판단 알림 규칙 구축</li>
+              <li>직관 의존 대응 → 데이터 기반 규칙 전환</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 프로젝트 04: AI Health -->
+    <div class="pdf-proj-page">
+      <div class="pdf-proj-hdr">
+        <div class="pdf-proj-hdr-left">
+          <div class="pdf-proj-badge">NLP · ML · IoT · 4개 기관 협력</div>
+          <div class="pdf-proj-num-title">
+            <span class="pdf-proj-pnum">04</span>
+            <span class="pdf-proj-ptitle">정신건강 서비스</span>
+          </div>
+          <div class="pdf-proj-psub">챗봇 고도화 &amp; IoT 라이프로그 위험군 분류 · 2024.12 — 2025.10</div>
+        </div>
+        <div class="pdf-proj-hdr-right">
+          <span class="pdf-proj-stat-pill">만족도 66% → 87%</span>
+          <span class="pdf-proj-stat-pill">수작업 → 전자동화</span>
+          <span class="pdf-proj-stat-pill">4개 기관 협력</span>
+        </div>
+      </div>
+      <div class="pdf-proj-body">
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">개요 — 챗봇 고도화</div>
+            <p class="pdf-proj-text">협력사 요구(긍/부정 단순 출력) 대신 공감형 답변 방식으로 개선 제안 및 구현. 예상 반응률 차이 시각화로 이해관계자 설득 → 환자 만족도 66%→87% 달성.</p>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">개요 — 위험군 분류</div>
+            <p class="pdf-proj-text">IoT 라이프로그(걸음수·조도·소음) Raw 데이터를 Random Forest로 정신건강 위험군 분류. Excel 수작업 → SQL Server-Python 연동 전자동화 파이프라인 구축.</p>
+          </div>
+        </div>
+        <div class="pdf-proj-col">
+          <div>
+            <div class="pdf-proj-sec-lbl">주요 액션</div>
+            <ul class="pdf-proj-ul">
+              <li>KcELECTRA 감정 재라벨링 · 공감형 답변 모듈 구현</li>
+              <li>SQL Server ↔ Python 직접 연동 (SQLAlchemy)</li>
+              <li>USER_ID별 최적 14일 분석 구간 자동 탐지</li>
+              <li>데이터 추출 → 분류 → 저장 일괄 자동화</li>
+            </ul>
+          </div>
+          <div>
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
+            <p class="pdf-proj-stack" style="margin-top:0.3rem; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /portfolioPdfView -->
+
 </section>
 
 <!-- ==============================
@@ -1969,7 +2272,7 @@
 
   // 포트폴리오 카테고리 필터: 선택한 카테고리 외 카드 숨기기
   function setHistoryView(view, btn) {
-    document.querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.closest('.view-toggle').querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const pdf = document.getElementById('pdfTimeline');
     const tl  = document.getElementById('centerTimeline');
@@ -1979,6 +2282,23 @@
     } else {
       pdf.classList.remove('active');
       tl.classList.remove('hidden');
+    }
+  }
+
+  function setPortfolioView(view, btn) {
+    btn.closest('.view-toggle').querySelectorAll('.view-toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const pdfView   = document.getElementById('portfolioPdfView');
+    const cardView  = document.getElementById('portfolioCardView');
+    const grid      = document.getElementById('portfolioGrid');
+    if (view === 'pdf') {
+      pdfView.classList.add('active');
+      cardView.style.display = 'none';
+      grid.style.display = 'none';
+    } else {
+      pdfView.classList.remove('active');
+      cardView.style.display = '';
+      grid.style.display = '';
     }
   }
 
