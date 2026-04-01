@@ -1152,7 +1152,7 @@
     }
 
     /* =============================================
-       Portfolio — PDF 보기 뷰 (가로 4열)
+       Portfolio — PDF 보기 뷰 (A4 가로 카드)
     ============================================= */
     .portfolio-header {
       display: flex;
@@ -1164,55 +1164,60 @@
     .portfolio-pdf-view { display: none; }
     .portfolio-pdf-view.active { display: block; }
 
-    /* 2x2 그리드 */
-    .pf-pdf-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.2rem;
-    }
+    /* 카드 4개 세로 스택 */
+    .pf-pdf-row { display: flex; flex-direction: column; gap: 2rem; }
+
+    /* 각 카드: 3열 가로 레이아웃 */
     .pf-pdf-card {
       background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem 1.4rem 1.2rem;
-      box-shadow: 0 2px 14px rgba(0,0,0,0.06);
+      border-radius: 12px;
+      padding: 1.8rem 2rem;
+      box-shadow: 0 3px 20px rgba(0,0,0,0.07);
+      display: grid;
+      grid-template-columns: 210px 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    /* 좌열: 번호 + 제목 + 스탯 */
+    .pf-pdf-left {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
-      min-width: 0;
-    }
-    .pf-pdf-card-top {
-      padding-bottom: 0.75rem;
-      border-bottom: 2px solid var(--accent);
+      gap: 0.65rem;
+      border-right: 2px solid var(--accent);
+      padding-right: 1.6rem;
     }
     .pf-pdf-badge {
       font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
       color: #166534; background: #f0fdf4; border: 1.5px solid #86efac;
-      border-radius: 999px; padding: 0.08rem 0.55rem;
-      display: inline-block; margin-bottom: 0.35rem;
+      border-radius: 999px; padding: 0.1rem 0.6rem;
+      display: inline-block; align-self: flex-start;
     }
-    .pf-pdf-num-row { display: flex; align-items: baseline; gap: 0.45rem; margin-bottom: 0.1rem; }
-    .pf-pdf-num { font-family: var(--mono); font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .pf-pdf-title { font-size: 1.1rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; line-height: 1.2; }
-    .pf-pdf-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; line-height: 1.4; }
-    .pf-pdf-stats { display: flex; flex-wrap: wrap; gap: 0.28rem; }
+    .pf-pdf-num { font-family: var(--mono); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .pf-pdf-title { font-size: 1.08rem; font-weight: 800; color: var(--text); line-height: 1.25; }
+    .pf-pdf-sub { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); line-height: 1.55; }
+    .pf-pdf-hr { height: 1px; background: var(--border); margin: 0.1rem 0; }
+    .pf-pdf-stats { display: flex; flex-direction: column; gap: 0.3rem; }
     .pf-pdf-stat {
-      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
-      padding: 0.12rem 0.5rem;
+      font-family: var(--mono); font-size: 0.63rem; font-weight: 700;
+      padding: 0.2rem 0.7rem;
       background: #f0fdf4; color: #166534; border: 1.5px solid #86efac;
-      border-radius: 999px; white-space: nowrap;
+      border-radius: 999px; white-space: nowrap; align-self: flex-start;
     }
-    .pf-pdf-section { display: flex; flex-direction: column; gap: 0.18rem; }
+
+    /* 중열 / 우열 */
+    .pf-pdf-mid, .pf-pdf-right { display: flex; flex-direction: column; gap: 1rem; }
+    .pf-pdf-section { display: flex; flex-direction: column; gap: 0.3rem; }
     .pf-pdf-lbl {
-      font-family: var(--mono); font-size: 0.57rem; font-weight: 700;
+      font-family: var(--mono); font-size: 0.59rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2);
-      padding-bottom: 0.15rem; border-bottom: 1px solid var(--border);
-      margin-bottom: 0.1rem;
+      padding-bottom: 0.18rem; border-bottom: 1px solid var(--border);
     }
-    .pf-pdf-text { font-size: 0.85rem; color: var(--text); line-height: 1.65; margin: 0; word-break: keep-all; }
-    .pf-pdf-ul { margin: 0; padding-left: 1rem; font-size: 0.82rem; color: var(--text); line-height: 1.7; }
-    .pf-pdf-ul li { margin-bottom: 0.05rem; }
-    .pf-pdf-stack { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); line-height: 1.55; margin: 0; word-break: break-all; }
+    .pf-pdf-text { font-size: 0.84rem; color: var(--text); line-height: 1.72; margin: 0; word-break: keep-all; }
+    .pf-pdf-ul { margin: 0; padding-left: 1.1rem; font-size: 0.82rem; color: var(--text); line-height: 1.78; }
+    .pf-pdf-ul li { margin-bottom: 0.1rem; }
+    .pf-pdf-stack { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -1307,35 +1312,50 @@
       .pdf-table .pdf-td-desc { font-size: 7.5pt; }
       .tl-type { font-size: 6.5pt; padding: 0.5mm 2mm; }
 
-      /* Portfolio — 카드 뷰 숨기고 PDF 뷰 표시 */
-      #portfolioCardView, .portfolio-grid, .portfolio-toggle { display: none !important; }
-      #portfolioPdfView { display: block !important; }
-      .portfolio-pdf-view.active, .portfolio-pdf-view { display: block !important; }
-      /* 4열 가로 그리드 유지, 각 카드 한 페이지 */
-      .pf-pdf-row {
-        display: grid;
+      /* ===== PDF 7페이지 구조 =====
+         1: 자기소개(home-grid)
+         2: 히스토리(pdfTimeline)
+         3: 포폴 미리보기(portfolio-grid 2×2)
+         4~7: 포폴 상세 4장(pf-pdf-card)
+      ============================= */
+      #portfolioCardView { display: none !important; }
+      .portfolio-grid {
+        display: grid !important;
         grid-template-columns: repeat(2, 1fr);
         gap: 5mm;
-        overflow: visible;
+        break-after: page;
       }
+      .portfolio-card { box-shadow: none; border: 1px solid #ddd; border-radius: 3mm; }
+      .portfolio-card-placeholder { height: 40mm; }
+      .card-info { padding: 3mm 4mm; }
+      .card-info-tag { font-size: 6pt; }
+      .card-info-name { font-size: 8.5pt; }
+      .card-print-desc { font-size: 7pt; color: #555; margin-top: 1.5mm; line-height: 1.5; }
+      .portfolio-header .view-toggle { display: none !important; }
+
+      #portfolioPdfView { display: block !important; }
+      .portfolio-pdf-view { display: block !important; }
+      .pf-pdf-row { display: flex; flex-direction: column; gap: 0; }
       .pf-pdf-card {
         box-shadow: none;
-        border: 1px solid #ccc;
-        border-radius: 3mm;
-        padding: 5mm 4mm;
-        break-inside: avoid;
-        font-size: 7.5pt;
+        border: none;
+        border-radius: 0;
+        padding: 6mm 0 0;
+        break-after: page;
+        grid-template-columns: 48mm 1fr 1fr;
+        gap: 6mm;
+        align-items: start;
       }
-      .pf-pdf-card-top { padding-bottom: 2.5mm; margin-bottom: 2mm; }
-      .pf-pdf-num { font-size: 13pt; }
-      .pf-pdf-title { font-size: 9pt; }
-      .pf-pdf-sub { font-size: 6.5pt; }
+      .pf-pdf-left { padding-right: 5mm; border-right: 1.5px solid #5cb531; }
+      .pf-pdf-num { font-size: 18pt; }
+      .pf-pdf-title { font-size: 9.5pt; }
+      .pf-pdf-sub { font-size: 6pt; }
       .pf-pdf-badge { font-size: 5.5pt; }
-      .pf-pdf-stat { font-size: 5.5pt; padding: 0.3mm 1.5mm; }
-      .pf-pdf-lbl { font-size: 5.5pt; }
-      .pf-pdf-text { font-size: 7pt; line-height: 1.5; }
-      .pf-pdf-ul { font-size: 6.5pt; line-height: 1.55; padding-left: 3.5mm; }
-      .pf-pdf-stack { font-size: 5.5pt; }
+      .pf-pdf-stat { font-size: 6pt; padding: 0.5mm 2mm; }
+      .pf-pdf-lbl { font-size: 6pt; }
+      .pf-pdf-text { font-size: 7.5pt; line-height: 1.6; }
+      .pf-pdf-ul { font-size: 7pt; line-height: 1.6; padding-left: 4mm; }
+      .pf-pdf-stack { font-size: 6pt; }
     }
   </style>
 </head>
@@ -1692,143 +1712,172 @@
 
   </div><!-- /portfolioGrid -->
 
-  <!-- ===== Portfolio PDF 보기 뷰 (4열 가로) ===== -->
+  <!-- ===== Portfolio PDF 보기 뷰 — A4 가로, 3열, 프로젝트당 1페이지 ===== -->
   <div id="portfolioPdfView" class="portfolio-pdf-view">
     <div class="pf-pdf-row">
 
       <!-- 01 SNATCH -->
       <div class="pf-pdf-card">
-        <div class="pf-pdf-card-top">
+        <div class="pf-pdf-left">
           <div class="pf-pdf-badge">NLP · Pipeline · 졸업프로젝트</div>
-          <div class="pf-pdf-num-row">
-            <span class="pf-pdf-num">01</span>
-            <span class="pf-pdf-title">SNATCH</span>
-          </div>
+          <div class="pf-pdf-num">01</div>
+          <div class="pf-pdf-title">SNATCH</div>
           <div class="pf-pdf-sub">F&amp;B 트렌드 분석 대시보드<br>2025.03 — 07 · 4인 팀</div>
+          <div class="pf-pdf-hr"></div>
+          <div class="pf-pdf-stats">
+            <span class="pf-pdf-stat">F1-Score 0.87</span>
+            <span class="pf-pdf-stat">추론 0.03s / 댓글</span>
+            <span class="pf-pdf-stat">End-to-End 파이프라인</span>
+          </div>
         </div>
-        <div class="pf-pdf-stats">
-          <span class="pf-pdf-stat">F1 0.87</span>
-          <span class="pf-pdf-stat">추론 0.03s/댓글</span>
-          <span class="pf-pdf-stat">E2E 파이프라인</span>
+        <div class="pf-pdf-mid">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">개요 / 배경</div>
+            <p class="pf-pdf-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해, SNS 댓글 기반 소비자 분석 대시보드를 개발했습니다.</p>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">진행한 일</div>
+            <p class="pf-pdf-text">유튜브·틱톡 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 카테고리별 평가를 Figma 대시보드로 시각화해 키워드·그래프·쇼츠 추이를 한눈에 파악할 수 있도록 완성했습니다.</p>
+          </div>
         </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">개요</div>
-          <p class="pf-pdf-text">편의점 운영자의 효율적 수주를 위해 SNS 댓글 기반 F&amp;B 트렌드 소비자 분석 대시보드 개발.</p>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">주요 작업</div>
-          <ul class="pf-pdf-ul">
-            <li>YouTube · TikTok · 인스티즈 크롤링</li>
-            <li>KcELECTRA 파인튜닝 (구어체)</li>
-            <li>HDBSCAN 클러스터링 → 감성분석 파이프라인</li>
-            <li>Figma 대시보드 시각화</li>
-          </ul>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">스택</div>
-          <p class="pf-pdf-stack">Python · Selenium · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
+        <div class="pf-pdf-right">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">주요 액션</div>
+            <ul class="pf-pdf-ul">
+              <li>YouTube · TikTok · 인스티즈 크롤링 및 수집</li>
+              <li>한국어 구어체 처리 KcELECTRA 파인튜닝</li>
+              <li>HDBSCAN 클러스터링 → 감성분석 파이프라인 설계</li>
+              <li>Python + AI 기반 EDA 자동화 · 반복 업무 자동화</li>
+            </ul>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">기술 스택</div>
+            <p class="pf-pdf-stack">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
+          </div>
         </div>
       </div>
 
       <!-- 02 립리딩 -->
       <div class="pf-pdf-card">
-        <div class="pf-pdf-card-top">
-          <div class="pf-pdf-badge">AI · Computer Vision · 장관상</div>
-          <div class="pf-pdf-num-row">
-            <span class="pf-pdf-num">02</span>
-            <span class="pf-pdf-title">립리딩 스마트 자막</span>
-          </div>
+        <div class="pf-pdf-left">
+          <div class="pf-pdf-badge">AI · Computer Vision · 대한산업공학회</div>
+          <div class="pf-pdf-num">02</div>
+          <div class="pf-pdf-title">립리딩<br>스마트 자막</div>
           <div class="pf-pdf-sub">청각장애인 화자 인식 자막<br>2024.10 · 대한산업공학회</div>
+          <div class="pf-pdf-hr"></div>
+          <div class="pf-pdf-stats">
+            <span class="pf-pdf-stat">대한산업공학회 장관상</span>
+            <span class="pf-pdf-stat">4 딥러닝 모델 비교</span>
+            <span class="pf-pdf-stat">"논문 주제로 발전 가능"</span>
+          </div>
         </div>
-        <div class="pf-pdf-stats">
-          <span class="pf-pdf-stat">장관상</span>
-          <span class="pf-pdf-stat">4 모델 비교</span>
-          <span class="pf-pdf-stat">"논문급" 평가</span>
+        <div class="pf-pdf-mid">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">개요 / 배경</div>
+            <p class="pf-pdf-text">OTT를 이용하며 기존 자막 시스템이 다중 화자 환경에서 화자를 구분하기 어렵다는 문제를 인식했습니다. 청각 장애인의 학습과 사회적 상호작용 개선을 목표로 '립리딩 기반 스마트 자막 서비스'를 제안했습니다.</p>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">진행한 일</div>
+            <p class="pf-pdf-text">Inception · ResNet 등 4가지 딥러닝 모델 정확도를 비교해 최적 모델을 선정하고, 안면 랜드마크 기반 화자 자동 탐지와 말풍선 형태 자막 배치 UX를 구현했습니다.</p>
+          </div>
         </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">개요</div>
-          <p class="pf-pdf-text">OTT 다중 화자 구분 불가 문제 인식 → 립리딩 기반 화자별 스마트 자막 서비스 제안·구현.</p>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">주요 작업</div>
-          <ul class="pf-pdf-ul">
-            <li>Inception · ResNet 등 4 모델 비교 실험</li>
-            <li>최적 모델 선정 및 파인튜닝</li>
-            <li>안면 랜드마크 기반 화자 자동 탐지</li>
-            <li>말풍선 형태 화자별 자막 UX 구현</li>
-          </ul>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">스택</div>
-          <p class="pf-pdf-stack">Python · OpenCV · Inception · ResNet · MediaPipe · Face Landmark</p>
+        <div class="pf-pdf-right">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">주요 액션</div>
+            <ul class="pf-pdf-ul">
+              <li>Inception · ResNet 등 4 모델 정확도 실험 비교</li>
+              <li>최적 딥러닝 모델 선정 및 파인튜닝</li>
+              <li>안면 랜드마크 기반 화자 자동 탐지 구현</li>
+              <li>말풍선 형태 화자별 자막 배치 UX 구현</li>
+            </ul>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">기술 스택</div>
+            <p class="pf-pdf-stack">Python · OpenCV · Inception · ResNet · Face Landmark Detection · MediaPipe</p>
+          </div>
         </div>
       </div>
 
       <!-- 03 ESB -->
       <div class="pf-pdf-card">
-        <div class="pf-pdf-card-top">
+        <div class="pf-pdf-left">
           <div class="pf-pdf-badge">ML · Log Analysis · 산학협력</div>
-          <div class="pf-pdf-num-row">
-            <span class="pf-pdf-num">03</span>
-            <span class="pf-pdf-title">ESB 로그 오류 감지</span>
+          <div class="pf-pdf-num">03</div>
+          <div class="pf-pdf-title">ESB 로그<br>시계열 오류 감지</div>
+          <div class="pf-pdf-sub">엔터프라이즈 장애 원인 자동 추론<br>2024 · PI-lab · 산학협력</div>
+          <div class="pf-pdf-hr"></div>
+          <div class="pf-pdf-stats">
+            <span class="pf-pdf-stat">DB Lock 자동 감지</span>
+            <span class="pf-pdf-stat">Disk I/O 병목 탐지</span>
+            <span class="pf-pdf-stat">인과관계 규칙 시스템화</span>
           </div>
-          <div class="pf-pdf-sub">시계열 패턴화 장애 자동 추론<br>2024 · PI-lab</div>
         </div>
-        <div class="pf-pdf-stats">
-          <span class="pf-pdf-stat">DB Lock 자동 감지</span>
-          <span class="pf-pdf-stat">Disk I/O 탐지</span>
-          <span class="pf-pdf-stat">인과관계 규칙화</span>
+        <div class="pf-pdf-mid">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">개요 / 배경</div>
+            <p class="pf-pdf-text">대규모 ESB(Enterprise Service Bus) 로그를 분석해 장애 원인 추론 시스템을 개발했습니다. 기존에는 운영자가 개별 지표를 수동 확인해 복구가 지연되는 문제가 있었습니다.</p>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">진행한 일</div>
+            <p class="pf-pdf-text">ESB 로그 시계열 데이터를 Random Forest로 패턴화하고, PC 알고리즘으로 지표 간 인과관계를 분석했습니다. DB Lock · Disk I/O 병목 등 구체적 장애 원인을 자동 판단하는 알림 규칙을 시스템화했습니다.</p>
+          </div>
         </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">개요</div>
-          <p class="pf-pdf-text">대규모 ESB 로그 분석 → 장애 원인 추론 자동화. 수동 확인·복구 지연 문제를 데이터 기반 규칙으로 전환.</p>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">주요 작업</div>
-          <ul class="pf-pdf-ul">
-            <li>Random Forest 시계열 패턴화</li>
-            <li>PC 알고리즘 지표 인과관계 분석</li>
-            <li>DB Lock · Disk I/O 원인 판단 규칙 구축</li>
-            <li>직관 대응 → 데이터 기반 전환</li>
-          </ul>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">스택</div>
-          <p class="pf-pdf-stack">Python · Random Forest · PC Algorithm · Time Series · SQL</p>
+        <div class="pf-pdf-right">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">주요 액션</div>
+            <ul class="pf-pdf-ul">
+              <li>ESB 로그 시계열 데이터 Random Forest 패턴화</li>
+              <li>PC 알고리즘 도입으로 지표 간 인과관계 분석</li>
+              <li>DB Lock · Disk I/O 원인 판단 알림 규칙 구축</li>
+              <li>직관 의존 대응 → 데이터 기반 규칙 전환</li>
+            </ul>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">기술 스택</div>
+            <p class="pf-pdf-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
+          </div>
         </div>
       </div>
 
       <!-- 04 정신건강 -->
       <div class="pf-pdf-card">
-        <div class="pf-pdf-card-top">
-          <div class="pf-pdf-badge">NLP · ML · IoT · 4기관 협력</div>
-          <div class="pf-pdf-num-row">
-            <span class="pf-pdf-num">04</span>
-            <span class="pf-pdf-title">정신건강 서비스</span>
+        <div class="pf-pdf-left">
+          <div class="pf-pdf-badge">NLP · ML · IoT · 4개 기관 협력</div>
+          <div class="pf-pdf-num">04</div>
+          <div class="pf-pdf-title">정신건강<br>서비스</div>
+          <div class="pf-pdf-sub">챗봇 고도화 &amp; 위험군 분류<br>2024.12 — 2025.10 · 1년 프로젝트</div>
+          <div class="pf-pdf-hr"></div>
+          <div class="pf-pdf-stats">
+            <span class="pf-pdf-stat">만족도 66% → 87%</span>
+            <span class="pf-pdf-stat">수작업 → 전자동화</span>
+            <span class="pf-pdf-stat">4개 기관 협력</span>
           </div>
-          <div class="pf-pdf-sub">챗봇 고도화 &amp; 위험군 분류<br>2024.12 — 2025.10</div>
         </div>
-        <div class="pf-pdf-stats">
-          <span class="pf-pdf-stat">만족도 66%→87%</span>
-          <span class="pf-pdf-stat">수작업→전자동화</span>
-          <span class="pf-pdf-stat">4기관 협력</span>
+        <div class="pf-pdf-mid">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">개요 / 챗봇 고도화</div>
+            <p class="pf-pdf-text">협력사 요구(긍/부정 단순 출력) 대신 공감형 답변 방식으로 개선을 제안·구현했습니다. 예상 반응률 차이를 시각화해 이해관계자를 설득, 환자 만족도 66%→87%를 달성했습니다.</p>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">개요 / 위험군 분류</div>
+            <p class="pf-pdf-text">IoT 라이프로그(걸음수·조도·소음) Raw 데이터를 Random Forest로 위험군 분류. Excel 수작업 → SQL Server-Python 연동 전자동화 파이프라인으로 전환했습니다.</p>
+          </div>
         </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">개요</div>
-          <p class="pf-pdf-text">감성분석 챗봇 고도화 + IoT 라이프로그 위험군 분류 파이프라인. 리테일테크·보건복지부·부산대병원·산업AI센터 협력.</p>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">주요 작업</div>
-          <ul class="pf-pdf-ul">
-            <li>KcELECTRA 재라벨링 · 공감형 답변 구현</li>
-            <li>SQL Server ↔ Python 연동 자동화</li>
-            <li>14일 최적 구간 자동 탐지 알고리즘</li>
-            <li>추출→분류→저장 일괄 자동화</li>
-          </ul>
-        </div>
-        <div class="pf-pdf-section">
-          <div class="pf-pdf-lbl">스택</div>
-          <p class="pf-pdf-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace</p>
+        <div class="pf-pdf-right">
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">주요 액션</div>
+            <ul class="pf-pdf-ul">
+              <li>KcELECTRA 감정 재라벨링 · 공감형 답변 모듈 구현</li>
+              <li>SQL Server ↔ Python 직접 연동 (SQLAlchemy)</li>
+              <li>USER_ID별 최적 14일 분석 구간 자동 탐지</li>
+              <li>데이터 추출 → 분류 → 저장 일괄 자동화</li>
+            </ul>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl">기술 스택</div>
+            <p class="pf-pdf-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
+            <p class="pf-pdf-stack" style="margin-top:0.3rem;">협력: 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
+          </div>
         </div>
       </div>
 
