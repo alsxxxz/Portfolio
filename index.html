@@ -1111,7 +1111,7 @@
     }
 
     /* =============================================
-       PDF 뷰 — 컴팩트 테이블 형태
+       PDF 뷰 — 컴팩트 테이블 형태 > 그냥 카테고리 별로 보여주기 시계열 대로 말고 
     ============================================= */
     .pdf-timeline { display: none; }
     .pdf-timeline.active { display: block; }
@@ -1132,9 +1132,9 @@
       vertical-align: middle;
       font-size: 0.88rem;
     }
-    .pdf-table .pdf-td-badge { width: 90px; }
+    .pdf-table .pdf-td-badge { width: 150px; }
     .pdf-table .pdf-td-date  {
-      width: 130px;
+      width: 100px;
       font-family: var(--mono);
       font-size: 0.75rem;
       color: var(--muted);
@@ -1471,13 +1471,13 @@
         <tr>
           <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2023.11</td>
-          <td class="pdf-td-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</td>
+          <td class="pdf-td-title">캡스톤디자인대회 [대상] · 아이디어 경진대회 [공과대학장상]</td>
           <td class="pdf-td-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</td>
         </tr>
         <tr>
           <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2024.05</td>
-          <td class="pdf-td-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</td>
+          <td class="pdf-td-title">춘계 학술대회 [입선] · 캡스톤디자인대회 [동상]</td>
           <td class="pdf-td-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</td>
         </tr>
         <tr>
@@ -1489,13 +1489,13 @@
         <tr>
           <td class="pdf-td-badge"><span class="tl-type research">🔬 Research</span></td>
           <td class="pdf-td-date">2024.07 — 2024.12</td>
-          <td class="pdf-td-title">PI-lab — 시계열 예측 연구실</td>
-          <td class="pdf-td-desc">동국대 산업AI연구센터 · ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</td>
+          <td class="pdf-td-title">PI-lab (시계열 예측 연구실) —  학부연구생</td>
+          <td class="pdf-td-desc"> ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</td>
         </tr>
         <tr>
           <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2024.10</td>
-          <td class="pdf-td-title">대한산업공학회 추계학술대회 대상 (장관상)</td>
+          <td class="pdf-td-title">대한산업공학회 추계학술대회 대상 [장관상]</td>
           <td class="pdf-td-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</td>
         </tr>
         <tr>
@@ -1507,7 +1507,7 @@
         <tr>
           <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
           <td class="pdf-td-date">2025.09 — 2025.11</td>
-          <td class="pdf-td-title">Naver HyperCLOVA 안전성 데이터 어노테이션</td>
+          <td class="pdf-td-title">Naver HyperCLOVA 데이터 구축 및 평가 작업 참여</td>
           <td class="pdf-td-desc">LLM Safety Code 데이터 어노테이션 · 우수 평가자 선정</td>
         </tr>
         <tr>
@@ -1528,7 +1528,7 @@
       <span class="tl-type edu">🎓 Education</span>
       <div class="tl-date">2021.03 — 2026.02</div>
       <div class="tl-title">동국대학교</div>
-      <div class="tl-desc">산업시스템공학과 + 데이터사이언스 복수전공</div>
+      <div class="tl-desc">산업시스템공학과 + 데이터사이언스 연계전공</div>
     </div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right ct-empty"></div>
@@ -1547,7 +1547,7 @@
     <div class="ct-left">
       <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2023.11</div>
-      <div class="tl-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
+      <div class="tl-title">캡스톤디자인대회 [대상] · 아이디어 경진대회 [공과대학장상]</div>
       <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</div>
     </div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
@@ -1559,7 +1559,7 @@
     <div class="ct-right">
       <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2024.05</div>
-      <div class="tl-title">춘계 학술대회 입선 · 캡스톤디자인대회 동상</div>
+      <div class="tl-title">춘계 학술대회 [입선] · 캡스톤디자인대회 [동상]</div>
       <div class="tl-desc">강남구 음주운전 집중 단속구역 선별 / 서울시 행복주택 최적 입지 선정</div>
     </div>
 
@@ -1579,15 +1579,15 @@
     <div class="ct-right">
       <span class="tl-type research">🔬 Research</span>
       <div class="tl-date">2024.07 — 2024.12</div>
-      <div class="tl-title">PI-lab — 시계열 예측 연구실</div>
-      <div class="tl-desc">동국대 산업AI연구센터 · ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</div>
+      <div class="tl-title">PI-lab (시계열 예측 연구실) —  학부연구생</div>
+      <div class="tl-desc"> ESB 로그 시계열 패턴화 · 오류 감지 모델 개발</div>
     </div>
 
     <!-- 7: 장관상 (왼쪽) -->
     <div class="ct-left">
       <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2024.10</div>
-      <div class="tl-title">대한산업공학회 추계학술대회 대상 (장관상)</div>
+      <div class="tl-title">대한산업공학회 추계학술대회 [장관상]</div>
       <div class="tl-desc">립리딩 기반 청각 장애인 스마트 자막 알고리즘</div>
     </div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
@@ -1609,7 +1609,7 @@
     <div class="ct-right">
       <span class="tl-type career">💼 Career</span>
       <div class="tl-date">2025.09 — 2025.11</div>
-      <div class="tl-title">Naver HyperCLOVA 안전성 데이터 어노테이션</div>
+      <div class="tl-title">Naver HyperCLOVA 데이터 구축 및 평가 작업 참여</div>
       <div class="tl-desc">LLM Safety Code 데이터 어노테이션 · 우수 평가자 선정</div>
     </div>
 
@@ -1718,7 +1718,7 @@
     <div class="pdf-proj-page pdf-toc-page">
       <div class="pdf-toc-hero">
         <div class="pdf-toc-hero-title">Portfolio</div>
-        <div class="pdf-toc-hero-sub">박민주 · Minjoo Park · Data Analyst · Data Modeler</div>
+        <div class="pdf-toc-hero-sub">박민주 · Minjoo Park · Data Engineer · Data Modeler</div>
       </div>
       <div class="pdf-toc-list">
         <div class="pdf-toc-item">
