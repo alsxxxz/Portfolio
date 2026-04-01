@@ -898,8 +898,8 @@
     }
     .cert-badge {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      padding: 0.3rem 0.9rem;
+      font-size: 0.88rem;
+      padding: 0.45rem 1.2rem;
       background: #f0fdf4;
       border: 1.5px solid #86efac;
       color: #166534;
@@ -1164,22 +1164,21 @@
     .portfolio-pdf-view { display: none; }
     .portfolio-pdf-view.active { display: block; }
 
-    /* 4열 가로 그리드 */
+    /* 2x2 그리드 */
     .pf-pdf-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1rem;
-      overflow-x: auto;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
     }
     .pf-pdf-card {
       background: #fff;
       border: 1.5px solid var(--border);
       border-radius: 10px;
-      padding: 1.2rem 1rem 1rem;
+      padding: 1.5rem 1.4rem 1.2rem;
       box-shadow: 0 2px 14px rgba(0,0,0,0.06);
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.8rem;
       min-width: 0;
     }
     .pf-pdf-card-top {
@@ -1193,9 +1192,9 @@
       display: inline-block; margin-bottom: 0.35rem;
     }
     .pf-pdf-num-row { display: flex; align-items: baseline; gap: 0.45rem; margin-bottom: 0.1rem; }
-    .pf-pdf-num { font-family: var(--mono); font-size: 1.3rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .pf-pdf-title { font-size: 0.97rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; line-height: 1.2; }
-    .pf-pdf-sub { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); margin-top: 0.1rem; line-height: 1.4; }
+    .pf-pdf-num { font-family: var(--mono); font-size: 1.5rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .pf-pdf-title { font-size: 1.1rem; font-weight: 800; color: var(--text); letter-spacing: -0.01em; line-height: 1.2; }
+    .pf-pdf-sub { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; line-height: 1.4; }
     .pf-pdf-stats { display: flex; flex-wrap: wrap; gap: 0.28rem; }
     .pf-pdf-stat {
       font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
@@ -1210,8 +1209,8 @@
       padding-bottom: 0.15rem; border-bottom: 1px solid var(--border);
       margin-bottom: 0.1rem;
     }
-    .pf-pdf-text { font-size: 0.78rem; color: var(--text); line-height: 1.65; margin: 0; word-break: keep-all; }
-    .pf-pdf-ul { margin: 0; padding-left: 1rem; font-size: 0.75rem; color: var(--text); line-height: 1.7; }
+    .pf-pdf-text { font-size: 0.85rem; color: var(--text); line-height: 1.65; margin: 0; word-break: keep-all; }
+    .pf-pdf-ul { margin: 0; padding-left: 1rem; font-size: 0.82rem; color: var(--text); line-height: 1.7; }
     .pf-pdf-ul li { margin-bottom: 0.05rem; }
     .pf-pdf-stack { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); line-height: 1.55; margin: 0; word-break: break-all; }
 
@@ -1315,7 +1314,7 @@
       /* 4열 가로 그리드 유지, 각 카드 한 페이지 */
       .pf-pdf-row {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
         gap: 5mm;
         overflow: visible;
       }
@@ -1369,14 +1368,9 @@
       </div>
 
       <p class="about-bio">
-        SQL 기반 데이터 파이프라인 구축과 NLP 모델 개발 실무를 경험한 데이터 분석가입니다.<br>
-        비즈니스 문제를 데이터로 정의하고, 분석 결과를 실제 의사결정에 연결하는 것을 좋아합니다.<br>
+        SQL 기반 데이터 파이프라인 구축과 NLP 모델 개발 실무를 경험한 데이터 분석가입니다. 비즈니스 문제를 데이터로 정의하고, 분석 결과를 실제 의사결정에 연결하는 것을 좋아합니다.<br>
         산업AI연구센터에서 다중 기관 협력 프로젝트를 수행하며 데이터 니즈 발굴부터 모델 설계·자동화까지 End-to-End로 경험했습니다.
       </p>
-
-      <div class="about-links" style="margin-top:1.2rem;">
-        <span>Github : <a href="https://github.com/" target="_blank">Link</a></span>
-      </div>
 
       <div class="scroll-hint" style="position:static; margin-top:3rem; opacity:1; animation:none;">
         <div class="scroll-line"></div>
@@ -1412,7 +1406,7 @@
             </div>
             <div class="skill-bar-item">
               <div class="skill-bar-label">Excel <span>Familiar</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:50%"></div></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:70%"></div></div>
             </div>
           </div>
         </div>
@@ -1457,16 +1451,16 @@
           <td class="pdf-td-desc">산업시스템공학과 + 데이터사이언스 복수전공</td>
         </tr>
         <tr>
-          <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
-          <td class="pdf-td-date">2024.01 — 2024.02</td>
-          <td class="pdf-td-title">영림원소프트랩 — ERP 인턴</td>
-          <td class="pdf-td-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</td>
-        </tr>
-        <tr>
           <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
           <td class="pdf-td-date">2023.11</td>
           <td class="pdf-td-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</td>
           <td class="pdf-td-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</td>
+        </tr>
+        <tr>
+          <td class="pdf-td-badge"><span class="tl-type career">💼 Career</span></td>
+          <td class="pdf-td-date">2024.01 — 2024.02</td>
+          <td class="pdf-td-title">영림원소프트랩 — ERP 인턴</td>
+          <td class="pdf-td-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</td>
         </tr>
         <tr>
           <td class="pdf-td-badge"><span class="tl-type award">🏆 Award</span></td>
@@ -1527,22 +1521,22 @@
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right ct-empty"></div>
 
-    <!-- 2: 영림원 인턴 (오른쪽) -->
+    <!-- 2: 2023 수상 (오른쪽) -->
     <div class="ct-left ct-empty"></div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right">
-      <span class="tl-type career">💼 Career</span>
-      <div class="tl-date">2024.01 — 2024.02</div>
-      <div class="tl-title">영림원소프트랩 — ERP 인턴</div>
-      <div class="tl-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</div>
-    </div>
-
-    <!-- 3: 2023 수상 (왼쪽) -->
-    <div class="ct-left">
       <span class="tl-type award">🏆 Award</span>
       <div class="tl-date">2023.11</div>
       <div class="tl-title">캡스톤디자인대회 대상 · 아이디어 경진대회 공과대학장상</div>
       <div class="tl-desc">서울시 지하차도 침수 피해 대비 배전반 위치 최적화</div>
+    </div>
+
+    <!-- 3: 영림원 인턴 (왼쪽) -->
+    <div class="ct-left">
+      <span class="tl-type career">💼 Career</span>
+      <div class="tl-date">2024.01 — 2024.02</div>
+      <div class="tl-title">영림원소프트랩 — ERP 인턴</div>
+      <div class="tl-desc">ERP 운영 실무 · NoSQL 기반 제조 공정 데이터 분석</div>
     </div>
     <div class="ct-mid"><div class="ct-dot"></div></div>
     <div class="ct-right ct-empty"></div>
@@ -1638,13 +1632,6 @@
 
   <div id="portfolioCardView">
     <p style="color:var(--muted); font-size:0.85rem; margin-bottom:2rem; font-family:var(--mono);">(Click images to show details)</p>
-    <div class="filter-bar">
-      <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
-      <button class="filter-btn" onclick="filterCards('nlp', this)">NLP</button>
-      <button class="filter-btn" onclick="filterCards('data', this)">Data Analysis</button>
-      <button class="filter-btn" onclick="filterCards('web', this)">Web/Dev</button>
-      <button class="filter-btn" onclick="filterCards('others', this)">Others</button>
-    </div>
   </div>
 
   <div class="portfolio-grid" id="portfolioGrid">
