@@ -1269,13 +1269,20 @@
       nav,
       .scroll-hint,
       .filter-bar,
-      .detail-page,
       .view-toggle,
       .center-timeline,
       .portfolio-overlay,
       .portfolio-card:hover .portfolio-overlay,
       .home-divider,
       #section-about { display: none !important; }
+
+      /* detail-page: position:fixed 요소가 프린트에서 누출되는 것 방지 */
+      .detail-page {
+        display: none !important;
+        position: static !important;
+        transform: none !important;
+        visibility: hidden !important;
+      }
 
       /* 프로필 사진 — PDF 크기 조정 */
       .hero-img-wrap {
@@ -1344,8 +1351,18 @@
         gap: 5mm;
         break-after: page;
       }
-      .portfolio-card { box-shadow: none; border: 1px solid #ddd; border-radius: 3mm; }
-      .portfolio-card-placeholder { height: 40mm; }
+      .portfolio-card { box-shadow: none; border: 1px solid #ddd; border-radius: 3mm; break-inside: avoid; }
+      .portfolio-card-placeholder {
+        height: 40mm !important;
+        max-height: 40mm !important;
+        overflow: hidden !important;
+      }
+      .portfolio-card-placeholder img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
+      }
       .card-info { padding: 3mm 4mm; }
       .card-info-tag { font-size: 6pt; }
       .card-info-name { font-size: 8.5pt; }
