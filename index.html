@@ -1220,6 +1220,20 @@
     .pf-pdf-ul li { margin-bottom: 0.1rem; }
     .pf-pdf-stack { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
+    /* 홈 그리드 내 프로필 사진 */
+    .home-profile-img-wrap {
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .home-profile-img-wrap img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; gap: 1.2rem; }
@@ -1245,13 +1259,18 @@
     }
 
     /* =============================================
-       PRINT — A4 가로 (landscape) PDF 최적화
+       PRINT — A4 세로 (portrait) PDF 최적화
     ============================================= */
     @media print {
       @page {
-        size: A4 landscape;
-        margin: 14mm 16mm;
+        size: A4 portrait;
+        margin: 12mm 14mm;
       }
+
+      /* 기본 리셋 */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      body { font-size: 9pt; line-height: 1.5; color: #1a1a1a; background: #fff; }
+      html { scroll-behavior: auto; }
 
       /* 숨길 요소 */
       nav,
@@ -1266,59 +1285,87 @@
       .home-divider,
       #section-about { display: none !important; }
 
-      /* 기본 리셋 */
-      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-      body { font-size: 9pt; line-height: 1.5; color: #1a1a1a; background: #fff; }
-      html { scroll-behavior: auto; }
-
       /* 섹션 여백 축소 */
       section {
-        padding: 8mm 0 6mm;
+        padding: 6mm 0 5mm;
         border-top: 1px solid #ddd;
         max-width: 100%;
       }
       .section-label { font-size: 7pt; margin-bottom: 2mm; }
-      .section-title { font-size: 16pt; margin-bottom: 5mm; }
+      .section-title { font-size: 15pt; margin-bottom: 4mm; }
 
-      /* 홈 그리드 */
+      /* ── 1페이지: 자기소개 ── */
       #section-home { min-height: auto; padding: 0; }
       .home-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 12mm;
+        grid-template-columns: 1.25fr 0.75fr;
+        gap: 10mm;
         padding: 0;
         min-height: auto;
         page-break-after: always;
+        break-after: page;
       }
-      .hero-tag { font-size: 7pt; margin-bottom: 3mm; opacity: 1; animation: none; }
-      .hero-title { font-size: 20pt; margin-bottom: 2mm; opacity: 1; animation: none; }
+
+      /* 프로필 사진 — 인쇄에서 표시 */
+      .home-profile-img-wrap {
+        display: block !important;
+        margin-bottom: 4mm;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        background: #f8f9f8;
+      }
+      .home-profile-img-wrap img {
+        width: 100%;
+        height: auto;
+        max-height: 58mm;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+      }
+
+      .hero-tag { font-size: 7pt; margin-bottom: 2mm; opacity: 1; animation: none; }
+      .hero-title { font-size: 19pt; line-height: 1.2; margin-bottom: 2mm; opacity: 1; animation: none; }
       .hero-sub { font-size: 9pt; margin-top: 2mm; opacity: 1; animation: none; }
-      .profile-meta { font-size: 8pt; gap: 1mm; margin-bottom: 4mm; }
-      .about-bio { font-size: 8.5pt; line-height: 1.7; }
-      .about-links { font-size: 8pt; margin-top: 3mm; }
-      .skills-block { gap: 4mm; }
+      .profile-meta { font-size: 7.5pt; gap: 1mm; margin-bottom: 3mm; }
+      .about-bio { font-size: 8pt; line-height: 1.7; }
+      .about-links { font-size: 7.5pt; margin-top: 2mm; }
+
+      /* 스킬 바 — 색상 강제 인쇄 */
+      .skills-block { gap: 3mm; }
       .skill-group h4 { font-size: 7pt; margin-bottom: 2mm; padding-bottom: 1mm; }
       .skill-bars { gap: 2mm; margin-bottom: 3mm; }
-      .skill-bar-label { font-size: 7.5pt; }
-      .skill-bar-track { height: 4px; }
+      .skill-bar-label { font-size: 7pt; }
+      .skill-bar-track {
+        height: 5px;
+        background: #e4e9e4 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .skill-bar-fill {
+        height: 100%;
+        border-radius: 3px;
+        background: #5cb531 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .skill-bar-fill.familiar {
+        background: #3a8a20 !important;
+        opacity: 0.5;
+      }
       .cert-row { gap: 2mm; margin-top: 1mm; }
-      .cert-badge { font-size: 7pt; padding: 1mm 3mm; }
+      .cert-badge { font-size: 7pt; padding: 1mm 3mm; background: #f0fdf4 !important; border: 1px solid #86efac !important; color: #166534 !important; }
 
-      /* History — PDF 테이블 뷰 강제 표시 */
+      /* ── 2페이지: 히스토리 ── */
       .history-header { margin-bottom: 4mm; align-items: center; }
       .history-header .section-title { margin-bottom: 0; }
-      #pdfTimeline { display: block !important; page-break-after: always; }
+      #pdfTimeline { display: block !important; break-after: page; }
       .pdf-table td { padding: 2mm 3mm; font-size: 8pt; }
       .pdf-table .pdf-td-date { font-size: 7.5pt; }
       .pdf-table .pdf-td-desc { font-size: 7.5pt; }
       .tl-type { font-size: 6.5pt; padding: 0.5mm 2mm; }
 
-      /* ===== PDF 7페이지 구조 =====
-         1: 자기소개(home-grid)
-         2: 히스토리(pdfTimeline)
-         3: 포폴 미리보기(portfolio-grid 2×2)
-         4~7: 포폴 상세 4장(pf-pdf-card)
-      ============================= */
+      /* ── 3페이지: 포트폴리오 미리보기 ── */
       #portfolioCardView { display: none !important; }
       .portfolio-grid {
         display: grid !important;
@@ -1327,13 +1374,15 @@
         break-after: page;
       }
       .portfolio-card { box-shadow: none; border: 1px solid #ddd; border-radius: 3mm; }
-      .portfolio-card-placeholder { height: 40mm; }
+      .portfolio-card-placeholder { height: 35mm; background: #f8f9f8 !important; }
+      .portfolio-card-placeholder img { display: block !important; width: 100%; height: 100%; object-fit: cover; }
       .card-info { padding: 3mm 4mm; }
       .card-info-tag { font-size: 6pt; }
       .card-info-name { font-size: 8.5pt; }
-      .card-print-desc { font-size: 7pt; color: #555; margin-top: 1.5mm; line-height: 1.5; }
+      .card-print-desc { display: block; font-size: 7pt; color: #555; margin-top: 1.5mm; line-height: 1.5; }
       .portfolio-header .view-toggle { display: none !important; }
 
+      /* ── 4~7페이지: 포트폴리오 상세 ── */
       #portfolioPdfView { display: block !important; }
       .portfolio-pdf-view { display: block !important; }
       .pf-pdf-row { display: flex; flex-direction: column; gap: 0; }
@@ -1341,22 +1390,22 @@
         box-shadow: none;
         border: none;
         border-radius: 0;
-        padding: 6mm 0 0;
+        padding: 5mm 0 0;
         break-after: page;
-        grid-template-columns: 48mm 1fr 1fr;
-        gap: 6mm;
+        grid-template-columns: 44mm 1fr 1fr;
+        gap: 5mm;
         align-items: start;
       }
-      .pf-pdf-left { padding-right: 5mm; border-right: 1.5px solid #5cb531; }
-      .pf-pdf-num { font-size: 18pt; }
-      .pf-pdf-title { font-size: 9.5pt; }
+      .pf-pdf-left { padding-right: 4mm; border-right: 1.5px solid #5cb531; }
+      .pf-pdf-num { font-size: 17pt; }
+      .pf-pdf-title { font-size: 9pt; }
       .pf-pdf-sub { font-size: 6pt; }
-      .pf-pdf-badge { font-size: 5.5pt; }
-      .pf-pdf-stat { font-size: 6pt; padding: 0.5mm 2mm; }
-      .pf-pdf-lbl { font-size: 6pt; }
+      .pf-pdf-badge { font-size: 5.5pt; background: #f0fdf4 !important; border: 1px solid #86efac !important; color: #166534 !important; }
+      .pf-pdf-stat { font-size: 6pt; padding: 0.5mm 2mm; background: #f0fdf4 !important; border: 1px solid #86efac !important; color: #166534 !important; }
+      .pf-pdf-lbl { font-size: 6pt; color: #3a8a20 !important; }
       .pf-pdf-text { font-size: 7.5pt; line-height: 1.6; }
       .pf-pdf-ul { font-size: 7pt; line-height: 1.6; padding-left: 4mm; }
-      .pf-pdf-stack { font-size: 6pt; }
+      .pf-pdf-stack { font-size: 6pt; color: #888f88 !important; }
     }
   </style>
 </head>
@@ -1401,8 +1450,8 @@
 
     <!-- 우: 프로필 사진 + 스킬 + 자격증 -->
     <div>
-      <div class="hero-img-wrap" style="position:static; margin-bottom:2rem; width:100%; height:220px; border-radius:8px; overflow:hidden;">
-        <img src="images/profile.jpg" alt="박민주" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+      <div class="home-profile-img-wrap">
+        <img src="images/profile.jpg" alt="박민주">
       </div>
 
       <div class="skills-block">
