@@ -1306,28 +1306,47 @@
       .section-title { font-size: 16pt; margin-bottom: 5mm; }
 
       /* 홈 그리드 */
-      #section-home { min-height: auto; padding: 0; }
+      #section-home { min-height: auto; padding: 0; position: static !important; }
       .home-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
-        gap: 12mm;
+        grid-template-columns: 1fr 0.9fr;
+        gap: 14mm;
         padding: 0;
         min-height: auto;
         page-break-after: always;
+        align-items: start;
+        max-width: 100%;
+        margin: 0;
       }
-      .hero-tag { font-size: 7pt; margin-bottom: 3mm; opacity: 1; animation: none; }
-      .hero-title { font-size: 20pt; margin-bottom: 2mm; opacity: 1; animation: none; }
-      .hero-sub { font-size: 9pt; margin-top: 2mm; opacity: 1; animation: none; }
-      .profile-meta { font-size: 8pt; gap: 1mm; margin-bottom: 4mm; }
-      .about-bio { font-size: 8.5pt; line-height: 1.7; }
-      .about-links { font-size: 8pt; margin-top: 3mm; }
-      .skills-block { gap: 4mm; }
-      .skill-group h4 { font-size: 7pt; margin-bottom: 2mm; padding-bottom: 1mm; }
-      .skill-bars { gap: 2mm; margin-bottom: 3mm; }
-      .skill-bar-label { font-size: 7.5pt; }
-      .skill-bar-track { height: 4px; }
-      .cert-row { gap: 2mm; margin-top: 1mm; }
-      .cert-badge { font-size: 7pt; padding: 1mm 3mm; }
+      /* 오른쪽 컬럼: 사진(왼) + 스킬(오른) 나란히 배치 */
+      .home-grid > div:last-child {
+        display: grid;
+        grid-template-columns: 42mm 1fr;
+        gap: 6mm;
+        align-items: start;
+      }
+      .hero-img-wrap {
+        width: 42mm !important;
+        height: 52mm !important;
+        margin-bottom: 0 !important;
+        position: static !important;
+        opacity: 1 !important;
+        animation: none !important;
+        border-radius: 4px !important;
+      }
+      .hero-tag { font-size: 8pt; margin-bottom: 4mm; opacity: 1; animation: none; }
+      .hero-title { font-size: 24pt; margin-bottom: 3mm; opacity: 1; animation: none; line-height: 1.25; }
+      .hero-sub { font-size: 10pt; margin-top: 2mm; opacity: 1; animation: none; }
+      .profile-meta { font-size: 8.5pt; gap: 1.5mm; margin-bottom: 5mm; }
+      .about-bio { font-size: 9pt; line-height: 1.8; }
+      .about-links { font-size: 8.5pt; margin-top: 3mm; }
+      .skills-block { gap: 5mm; }
+      .skill-group h4 { font-size: 8pt; margin-bottom: 2.5mm; padding-bottom: 1.5mm; }
+      .skill-bars { gap: 2.5mm; margin-bottom: 4mm; }
+      .skill-bar-label { font-size: 8pt; }
+      .skill-bar-track { height: 5px; }
+      .cert-row { gap: 2.5mm; margin-top: 2mm; flex-direction: column; }
+      .cert-badge { font-size: 8pt; padding: 2mm 3mm; }
 
       /* History — PDF 테이블 뷰 강제 표시 */
       .history-header { margin-bottom: 4mm; align-items: center; }
@@ -1369,29 +1388,39 @@
       .card-print-desc { font-size: 7pt; color: #555; margin-top: 1.5mm; line-height: 1.5; }
       .portfolio-header .view-toggle { display: none !important; }
 
-      #portfolioPdfView { display: block !important; }
+      /* portfolio-grid(3페이지)와 pf-pdf-cards(4-7페이지) 반드시 별도 페이지 */
+      .portfolio-grid {
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+      #portfolioPdfView {
+        page-break-before: always !important;
+        break-before: page !important;
+        display: block !important;
+      }
       .portfolio-pdf-view { display: block !important; }
       .pf-pdf-row { display: flex; flex-direction: column; gap: 0; }
       .pf-pdf-card {
         box-shadow: none;
         border: none;
         border-radius: 0;
-        padding: 6mm 0 0;
+        padding: 8mm 0 0;
         break-after: page;
-        grid-template-columns: 48mm 1fr 1fr;
-        gap: 6mm;
+        page-break-after: always;
+        grid-template-columns: 52mm 1fr 1fr;
+        gap: 8mm;
         align-items: start;
       }
-      .pf-pdf-left { padding-right: 5mm; border-right: 1.5px solid #5cb531; }
-      .pf-pdf-num { font-size: 18pt; }
-      .pf-pdf-title { font-size: 9.5pt; }
-      .pf-pdf-sub { font-size: 6pt; }
-      .pf-pdf-badge { font-size: 5.5pt; }
-      .pf-pdf-stat { font-size: 6pt; padding: 0.5mm 2mm; }
-      .pf-pdf-lbl { font-size: 6pt; }
-      .pf-pdf-text { font-size: 7.5pt; line-height: 1.6; }
-      .pf-pdf-ul { font-size: 7pt; line-height: 1.6; padding-left: 4mm; }
-      .pf-pdf-stack { font-size: 6pt; }
+      .pf-pdf-left { padding-right: 6mm; border-right: 1.5px solid #5cb531; }
+      .pf-pdf-num { font-size: 26pt; }
+      .pf-pdf-title { font-size: 13pt; }
+      .pf-pdf-sub { font-size: 8pt; }
+      .pf-pdf-badge { font-size: 7pt; }
+      .pf-pdf-stat { font-size: 7.5pt; padding: 1mm 3mm; }
+      .pf-pdf-lbl { font-size: 8pt; }
+      .pf-pdf-text { font-size: 9.5pt; line-height: 1.7; }
+      .pf-pdf-ul { font-size: 9pt; line-height: 1.7; padding-left: 5mm; }
+      .pf-pdf-stack { font-size: 8pt; }
     }
   </style>
 </head>
