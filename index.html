@@ -1232,6 +1232,16 @@
     .pf-pdf-ul li { margin-bottom: 0.1rem; }
     .pf-pdf-stack { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); line-height: 1.6; margin: 0; }
 
+    /* SNATCH 카드 이미지 */
+    .pf-pdf-img-main {
+      width: 100%; height: 36mm; object-fit: cover;
+      border-radius: 3px; display: block; margin-bottom: 2mm;
+    }
+    .pf-pdf-img-sub {
+      width: 100%; height: 20mm; object-fit: cover;
+      border-radius: 3px; display: block; margin-bottom: 3mm;
+    }
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; gap: 1.2rem; }
@@ -1284,13 +1294,6 @@
         visibility: hidden !important;
       }
 
-      /* 프로필 사진 — PDF 크기 조정 */
-      .hero-img-wrap {
-        height: 38mm !important;
-        margin-bottom: 4mm !important;
-        border-radius: 4px !important;
-      }
-
       /* 기본 리셋 */
       * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       body { font-size: 9pt; line-height: 1.5; color: #1a1a1a; background: #fff; }
@@ -1306,10 +1309,10 @@
       .section-title { font-size: 16pt; margin-bottom: 5mm; }
 
       /* 홈 그리드 */
-      #section-home { min-height: auto; padding: 0; position: static !important; }
+      #section-home { min-height: auto; padding: 0; }
       .home-grid {
         display: grid;
-        grid-template-columns: 1fr 0.9fr;
+        grid-template-columns: 1fr 0.85fr;
         gap: 14mm;
         padding: 0;
         min-height: auto;
@@ -1318,21 +1321,24 @@
         max-width: 100%;
         margin: 0;
       }
-      /* 오른쪽 컬럼: 사진(왼) + 스킬(오른) 나란히 배치 */
-      .home-grid > div:last-child {
-        display: grid;
-        grid-template-columns: 42mm 1fr;
-        gap: 6mm;
-        align-items: start;
-      }
+      /* 오른쪽 컬럼: 사진 위 → 스킬 아래 (단순 세로 배치) */
       .hero-img-wrap {
-        width: 42mm !important;
-        height: 52mm !important;
-        margin-bottom: 0 !important;
+        width: 100% !important;
+        height: 68mm !important;
+        margin-bottom: 5mm !important;
         position: static !important;
+        display: block !important;
         opacity: 1 !important;
         animation: none !important;
         border-radius: 4px !important;
+        overflow: hidden !important;
+      }
+      .hero-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        object-position: top !important;
+        display: block !important;
       }
       .hero-tag { font-size: 8pt; margin-bottom: 4mm; opacity: 1; animation: none; }
       .hero-title { font-size: 24pt; margin-bottom: 3mm; opacity: 1; animation: none; line-height: 1.25; }
@@ -1782,8 +1788,10 @@
     <div class="pf-pdf-row">
 
       <!-- 01 SNATCH -->
-      <div class="pf-pdf-card">
+      <div class="pf-pdf-card" style="grid-template-columns: 70mm 1fr 1fr;">
         <div class="pf-pdf-left">
+          <img src="images/snatch_main.png" alt="SNATCH 대시보드" class="pf-pdf-img-main">
+          <img src="images/snatch1.png" alt="SNATCH 분석화면" class="pf-pdf-img-sub">
           <div class="pf-pdf-badge">NLP · Pipeline · 졸업프로젝트</div>
           <div class="pf-pdf-num">01</div>
           <div class="pf-pdf-title">SNATCH</div>
@@ -1797,23 +1805,35 @@
         </div>
         <div class="pf-pdf-mid">
           <div class="pf-pdf-section">
-            <div class="pf-pdf-lbl">개요 / 배경</div>
-            <p class="pf-pdf-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해, SNS 댓글 기반 소비자 분석 대시보드를 개발했습니다.</p>
+            <div class="pf-pdf-lbl"><span style="color:var(--accent);font-weight:800;margin-right:2px;">01</span> 프로젝트 소개</div>
+            <p class="pf-pdf-text"><strong>SNATCH — F&amp;B 트렌드 분석 대시보드</strong><br>2025.03 — 2025.07 · 졸업 프로젝트 (4인 팀)</p>
           </div>
           <div class="pf-pdf-section">
-            <div class="pf-pdf-lbl">진행한 일</div>
-            <p class="pf-pdf-text">유튜브·틱톡 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 카테고리별 평가를 Figma 대시보드로 시각화해 키워드·그래프·쇼츠 추이를 한눈에 파악할 수 있도록 완성했습니다.</p>
+            <div class="pf-pdf-lbl"><span style="color:var(--accent);font-weight:800;margin-right:2px;">02</span> 프로젝트 개요</div>
+            <p class="pf-pdf-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해 SNS 댓글 기반 소비자 분석 대시보드를 개발했습니다.</p>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl"><span style="color:var(--accent);font-weight:800;margin-right:2px;">03</span> 진행한 일</div>
+            <p class="pf-pdf-text">SNS 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 평가를 Figma 대시보드로 시각화해 키워드·쇼츠 추이를 한눈에 확인할 수 있도록 완성했습니다.</p>
           </div>
         </div>
         <div class="pf-pdf-right">
           <div class="pf-pdf-section">
-            <div class="pf-pdf-lbl">주요 액션</div>
+            <div class="pf-pdf-lbl"><span style="color:var(--accent);font-weight:800;margin-right:2px;">04</span> 주요 액션</div>
             <ul class="pf-pdf-ul">
-              <li>YouTube · TikTok · 인스티즈 크롤링 및 수집</li>
+              <li>YouTube · TikTok · 인스티즈 크롤링 및 데이터 수집</li>
               <li>한국어 구어체 처리 KcELECTRA 파인튜닝</li>
               <li>HDBSCAN 클러스터링 → 감성분석 파이프라인 설계</li>
               <li>Python + AI 기반 EDA 자동화 · 반복 업무 자동화</li>
             </ul>
+          </div>
+          <div class="pf-pdf-section">
+            <div class="pf-pdf-lbl"><span style="color:var(--accent);font-weight:800;margin-right:2px;">05</span> 결과물</div>
+            <div class="pf-pdf-stats" style="flex-direction:row;flex-wrap:wrap;gap:2mm;">
+              <span class="pf-pdf-stat">F1-Score 0.87</span>
+              <span class="pf-pdf-stat">추론 0.03s/댓글</span>
+              <span class="pf-pdf-stat">End-to-End</span>
+            </div>
           </div>
           <div class="pf-pdf-section">
             <div class="pf-pdf-lbl">기술 스택</div>
