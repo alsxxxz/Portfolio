@@ -921,6 +921,21 @@
       font-weight: 600;
     }
 
+    /* 스킬 네모 태그 (Skilled=진한 초록, Familiar=연한 초록) */
+    .skill-sq-group { margin-bottom: 0.65rem; }
+    .skill-sq-level {
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    .skill-sq-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .skill-sq {
+      font-family: var(--mono); font-size: 0.73rem; font-weight: 700;
+      padding: 4px 12px; border-radius: 3px; letter-spacing: 0.02em;
+    }
+    .skill-sq.skilled { background: var(--accent); color: #fff; }
+    .skill-sq.familiar { background: #f0fdf4; color: #166534; border: 1.5px solid #86efac; }
+
     /* 개인정보 칩 목록 */
     .profile-meta {
       display: flex;
@@ -1244,12 +1259,16 @@
 
     /* SNATCH 새 레이아웃 */
     .pf-snatch-card { grid-template-columns: 55mm 1fr !important; }
-    .pf-snatch-body { display: flex; flex-direction: column; gap: 4mm; }
-    .pf-snatch-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; }
+    .pf-snatch-body {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 4mm;
+    }
+    .pf-snatch-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; align-content: start; }
     .pf-snatch-col { display: flex; flex-direction: column; gap: 4mm; }
     .pf-snatch-imgs {
       display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;
-      height: 40mm;
+      height: 36mm;
     }
     .pf-snatch-imgs img {
       width: 100%; height: 100%; object-fit: cover;
@@ -1329,7 +1348,7 @@
       #section-home { min-height: auto; padding: 0; }
       .home-grid {
         display: grid;
-        grid-template-columns: 1fr 0.48fr;
+        grid-template-columns: 1fr 0.68fr;
         gap: 12mm;
         padding: 0;
         min-height: auto;
@@ -1338,11 +1357,11 @@
         max-width: 100%;
         margin: 0;
       }
-      /* 오른쪽 컬럼: 사진만 (스킬은 왼쪽으로 이동) */
+      /* 오른쪽 컬럼: 사진 위 + 스킬/자격증 아래 */
       .hero-img-wrap {
         width: 100% !important;
         height: auto !important;
-        margin-bottom: 0 !important;
+        margin-bottom: 5mm !important;
         position: static !important;
         display: block !important;
         opacity: 1 !important;
@@ -1356,23 +1375,22 @@
         object-fit: unset !important;
         display: block !important;
       }
-      /* 오른쪽 컬럼 skills-block 숨김 (왼쪽에 pdf-skills-left 표시) */
-      .home-grid > div:last-child > .skills-block { display: none !important; }
-      /* PDF 인쇄용 스킬 블록 표시 */
-      .pdf-skills-left { display: block !important; margin-top: 5mm; }
       .hero-tag { font-size: 8pt; margin-bottom: 4mm; opacity: 1; animation: none; }
       .hero-title { font-size: 24pt; margin-bottom: 3mm; opacity: 1; animation: none; line-height: 1.25; }
-      .hero-sub { font-size: 10pt; margin-top: 2mm; opacity: 1; animation: none; }
-      .profile-meta { font-size: 8.5pt; gap: 1.5mm; margin-bottom: 5mm; }
-      .about-bio { font-size: 9pt; line-height: 1.8; }
+      .hero-sub { font-size: 13pt; margin-top: 2mm; opacity: 1; animation: none; font-weight: 700; }
+      .profile-meta { font-size: 9.5pt; gap: 2mm; margin-bottom: 5mm; }
+      .about-bio { font-size: 10pt; line-height: 1.85; }
       .about-links { font-size: 8.5pt; margin-top: 3mm; }
       .skills-block { gap: 5mm; }
       .skill-group h4 { font-size: 8pt; margin-bottom: 2.5mm; padding-bottom: 1.5mm; }
-      .skill-bars { gap: 2.5mm; margin-bottom: 4mm; }
-      .skill-bar-label { font-size: 8pt; }
-      .skill-bar-track { height: 5px; }
-      .cert-row { gap: 2.5mm; margin-top: 2mm; flex-direction: column; }
-      .cert-badge { font-size: 8pt; padding: 2mm 3mm; }
+      /* 스킬 네모 태그 print 크기 */
+      .skill-sq { font-size: 8pt !important; padding: 2mm 3.5mm !important; border-radius: 2px !important; }
+      .skill-sq-level { font-size: 7pt !important; margin-bottom: 1.5mm !important; }
+      .skill-sq-group { margin-bottom: 3mm !important; }
+      .skill-sq-tags { gap: 2mm !important; }
+      /* 자격증 가로 배치 */
+      .cert-row { gap: 2.5mm; margin-top: 2mm; flex-direction: row !important; flex-wrap: wrap; }
+      .cert-badge { font-size: 8pt; padding: 2mm 4mm; border-radius: 3px !important; }
 
       /* History — PDF 테이블 뷰 강제 표시 */
       .history-header { margin-bottom: 4mm; align-items: center; }
@@ -1483,44 +1501,6 @@
         산업AI연구센터에서 다중 기관 협력 프로젝트를 수행하며 데이터 니즈 발굴부터 모델 설계·자동화까지 End-to-End로 경험했습니다.
       </p>
 
-      <!-- PDF 인쇄 전용: 스킬 + 자격증 (왼쪽 컬럼) -->
-      <div class="pdf-skills-left">
-        <div class="skills-block">
-          <div class="skill-group">
-            <h4>Programming Languages</h4>
-            <div class="skill-bars">
-              <div class="skill-bar-item">
-                <div class="skill-bar-label">Python <span>Skilled</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-label">SQL <span>Skilled</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-label">PPT <span>Skilled</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-label">Java <span>Familiar</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:45%"></div></div>
-              </div>
-              <div class="skill-bar-item">
-                <div class="skill-bar-label">Excel <span>Familiar</span></div>
-                <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:70%"></div></div>
-              </div>
-            </div>
-          </div>
-          <div class="skill-group">
-            <h4>Certifications &amp; Language</h4>
-            <div class="cert-row">
-              <span class="cert-badge">빅데이터 분석기사</span>
-              <span class="cert-badge">OPIc IH</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="scroll-hint" style="position:static; margin-top:3rem; opacity:1; animation:none;">
         <div class="scroll-line"></div>
         scroll to explore
@@ -1536,32 +1516,25 @@
       <div class="skills-block">
         <div class="skill-group">
           <h4>Programming Languages</h4>
-          <div class="skill-bars">
-            <div class="skill-bar-item">
-              <div class="skill-bar-label">Python <span>Skilled</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+          <div class="skill-sq-group">
+            <div class="skill-sq-level">Skilled</div>
+            <div class="skill-sq-tags">
+              <span class="skill-sq skilled">Python</span>
+              <span class="skill-sq skilled">SQL</span>
+              <span class="skill-sq skilled">PPT</span>
             </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label">SQL <span>Skilled</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label">PPT <span>Skilled</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label">Java <span>Familiar</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:45%"></div></div>
-            </div>
-            <div class="skill-bar-item">
-              <div class="skill-bar-label">Excel <span>Familiar</span></div>
-              <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:70%"></div></div>
+          </div>
+          <div class="skill-sq-group">
+            <div class="skill-sq-level">Familiar</div>
+            <div class="skill-sq-tags">
+              <span class="skill-sq familiar">Java</span>
+              <span class="skill-sq familiar">Excel</span>
             </div>
           </div>
         </div>
 
         <div class="skill-group">
-          <h4>Certifications & Language</h4>
+          <h4>Certifications &amp; Language</h4>
           <div class="cert-row">
             <span class="cert-badge">빅데이터 분석기사</span>
             <span class="cert-badge">OPIc IH</span>
