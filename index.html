@@ -1262,18 +1262,22 @@
     .pf-snatch-body {
       display: grid;
       grid-template-rows: 1fr auto;
-      gap: 4mm;
+      gap: 6mm;
     }
     .pf-snatch-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; align-content: start; }
     .pf-snatch-col { display: flex; flex-direction: column; gap: 4mm; }
     .pf-snatch-imgs {
       display: grid; grid-template-columns: 1fr 1fr; gap: 4mm;
-      height: 36mm;
+      height: 38mm;
+      border-top: 1px solid var(--border);
+      padding-top: 4mm;
     }
     .pf-snatch-imgs img {
       width: 100%; height: 100%; object-fit: cover;
       border-radius: 3px; display: block;
     }
+    /* SNATCH 왼쪽 컬럼 상단 패딩 */
+    .pf-snatch-card .pf-pdf-left { padding-top: 2mm; }
 
     /* PDF 인쇄용 왼쪽 스킬 블록 (기본: 숨김) */
     .pdf-skills-left { display: none; }
@@ -1319,7 +1323,6 @@
       .center-timeline,
       .portfolio-overlay,
       .portfolio-card:hover .portfolio-overlay,
-      .home-divider,
       #section-about { display: none !important; }
 
       /* detail-page: position:fixed 요소가 프린트에서 누출되는 것 방지 */
@@ -1353,15 +1356,32 @@
         padding: 0;
         min-height: auto;
         page-break-after: always;
-        align-items: start;
+        align-items: stretch;
         max-width: 100%;
         margin: 0;
       }
-      /* 오른쪽 컬럼: 사진 위 + 스킬/자격증 아래 */
+      /* 왼쪽 컬럼: flex column으로 꽉 채우기 */
+      .home-grid > div:first-child {
+        display: flex !important;
+        flex-direction: column !important;
+      }
+      .home-grid > div:first-child .about-bio {
+        flex: 1 !important;
+        margin-bottom: 0 !important;
+      }
+      .home-divider {
+        display: block !important;
+        margin: 5mm 0 !important;
+        height: 1px !important;
+        background: var(--border) !important;
+        border: none !important;
+      }
+      /* 오른쪽 컬럼: 사진 높이 제한 → 스킬+자격증이 1페이지에 들어오도록 */
       .hero-img-wrap {
         width: 100% !important;
-        height: auto !important;
-        margin-bottom: 5mm !important;
+        height: 82mm !important;
+        max-height: 82mm !important;
+        margin-bottom: 4mm !important;
         position: static !important;
         display: block !important;
         opacity: 1 !important;
@@ -1371,15 +1391,16 @@
       }
       .hero-img-wrap img {
         width: 100% !important;
-        height: auto !important;
-        object-fit: unset !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        object-position: top center !important;
         display: block !important;
       }
-      .hero-tag { font-size: 8pt; margin-bottom: 4mm; opacity: 1; animation: none; }
-      .hero-title { font-size: 24pt; margin-bottom: 3mm; opacity: 1; animation: none; line-height: 1.25; }
-      .hero-sub { font-size: 13pt; margin-top: 2mm; opacity: 1; animation: none; font-weight: 700; }
-      .profile-meta { font-size: 9.5pt; gap: 2mm; margin-bottom: 5mm; }
-      .about-bio { font-size: 10pt; line-height: 1.85; }
+      .hero-tag { font-size: 8pt; margin-bottom: 3mm; opacity: 1; animation: none; }
+      .hero-title { font-size: 26pt; margin-bottom: 3mm; opacity: 1; animation: none; line-height: 1.25; }
+      .hero-sub { font-size: 13pt; margin-top: 1mm; margin-bottom: 0; opacity: 1; animation: none; font-weight: 700; }
+      .profile-meta { font-size: 9.5pt; gap: 2mm; margin-bottom: 0; }
+      .about-bio { font-size: 10pt; line-height: 2.0; }
       .about-links { font-size: 8.5pt; margin-top: 3mm; }
       .skills-block { gap: 5mm; }
       .skill-group h4 { font-size: 8pt; margin-bottom: 2.5mm; padding-bottom: 1.5mm; }
