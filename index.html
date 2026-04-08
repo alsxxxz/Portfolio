@@ -1386,22 +1386,53 @@
   
     }
 
-    /* ---- 이미지 컬럼 ---- */
+    /* =============================================
+       이미지 컬럼 — 우측 45%
+       구조: [상단 2장 row] + [하단 1장 wide (margin-top:auto로 내려감)] + [기술스택 반칸]
+       이미지 3장이 컬럼 상반부를 차지하고 기술스택이 하단 반칸을 차지함
+    ============================================= */
+
+    /* 이미지 컬럼 전체: flex column, 기술스택 하단 고정 */
     .pdf-proj-img-col {
       display: flex;
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0;
+      height: 100%;
     }
 
-    /* 상단 이미지 2장 나란히 */
+    /* 이미지 3장 묶음 (상반부) — flex:1 로 공간 차지 */
+    .pdf-proj-img-top {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* 상단 2장 나란히 */
     .pdf-proj-img-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.65rem;
+      gap: 0.6rem;
     }
 
-    /* 이미지 플레이스홀더 (실제 이미지 없을 때 점선 박스) */
-    /* 수정: img 태그 주석 해제 후 실제 이미지 삽입 가능 */
+    /* 이미지 1장 + 캡션 묶음 */
+    .pdf-proj-img-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    /* 하단 wide 이미지 wrap — margin-top:auto 로 아래로 밀림 */
+    .pdf-proj-img-wrap-bottom {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      margin-top: auto;
+    }
+
+    /* 이미지 플레이스홀더 */
+    /* 수정: img 태그 주석 해제 후 src="images/파일명" 입력 */
     .pdf-proj-img-ph {
       background: var(--surface);
       border: 1.5px dashed var(--border);
@@ -1414,20 +1445,41 @@
       font-size: 0.65rem;
       letter-spacing: 0.05em;
       overflow: hidden;
-      position: relative;
+      flex-shrink: 0;
     }
-    /* 높이 변형 */
-    .pdf-proj-img-ph.h-sm  { height: 120px; }  /* 상단 2분할 */
-    .pdf-proj-img-ph.h-md  { height: 150px; }  /* 하단 wide */
-    .pdf-proj-img-ph.h-lg  { height: 280px; }  /* 단독 전체 */
+    /* 상단 2분할 — 더 크게 */
+    .pdf-proj-img-ph.h-sm { height: 155px; }
+    /* 하단 wide */
+    .pdf-proj-img-ph.h-md { height: 145px; }
+    .pdf-proj-img-ph.h-lg { height: 280px; }
 
-    /* 이미지 삽입 시 꽉 채우기 */
+    /* 실제 이미지 삽입 시 꽉 채우기 */
     .pdf-proj-img-ph img {
       width: 100%; height: 100%;
       object-fit: cover; display: block;
     }
 
-    /* 기술 스택 푸터 구분선 */
+    /* 이미지 아래 작은 캡션 설명 */
+    /* 수정: 각 이미지 설명 텍스트를 여기에 입력 */
+    .pdf-proj-img-caption {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      color: var(--muted);
+      text-align: center;
+      letter-spacing: 0.04em;
+      line-height: 1.4;
+      padding: 0 0.2rem;
+    }
+
+    /* 기술 스택 — 이미지 컬럼 하단 반칸 */
+    .pdf-proj-img-footer {
+      flex-shrink: 0;
+      margin-top: 0.85rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* 왼쪽 컬럼 기술스택 푸터 (기존 호환용) */
     .pdf-proj-footer {
       margin-top: 1.2rem;
       padding-top: 0.9rem;
@@ -1576,15 +1628,21 @@
       .pdf-proj-ul li { margin-bottom: 0.5mm; }
       .pdf-proj-stack { font-size: 7.5pt; line-height: 1.6; }
 
-      /* 이미지 플레이스홀더 */
-      .pdf-proj-img-col { gap: 2.5mm; }
+      /* 이미지 컬럼 */
+      .pdf-proj-img-col { gap: 0; }
+      .pdf-proj-img-top { gap: 2.5mm; }
       .pdf-proj-img-row { gap: 2.5mm; }
-      .pdf-proj-img-ph { border: 1px solid #ddd; background: #f8f8f8; font-size: 7pt; }
-      .pdf-proj-img-ph.h-sm { height: 52mm; }
-      .pdf-proj-img-ph.h-md { height: 62mm; }
+      .pdf-proj-img-ph { border: 1px solid #ddd; background: #f8f8f8; font-size: 6.5pt; }
+      /* 상단 2장 — 더 크게 */
+      .pdf-proj-img-ph.h-sm { height: 66mm; }
+      /* 하단 wide */
+      .pdf-proj-img-ph.h-md { height: 58mm; }
       .pdf-proj-img-ph.h-lg { height: 120mm; }
-
-      /* 기술 스택 푸터 */
+      /* 캡션 */
+      .pdf-proj-img-caption { font-size: 6pt; margin-top: 0.5mm; }
+      /* 기술 스택 (이미지 컬럼 하단 반칸) */
+      .pdf-proj-img-footer { margin-top: 2mm; padding-top: 2mm; }
+      /* 왼쪽 컬럼 푸터 */
       .pdf-proj-footer { margin-top: 2.5mm; padding-top: 2mm; }
 
       /* 목차 */
@@ -1943,12 +2001,12 @@
   <div class="portfolio-header">
     <h2 class="section-title">Featured <em>Portfolio</em></h2>
     <div class="view-toggle" id="portfolioToggle">
-      <button class="view-toggle-btn active" onclick="setPortfolioView('card', this)">🗂 카드 뷰</button>
-      <button class="view-toggle-btn" onclick="setPortfolioView('pdf', this)">📄 PDF 보기</button>
+      <button class="view-toggle-btn" onclick="setPortfolioView('card', this)">🗂 카드 뷰</button>
+      <button class="view-toggle-btn active" onclick="setPortfolioView('pdf', this)">📄 PDF 보기</button>
     </div>
   </div>
 
-  <div id="portfolioCardView">
+  <div id="portfolioCardView" style="display:none">
     <p style="color:var(--muted); font-size:0.85rem; margin-bottom:2rem; font-family:var(--mono);">(Click images to show details)</p>
     <div class="filter-bar">
       <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
@@ -1959,7 +2017,7 @@
     </div>
   </div>
 
-  <div class="portfolio-grid" id="portfolioGrid">
+  <div class="portfolio-grid" id="portfolioGrid" style="display:none">
 
     <div class="portfolio-card" data-cat="nlp" onclick="openModal('snatch')">
       <div class="portfolio-card-placeholder" style="background:#e8eef8; padding:0; overflow:hidden;">
@@ -2032,7 +2090,7 @@
          - 기술 스택 : .pdf-proj-stack 내용 교체
          - 통계 뱃지 : .pdf-proj-stat-pill 추가/삭제
         ============================== !--> 
-  <div id="portfolioPdfView" class="portfolio-pdf-view">
+  <div id="portfolioPdfView" class="portfolio-pdf-view active">
 
     <!-- ===== 목차 페이지 ===== -->
     <div class="pdf-proj-page pdf-toc-page">
@@ -2092,10 +2150,10 @@
         </div>
       </div>
 
-      <!-- 바디: 텍스트(좌) | 이미지(우) -->
+      <!-- 바디: 텍스트(좌 55%) | 이미지+기술스택(우 45%) -->
       <div class="pdf-proj-body">
 
-        <!-- 좌: 텍스트 -->
+        <!-- 좌: 개요·진행한일·주요액션 -->
         <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">개요</div>
@@ -2114,31 +2172,46 @@
               <li>Python + AI 기반 EDA 자동화 및 반복 업무 OneClick 자동화</li>
             </ul>
           </div>
-          <!-- 기술 스택 푸터 -->
-          <div class="pdf-proj-footer">
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA  · HuggingFace · Figma</p>
-          </div>
         </div>
 
-        <!-- 이미지 영역 (사진 준비 시 주석 해제) -->
+        <!-- 우: 이미지 3장(상반부) + 기술스택(반칸) -->
+        <!-- 수정: img 주석 해제 후 src="images/파일명" 입력, caption 텍스트 교체 -->
         <div class="pdf-proj-img-col">
-          <div class="pdf-proj-img-row">
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/lipreading1.png" alt=""> -->
-              스크린샷 1
-            </div>
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/lipreading2.png" alt=""> -->
-              스크린샷 2
-            </div>
-          </div>
-          <div class="pdf-proj-img-ph h-md">
-            <!-- <img src="images/lipreading3.png" alt=""> -->
-            스크린샷 3
-          </div>
-        </div>
 
+          <!-- 이미지 상반부 -->
+          <div class="pdf-proj-img-top">
+            <!-- 상단 2장 나란히 -->
+            <div class="pdf-proj-img-row">
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <img src="images/snatch1.png" alt="SNATCH 스크린샷 1">
+                </div>
+                <!-- 수정: 이미지 설명 텍스트 입력 -->
+                <div class="pdf-proj-img-caption">SNS 댓글 수집 파이프라인</div>
+              </div>
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <img src="images/snatch2.png" alt="SNATCH 스크린샷 2">
+                </div>
+                <div class="pdf-proj-img-caption">HDBSCAN 클러스터링 결과</div>
+              </div>
+            </div>
+            <!-- 하단 wide (margin-top:auto 로 아래로 밀림) -->
+            <div class="pdf-proj-img-wrap-bottom">
+              <div class="pdf-proj-img-ph h-md">
+                <img src="images/snatch3.png" alt="SNATCH 스크린샷 3">
+              </div>
+              <div class="pdf-proj-img-caption">Figma 대시보드 최종 시각화</div>
+            </div>
+          </div>
+
+          <!-- 기술 스택 (반칸) — 우측 하단 -->
+          <div class="pdf-proj-img-footer">
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
+          </div>
+
+        </div>
       </div>
     </div><!-- /프로젝트 01 -->
 
@@ -2173,33 +2246,43 @@
             <p class="pdf-proj-text">Inception · ResNet 등 4가지 딥러닝 모델 정확도 비교 → 최적 모델 선정. 안면 랜드마크로 화자 자동 탐지, 말풍선 형태 화자별 자막 배치 UX를 구현했습니다.</p>
           </div>
           <div>
-            <div class="pdf-proj-sec-lbl">주요 액션(기여한 일)</div>
+            <div class="pdf-proj-sec-lbl">주요 액션 (기여한 일)</div>
             <ul class="pdf-proj-ul">
               <li>욕설 Data 전처리 및 필터링 모델링</li>
               <li>말풍선 형태 화자별 자막 배치 UX 프로토타입 구현</li>
             </ul>
           </div>
-          <div class="pdf-proj-footer">
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · 정규화 </p>
-          </div>
         </div>
 
-        <!-- 이미지 영역 (사진 준비 시 주석 해제) -->
         <div class="pdf-proj-img-col">
-          <div class="pdf-proj-img-row">
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/lipreading1.png" alt=""> -->
-              스크린샷 1
+          <div class="pdf-proj-img-top">
+            <div class="pdf-proj-img-row">
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/lipreading1.png" alt=""> -->
+                  스크린샷 1
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/lipreading2.png" alt=""> -->
+                  스크린샷 2
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
             </div>
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/lipreading2.png" alt=""> -->
-              스크린샷 2
+            <div class="pdf-proj-img-wrap-bottom">
+              <div class="pdf-proj-img-ph h-md">
+                <!-- <img src="images/lipreading3.png" alt=""> -->
+                스크린샷 3
+              </div>
+              <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
             </div>
           </div>
-          <div class="pdf-proj-img-ph h-md">
-            <!-- <img src="images/lipreading3.png" alt=""> -->
-            스크린샷 3
+          <div class="pdf-proj-img-footer">
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · 정규화</p>
           </div>
         </div>
 
@@ -2245,26 +2328,37 @@
               <li>직관 의존 수동 대응 → 데이터 기반 자동 규칙 전환</li>
             </ul>
           </div>
-          <div class="pdf-proj-footer">
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
-          </div>
         </div>
 
         <div class="pdf-proj-img-col">
-          <div class="pdf-proj-img-row">
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/esb1.png" alt=""> -->
-              스크린샷 1
+          <div class="pdf-proj-img-top">
+            <div class="pdf-proj-img-row">
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/esb1.png" alt=""> -->
+                  스크린샷 1
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/esb2.png" alt=""> -->
+                  스크린샷 2
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
             </div>
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/esb2.png" alt=""> -->
-              스크린샷 2
+            <div class="pdf-proj-img-wrap-bottom">
+              <div class="pdf-proj-img-ph h-md">
+                <!-- <img src="images/esb3.png" alt=""> -->
+                스크린샷 3
+              </div>
+              <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
             </div>
           </div>
-          <div class="pdf-proj-img-ph h-md">
-            <!-- <img src="images/esb3.png" alt=""> -->
-            스크린샷 3
+          <div class="pdf-proj-img-footer">
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
           </div>
         </div>
 
@@ -2310,27 +2404,38 @@
               <li>데이터 추출 → 분류 → 저장 일괄 자동화</li>
             </ul>
           </div>
-          <div class="pdf-proj-footer">
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
-            <p class="pdf-proj-stack" style="margin-top:2px; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
-          </div>
         </div>
 
         <div class="pdf-proj-img-col">
-          <div class="pdf-proj-img-row">
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/health1.png" alt=""> -->
-              스크린샷 1
+          <div class="pdf-proj-img-top">
+            <div class="pdf-proj-img-row">
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/health1.png" alt=""> -->
+                  스크린샷 1
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
+              <div class="pdf-proj-img-wrap">
+                <div class="pdf-proj-img-ph h-sm">
+                  <!-- <img src="images/health2.png" alt=""> -->
+                  스크린샷 2
+                </div>
+                <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
+              </div>
             </div>
-            <div class="pdf-proj-img-ph h-sm">
-              <!-- <img src="images/health2.png" alt=""> -->
-              스크린샷 2
+            <div class="pdf-proj-img-wrap-bottom">
+              <div class="pdf-proj-img-ph h-md">
+                <!-- <img src="images/health3.png" alt=""> -->
+                스크린샷 3
+              </div>
+              <div class="pdf-proj-img-caption">캡션을 입력하세요</div>
             </div>
           </div>
-          <div class="pdf-proj-img-ph h-md">
-            <!-- <img src="images/health3.png" alt=""> -->
-            스크린샷 3
+          <div class="pdf-proj-img-footer">
+            <div class="pdf-proj-sec-lbl">기술 스택</div>
+            <p class="pdf-proj-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
+            <p class="pdf-proj-stack" style="margin-top:2px; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
           </div>
         </div>
 
