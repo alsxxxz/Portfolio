@@ -1272,7 +1272,6 @@
       .center-timeline,
       .portfolio-overlay,
       .portfolio-card:hover .portfolio-overlay,
-      .hero-img-wrap,
       .home-divider,
       #section-about { display: none !important; }
 
@@ -1294,11 +1293,27 @@
       #section-home { min-height: auto; padding: 0; }
       .home-grid {
         display: grid;
-        grid-template-columns: 1.2fr 0.8fr;
+        grid-template-columns: 0.35fr 0.65fr;
         gap: 12mm;
         padding: 0;
         min-height: auto;
         page-break-after: always;
+      }
+      .home-right .skills-block { display: none !important; }
+      .home-right .hero-img-wrap {
+        position: static !important;
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        animation: none !important;
+        min-height: 160mm;
+      }
+      .home-right .hero-img-wrap img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        display: block !important;
       }
       .hero-tag { font-size: 7pt; margin-bottom: 3mm; opacity: 1; animation: none; }
       .hero-title { font-size: 20pt; margin-bottom: 2mm; opacity: 1; animation: none; }
@@ -1388,12 +1403,9 @@
     </div>
 
     <!-- 우: 프로필 사진 + 스킬 + 자격증 -->
-    <div>
+    <div class="home-right">
       <div class="hero-img-wrap" style="position:static; margin-bottom:2rem; width:100%; height:220px;">
-        <div class="hero-img-placeholder">
-          <span style="font-size:2rem;">🌿</span>
-          <span>Profile Photo</span>
-        </div>
+        <img src="images/profile.jpg" alt="프로필 사진" style="width:100%;height:100%;object-fit:cover;display:block;">
       </div>
 
       <div class="skills-block">
@@ -1790,10 +1802,6 @@
               <li>Python + AI 기반 EDA 자동화</li>
             </ul>
           </div>
-          <div>
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
-          </div>
         </div>
       </div>
     </div>
@@ -1835,10 +1843,6 @@
               <li>안면 랜드마크 기반 화자 자동 탐지 구현</li>
               <li>말풍선 형태 화자별 자막 배치 UX</li>
             </ul>
-          </div>
-          <div>
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · OpenCV · Inception · ResNet · Face Landmark Detection · MediaPipe</p>
           </div>
         </div>
       </div>
@@ -1882,10 +1886,6 @@
               <li>직관 의존 대응 → 데이터 기반 규칙 전환</li>
             </ul>
           </div>
-          <div>
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
-          </div>
         </div>
       </div>
     </div>
@@ -1927,11 +1927,6 @@
               <li>USER_ID별 최적 14일 분석 구간 자동 탐지</li>
               <li>데이터 추출 → 분류 → 저장 일괄 자동화</li>
             </ul>
-          </div>
-          <div>
-            <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
-            <p class="pdf-proj-stack" style="margin-top:0.3rem; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
           </div>
         </div>
       </div>
@@ -2045,14 +2040,6 @@
         </div>
       </div>
 
-      <div class="pf-section">
-        <div class="pf-section-header">
-          <span class="pf-num">+</span>
-          <span class="pf-section-title">기술 스택</span>
-        </div>
-        <div class="pf-body">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</div>
-      </div>
-
       <div class="modal-links">
         <a href="https://github.com/" target="_blank">GitHub</a>
         <a href="https://www.youtube.com/watch?v=XcTPIbSz6eI" target="_blank">▶ 시연 영상 (YouTube)</a>
@@ -2104,10 +2091,6 @@
         </ul>
       </div>
 
-      <div class="modal-section">
-        <h4>기술 스택</h4>
-        <p>Python · OpenCV · Inception · ResNet · Face Landmark Detection</p>
-      </div>
     `,
 
     esb: `
@@ -2157,10 +2140,6 @@
         </ul>
       </div>
 
-      <div class="modal-section">
-        <h4>기술 스택</h4>
-        <p>Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
-      </div>
     `,
 
     aihealth: `
@@ -2227,10 +2206,7 @@
         <p>T_DATA_USER_INFO (사용자 정보) · T_DATA_LABEL (라벨) · T_DATA_STEP (걸음수) · T_DATA_PICTURE (사진) · T_DATA_LUX (조도) · T_DATA_DB (소음)</p>
       </div>
 
-      <div class="modal-section">
-        <h4>기술 스택</h4>
-        <p>Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · Matplotlib · IoT 라이프로그</p>
-      </div>
+
 
       <div class="modal-links">
         <a href="https://github.com/alsxxxz/Lifelog" target="_blank">GitHub — Lifelog</a>
