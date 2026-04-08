@@ -988,25 +988,110 @@
     }
 
     /* =============================================
-       Hero + About 합친 홈 그리드
+       홈 전체 그리드: 좌(히어로+바이오+스킬) | 우(사진+프로필정보)
+       - 두 컬럼 50/50 분할
+       - 좌우 컬럼은 세로 중앙 정렬
     ============================================= */
     .home-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 5rem;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: center;
       min-height: 100vh;
       padding: 8rem 3rem 5rem;
       max-width: 1100px;
       margin: 0 auto;
     }
 
-    .home-divider {
-      width: 2rem;
-      height: 1px;
-      background: var(--border);
-      margin: 1.8rem 0;
+    /* =============================================
+       좌측 컬럼: 히어로 텍스트 + 바이오 + 하단 스킬/자격증
+       - justify-content: space-between 으로
+         상단(히어로) / 하단(스킬) 자동 배치
+    ============================================= */
+    .home-left {
+      padding-right: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 70vh;
     }
+
+    /* 좌측 상단: hero-tag + title + bio */
+    .home-left-top { flex: 1; }
+
+    /* 좌측 하단: 스킬바 + 자격증 구분선 포함 */
+    .home-bottom-skills {
+      margin-top: 2.5rem;
+      padding-top: 1.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* =============================================
+       우측 컬럼: 사진(왼) + 이름·정보(오른) 가로 배치
+       - 좌측 컬럼과 구분하는 세로 경계선
+    ============================================= */
+    .home-right {
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+      padding-left: 3rem;
+      border-left: 1px solid var(--border);
+    }
+
+    /* 프로필 사진 래퍼: 고정 너비 220px */
+    .profile-photo-wrap {
+      flex-shrink: 0;
+      width: 220px;
+    }
+    .profile-photo-wrap img {
+      width: 100%;
+      height: 290px;
+      object-fit: cover;
+      object-position: top center; /* 얼굴이 잘리지 않도록 상단 기준 */
+      display: block;
+    }
+
+    /* 이름 + 프로필 정보 영역 */
+    .profile-info {
+      flex: 1;
+      padding-top: 0.5rem;
+    }
+
+    /* "박민주 · Minjoo Park" 크고 굵게 */
+    .profile-name-large {
+      font-family: var(--heading);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.8rem;
+      line-height: 1.3;
+    }
+
+    /* 정보 항목 세로 목록 */
+    .profile-meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    /* 각 정보 행: [강조 라벨] [값] */
+    .profile-meta-item {
+      display: flex;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+    .profile-meta-item strong {
+      color: var(--text);
+      font-weight: 600;
+      min-width: 4.5rem; /* 라벨 너비 고정으로 값 세로 정렬 */
+      flex-shrink: 0;
+    }
+    .profile-meta-item span { color: var(--muted); }
+
+    /* (더 이상 사용하지 않지만 하위 호환용 유지) */
+    .home-divider { display: none; }
 
     /* =============================================
        가운데 수직 타임라인
@@ -1164,71 +1249,192 @@
     .portfolio-pdf-view { display: none; }
     .portfolio-pdf-view.active { display: block; }
 
+    /* =============================================
+       Portfolio PDF 뷰 — 프로젝트 페이지
+       웹: 카드 형태, 스크롤 가능
+       인쇄: 프로젝트당 A4 1장 (가로)
+
+       레이아웃 구조 (좌 55% | 우 45%):
+       ┌──────────────────────────────────────────────┐
+       │ HEADER: 번호·제목·부제·통계 뱃지              │
+       ├──────────────────┬───────────────────────────┤
+       │  개요            │  이미지 1 │ 이미지 2      │
+       │  진행한 일       ├───────────────────────────┤
+       │  주요 액션       │     이미지 3 (wide)       │
+       ├──────────────────┴───────────────────────────┤
+       │  기술 스택 (footer)                           │
+       └──────────────────────────────────────────────┘
+    ============================================= */
+
+    /* 카드 전체 */
     .pdf-proj-page {
       background: #fff;
       border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 2rem 2.4rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 2px 18px rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 2.2rem 2.6rem 1.8rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.07);
       display: flex;
       flex-direction: column;
-      min-height: 480px;
+      gap: 0;
     }
+
+    /* 목차 페이지 */
     .pdf-toc-page {
       align-items: center;
       justify-content: center;
       text-align: center;
-      gap: 0;
-      min-height: 360px;
+      min-height: 400px;
     }
-    .pdf-toc-hero { margin-bottom: 2rem; }
-    .pdf-toc-hero-title { font-size: 1.8rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.25rem; }
-    .pdf-toc-hero-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); letter-spacing: 0.06em; }
-    .pdf-toc-list { width: 100%; max-width: 680px; display: flex; flex-direction: column; gap: 0.45rem; }
+    .pdf-toc-hero { margin-bottom: 2.2rem; }
+    .pdf-toc-hero-title { font-size: 2rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; margin-bottom: 0.3rem; }
+    .pdf-toc-hero-sub { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); letter-spacing: 0.07em; }
+    .pdf-toc-list { width: 100%; max-width: 700px; display: flex; flex-direction: column; gap: 0.5rem; }
     .pdf-toc-item {
-      display: flex; align-items: center; gap: 1.1rem;
-      padding: 0.8rem 1.2rem;
-      border: 1.5px solid var(--border); border-radius: 8px; background: var(--surface); text-align: left;
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 0.9rem 1.3rem;
+      border: 1.5px solid var(--border); border-radius: 10px;
+      background: var(--surface); text-align: left;
+      transition: border-color 0.2s;
     }
-    .pdf-toc-item-num { font-family: var(--mono); font-size: 1rem; font-weight: 800; color: var(--accent); min-width: 1.8rem; }
-    .pdf-toc-item-name { font-size: 0.92rem; font-weight: 700; color: var(--text); margin-bottom: 0.15rem; }
-    .pdf-toc-item-tag { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); letter-spacing: 0.03em; }
+    .pdf-toc-item:hover { border-color: var(--accent); }
+    .pdf-toc-item-num { font-family: var(--mono); font-size: 1.1rem; font-weight: 800; color: var(--accent); min-width: 2rem; }
+    .pdf-toc-item-name { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 0.18rem; }
+    .pdf-toc-item-tag { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); letter-spacing: 0.04em; }
 
+    /* ---- 헤더 영역 ---- */
     .pdf-proj-hdr {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      padding-bottom: 0.9rem; margin-bottom: 1rem;
-      border-bottom: 2px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 1rem;
+      margin-bottom: 1.4rem;
+      border-bottom: 2.5px solid var(--accent);
     }
+    .pdf-proj-hdr-left { flex: 1; }
+
+    /* 카테고리 배지 */
     .pdf-proj-badge {
-      font-family: var(--mono); font-size: 0.63rem; font-weight: 700;
+      font-family: var(--mono); font-size: 0.65rem; font-weight: 700;
       color: #166534; background: #f0fdf4; border: 1.5px solid #86efac;
-      border-radius: 999px; padding: 0.1rem 0.6rem;
-      display: inline-block; margin-bottom: 0.45rem;
+      border-radius: 999px; padding: 0.15rem 0.75rem;
+      display: inline-block; margin-bottom: 0.55rem;
     }
-    .pdf-proj-num-title { display: flex; align-items: baseline; gap: 0.55rem; }
-    .pdf-proj-pnum { font-family: var(--mono); font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .pdf-proj-ptitle { font-size: 1.3rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; line-height: 1.15; }
-    .pdf-proj-psub { font-size: 0.8rem; color: var(--muted); margin-top: 0.12rem; font-family: var(--mono); }
-    .pdf-proj-hdr-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.35rem; }
+
+    /* 번호 + 타이틀 */
+    .pdf-proj-num-title { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.2rem; }
+    .pdf-proj-pnum {
+      font-family: var(--mono); font-size: 1.7rem; font-weight: 800;
+      color: var(--accent); line-height: 1;
+    }
+    .pdf-proj-ptitle {
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--text); letter-spacing: -0.02em; line-height: 1.15;
+    }
+    .pdf-proj-psub {
+      font-family: var(--mono); font-size: 0.8rem; color: var(--muted); margin-top: 0.15rem;
+    }
+
+    /* 우측 통계 뱃지 열 */
+    .pdf-proj-hdr-right {
+      display: flex; flex-direction: column; align-items: flex-end;
+      gap: 0.4rem; padding-left: 1.5rem; flex-shrink: 0;
+    }
     .pdf-proj-stat-pill {
-      font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
-      padding: 0.2rem 0.7rem;
+      font-family: var(--mono); font-size: 0.7rem; font-weight: 700;
+      padding: 0.25rem 0.85rem;
       background: #f0fdf4; color: #166534; border: 1.5px solid #86efac;
       border-radius: 999px; white-space: nowrap;
     }
-    .pdf-proj-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; flex: 1; }
-    .pdf-proj-col { display: flex; flex-direction: column; gap: 0.7rem; }
-    .pdf-proj-sec-lbl {
-      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2);
-      padding-bottom: 0.2rem; border-bottom: 1px solid var(--border);
+
+    /* ---- 바디: 텍스트(좌) | 이미지(우) ---- */
+    .pdf-proj-body {
+      display: grid;
+      grid-template-columns: 40% 1fr;
+      gap: 2rem;
+      flex: 1;
+      min-height: 0;
     }
-    .pdf-proj-text { font-size: 0.83rem; color: var(--text); line-height: 1.7; margin: 0; }
-    .pdf-proj-ul { margin: 0; padding-left: 1.1rem; font-size: 0.8rem; color: var(--text); line-height: 1.75; }
-    .pdf-proj-ul li { margin-bottom: 0.1rem; }
-    .pdf-proj-stack { font-family: var(--mono); font-size: 0.67rem; color: var(--muted); line-height: 1.65; margin: 0; }
-    .pdf-proj-pills { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+    /* 텍스트 컬럼 */
+    .pdf-proj-col { display: flex; flex-direction: column; gap: 1rem; }
+
+    /* 섹션 라벨 (소제목) */
+    .pdf-proj-sec-lbl {
+      font-family: var(--mono); font-size: 0.62rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent2);
+      padding-bottom: 0.25rem; margin-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 본문 텍스트 — 가독성을 위해 line-height 여유있게 */
+    .pdf-proj-text {
+      font-size: 0.7rem; color: var(--text);
+      line-height: 1.78; margin: 0;
+    }
+
+    /* 불릿 리스트 */
+    .pdf-proj-ul {
+      margin: 0; padding-left: 1.15rem;
+      font-size: 0.7rem; color: var(--text); line-height: 1.8;
+    }
+    .pdf-proj-ul li { margin-bottom: 0.01rem; }
+
+    /* 기술 스택 (푸터 스타일) */
+    .pdf-proj-stack {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+  
+    }
+
+    /* ---- 이미지 컬럼 ---- */
+    .pdf-proj-img-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    /* 상단 이미지 2장 나란히 */
+    .pdf-proj-img-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    /* 이미지 플레이스홀더 (실제 이미지 없을 때 점선 박스) */
+    /* 수정: img 태그 주석 해제 후 실제 이미지 삽입 가능 */
+    .pdf-proj-img-ph {
+      background: var(--surface);
+      border: 1.5px dashed var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.05em;
+      overflow: hidden;
+      position: relative;
+    }
+    /* 높이 변형 */
+    .pdf-proj-img-ph.h-sm  { height: 120px; }  /* 상단 2분할 */
+    .pdf-proj-img-ph.h-md  { height: 150px; }  /* 하단 wide */
+    .pdf-proj-img-ph.h-lg  { height: 280px; }  /* 단독 전체 */
+
+    /* 이미지 삽입 시 꽉 채우기 */
+    .pdf-proj-img-ph img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+
+    /* 기술 스택 푸터 구분선 */
+    .pdf-proj-footer {
+      margin-top: 1.2rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .pdf-proj-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -1323,23 +1529,69 @@
       .pdf-table .pdf-td-desc { font-size: 7.5pt; }
       .tl-type { font-size: 6.5pt; padding: 0.5mm 2mm; }
 
-      /* Portfolio — 카드 뷰 숨기고 PDF 뷰 표시 */
+      /* ---- Portfolio: 카드 뷰 숨기고 PDF 뷰 표시 ---- */
       #portfolioCardView, .portfolio-grid, .portfolio-toggle { display: none !important; }
       #portfolioPdfView { display: block !important; }
-      .pdf-proj-page { break-after: page; box-shadow: none; border: none; border-radius: 0; padding: 0; min-height: auto; }
-      .pdf-toc-page { break-after: page; }
-      .pdf-proj-hdr { border-bottom-color: #5cb531; }
-      .pdf-proj-sec-lbl { font-size: 6.5pt; }
-      .pdf-proj-text { font-size: 8pt; }
-      .pdf-proj-ul { font-size: 7.5pt; }
-      .pdf-proj-stack { font-size: 6.5pt; }
-      .pdf-proj-stat-pill { font-size: 6.5pt; padding: 0.5mm 2mm; }
-      .pdf-proj-pnum { font-size: 14pt; }
-      .pdf-proj-ptitle { font-size: 14pt; }
-      .pdf-toc-hero-title { font-size: 18pt; }
-      .pdf-toc-item { padding: 3mm 5mm; }
-      .pdf-toc-item-name { font-size: 9pt; }
-      .pdf-toc-item-tag { font-size: 7pt; }
+
+      /* 프로젝트 1장 = A4 1페이지 (182mm 사용 가능 높이) */
+      .pdf-proj-page {
+        break-after: page;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        height: 182mm;
+        min-height: 182mm;
+        max-height: 182mm;
+        overflow: hidden;
+        margin-bottom: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .pdf-toc-page { break-after: page; min-height: 182mm; height: 182mm; }
+
+      /* 헤더 */
+      .pdf-proj-hdr { padding-bottom: 3mm; margin-bottom: 4mm; border-bottom: 2px solid #5cb531; }
+      .pdf-proj-badge { font-size: 6.5pt; padding: 0.5mm 2.5mm; margin-bottom: 1.5mm; }
+      .pdf-proj-pnum  { font-size: 18pt; }
+      .pdf-proj-ptitle { font-size: 16pt; }
+      .pdf-proj-psub  { font-size: 8pt; margin-top: 0.5mm; }
+      .pdf-proj-stat-pill { font-size: 6.5pt; padding: 0.5mm 2.5mm; }
+
+      /* 바디 레이아웃: 텍스트 | 이미지 */
+      .pdf-proj-body {
+        grid-template-columns: 56% 1fr;
+        gap: 6mm;
+        flex: 1;
+        overflow: hidden;
+      }
+      .pdf-proj-col { gap: 3mm; }
+
+      /* 섹션 라벨 */
+      .pdf-proj-sec-lbl { font-size: 6.5pt; padding-bottom: 0.8mm; margin-bottom: 1.5mm; }
+
+      /* 본문 텍스트 — 인쇄 최소 9pt 권장 */
+      .pdf-proj-text { font-size: 9pt;   line-height: 1.65; }
+      .pdf-proj-ul   { font-size: 8.5pt; line-height: 1.7;  }
+      .pdf-proj-ul li { margin-bottom: 0.5mm; }
+      .pdf-proj-stack { font-size: 7.5pt; line-height: 1.6; }
+
+      /* 이미지 플레이스홀더 */
+      .pdf-proj-img-col { gap: 2.5mm; }
+      .pdf-proj-img-row { gap: 2.5mm; }
+      .pdf-proj-img-ph { border: 1px solid #ddd; background: #f8f8f8; font-size: 7pt; }
+      .pdf-proj-img-ph.h-sm { height: 52mm; }
+      .pdf-proj-img-ph.h-md { height: 62mm; }
+      .pdf-proj-img-ph.h-lg { height: 120mm; }
+
+      /* 기술 스택 푸터 */
+      .pdf-proj-footer { margin-top: 2.5mm; padding-top: 2mm; }
+
+      /* 목차 */
+      .pdf-toc-hero-title { font-size: 20pt; }
+      .pdf-toc-item { padding: 2.5mm 5mm; }
+      .pdf-toc-item-name { font-size: 9.5pt; }
+      .pdf-toc-item-tag  { font-size: 7pt; }
     }
   </style>
 </head>
@@ -1352,54 +1604,58 @@
   <a href="#section-portfolio">Portfolio</a>
 </nav>
 
-<!-- HOME + ABOUT 합친 섹션 -->
+<!-- ==============================
+     HOME 섹션
+     구조: 좌측(히어로+바이오+스킬) | 우측(사진+프로필정보)
+     수정 포인트:
+       - 타이틀:    .hero-title h1 안의 텍스트
+       - 바이오:    .about-bio p 안의 텍스트
+       - GitHub:   .about-links a 의 href
+       - 사진:      .profile-photo-wrap img 의 src
+       - 이름:      .profile-name-large
+       - 정보항목:  .profile-meta-item 각 행
+       - 스킬바:    style="width:XX%" 퍼센트 값
+       - 자격증:    .cert-badge 텍스트
+============================== -->
 <div id="section-home">
   <div class="home-grid">
 
-    <!-- 좌: 헤로 타이틀 + 바이오 + 링크 -->
-    <div>
-      <div class="hero-tag">✦ Data Analyst · Data Modeler · IT Planner</div>
-      <h1 class="hero-title">데이터로 비즈니스<br>문제를 푸는 <span>분석가</span></h1>
-      <p class="hero-sub"><span>박민주</span> · Minjoo Park</p>
+    <!-- ===== 좌측 컬럼 ===== -->
+    <div class="home-left">
 
-      <div class="home-divider"></div>
+      <!-- 상단: 직함 태그 + 메인 타이틀 + 바이오 + 링크 -->
+      <div class="home-left-top">
 
-      <div class="profile-meta">
-        <span><strong>학교</strong> 동국대학교 서울캠퍼스</span>
-        <span><strong>생년월일</strong> 2001.01.10</span>
-        <span><strong>전공</strong> 산업시스템공학 + 데이터사이언스</span>
-        <span><strong>E-mail</strong> abcmin42@gmail.com</span>
-      </div>
+        <!-- 직함 라벨 (초록 소문자 트래킹) — 수정: 직함 변경 시 이 텍스트 수정 -->
+        <div class="hero-tag">✦ Data Analyst · Data Modeler · IT Planner</div>
 
-      <p class="about-bio">
-        SQL 기반 데이터 파이프라인 구축과 NLP 모델 개발 실무를 경험한 데이터 분석가입니다.<br>
-        비즈니스 문제를 데이터로 정의하고, 분석 결과를 실제 의사결정에 연결하는 것을 좋아합니다.<br>
-        산업AI연구센터에서 다중 기관 협력 프로젝트를 수행하며 데이터 니즈 발굴부터 모델 설계·자동화까지 End-to-End로 경험했습니다.
-      </p>
+        <!-- 메인 타이틀 — 수정: <span> 안이 초록 강조 색상 -->
+        <h1 class="hero-title">데이터로 비즈니스<br>문제를 해결하는 <span>기획자</span></h1>
 
-      <div class="about-links" style="margin-top:1.2rem;">
-        <span>Github : <a href="https://github.com/" target="_blank">Link</a></span>
-      </div>
+        <!-- 자기소개 바이오 — 수정: 3줄 소개 텍스트 -->
+        <p class="about-bio" style="margin-top:1.8rem;">
+          다양한 데이터 파이프라인 구축과 LLM개발 실무를 경험한 데이터 분석 기획자입니다.<br>
+          비즈니스 문제를 데이터로 정의하고, 분석 결과를 실제 의사결정에 연결했을 때 오는<br>
+          피드백을 자양분 삼아 성장하고 있습니다.
+        </p>
 
-      <div class="scroll-hint" style="position:static; margin-top:3rem; opacity:1; animation:none;">
-        <div class="scroll-line"></div>
-        scroll to explore
-      </div>
-    </div>
-
-    <!-- 우: 프로필 사진 + 스킬 + 자격증 -->
-    <div>
-      <div class="hero-img-wrap" style="position:static; margin-bottom:2rem; width:100%; height:220px;">
-        <div class="hero-img-placeholder">
-          <span style="font-size:2rem;">🌿</span>
-          <span>Profile Photo</span>
+        <!-- GitHub 링크 — 수정: href 에 실제 GitHub URL 입력 -->
+        <div class="about-links" style="margin-top:1.2rem;">
+          <span>Github : <a href="https://github.com/" target="_blank">Link</a></span>
         </div>
-      </div>
 
-      <div class="skills-block">
+      </div><!-- /home-left-top -->
+
+      <!-- 하단: 스킬바 + 자격증 (구분선 위) -->
+      <!-- 수정: 스킬 추가/삭제 시 .skill-bar-item 블록 복붙, width % 조정 -->
+      <div class="home-bottom-skills">
+
+        <!-- 프로그래밍 언어 스킬바 그룹 -->
         <div class="skill-group">
           <h4>Programming Languages</h4>
           <div class="skill-bars">
+
+            <!-- Skilled (진한 초록) -->
             <div class="skill-bar-item">
               <div class="skill-bar-label">Python <span>Skilled</span></div>
               <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
@@ -1412,6 +1668,8 @@
               <div class="skill-bar-label">PPT <span>Skilled</span></div>
               <div class="skill-bar-track"><div class="skill-bar-fill" style="width:88%"></div></div>
             </div>
+
+            <!-- Familiar (연한 초록 — .familiar 클래스로 구분) -->
             <div class="skill-bar-item">
               <div class="skill-bar-label">Java <span>Familiar</span></div>
               <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:45%"></div></div>
@@ -1420,18 +1678,66 @@
               <div class="skill-bar-label">Excel <span>Familiar</span></div>
               <div class="skill-bar-track"><div class="skill-bar-fill familiar" style="width:50%"></div></div>
             </div>
+
           </div>
         </div>
 
-        <div class="skill-group">
-          <h4>Certifications & Language</h4>
+        <!-- 자격증·어학 배지 — 수정: .cert-badge span 텍스트 추가/삭제 -->
+        <div class="skill-group" style="margin-top:1rem;">
+          <h4>Certifications &amp; Language</h4>
           <div class="cert-row">
             <span class="cert-badge">빅데이터 분석기사</span>
             <span class="cert-badge">OPIc IH</span>
           </div>
         </div>
+
+      </div><!-- /home-bottom-skills -->
+
+    </div><!-- /home-left -->
+
+    <!-- ===== 우측 컬럼: 사진 + 프로필 정보 ===== -->
+    <div class="home-right">
+
+      <!-- 프로필 사진 — 수정: src 경로를 실제 사진 파일로 교체 -->
+      <div class="profile-photo-wrap">
+        <img src="images/profile.jpg" alt="박민주 프로필 사진">
       </div>
-    </div>
+
+      <!-- 이름 + 상세 정보 -->
+      <div class="profile-info">
+
+        <!-- 한글명 · 영문명 — 수정: 이름 변경 시 이 텍스트 수정 -->
+        <div class="profile-name-large">박민주 · Minjoo Park</div>
+
+        <!-- 개인 정보 목록
+             수정: 항목 추가 시 .profile-meta-item 블록 복붙
+             strong = 라벨, span = 값 -->
+        <div class="profile-meta-list">
+          <div class="profile-meta-item">
+            <strong>학교</strong>
+            <span>동국대학교 서울캠퍼스</span>
+          </div>
+          <div class="profile-meta-item">
+            <strong>생년월일</strong>
+            <span>2001.01.10</span>
+          </div>
+          <div class="profile-meta-item">
+            <strong>주전공</strong>
+            <span>산업시스템공학</span>
+          </div>
+          <div class="profile-meta-item">
+            <strong>연계전공</strong>
+            <span>데이터사이언스소프트웨어</span>
+          </div>
+          <div class="profile-meta-item">
+            <strong>E-mail</strong>
+            <span>abcmin42@gmail.com</span>
+          </div>
+        </div>
+
+      </div><!-- /profile-info -->
+
+    </div><!-- /home-right -->
 
   </div>
 </div>
@@ -1711,10 +2017,24 @@
 
   </div><!-- /portfolioGrid -->
 
-  <!-- ===== Portfolio PDF 보기 뷰 ===== -->
+  <!-- ==============================
+       Portfolio PDF 보기 뷰
+       구조: 목차 1장 + 프로젝트 4장 = 총 5페이지
+
+       이미지 교체 방법:
+         1. .pdf-proj-img-ph 안의 주석(<!-- img -->
+         <!-- 2. src="images/파일명.png" 으로 교체
+         3. 빈 플레이스홀더 텍스트는 자동으로 사라짐
+
+       텍스트 수정 방법:
+         - 개요/진행한 일 : .pdf-proj-text 내용 교체
+         - 주요 액션 : .pdf-proj-ul li 추가/삭제
+         - 기술 스택 : .pdf-proj-stack 내용 교체
+         - 통계 뱃지 : .pdf-proj-stat-pill 추가/삭제
+        ============================== !--> 
   <div id="portfolioPdfView" class="portfolio-pdf-view">
 
-    <!-- 목차 -->
+    <!-- ===== 목차 페이지 ===== -->
     <div class="pdf-proj-page pdf-toc-page">
       <div class="pdf-toc-hero">
         <div class="pdf-toc-hero-title">Portfolio</div>
@@ -1738,7 +2058,7 @@
         <div class="pdf-toc-item">
           <div class="pdf-toc-item-num">03</div>
           <div>
-            <div class="pdf-toc-item-name">ESB 로그 시계열 패턴화 오류 감지</div>
+            <div class="pdf-toc-item-name">ESB 로그 데이터 활용 Software 장애 원인 파악</div>
             <div class="pdf-toc-item-tag">ML · Log Analysis · 산학협력 · PI-lab</div>
           </div>
         </div>
@@ -1752,8 +2072,10 @@
       </div>
     </div>
 
-    <!-- 프로젝트 01: SNATCH -->
+    <!-- ===== 프로젝트 01: SNATCH ===== -->
     <div class="pdf-proj-page">
+
+      <!-- 헤더 -->
       <div class="pdf-proj-hdr">
         <div class="pdf-proj-hdr-left">
           <div class="pdf-proj-badge">NLP · Pipeline · 졸업프로젝트</div>
@@ -1769,37 +2091,60 @@
           <span class="pdf-proj-stat-pill">End-to-End 파이프라인</span>
         </div>
       </div>
+
+      <!-- 바디: 텍스트(좌) | 이미지(우) -->
       <div class="pdf-proj-body">
+
+        <!-- 좌: 텍스트 -->
         <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">개요</div>
-            <p class="pdf-proj-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해 SNS 댓글 기반 소비자 분석 대시보드를 개발.</p>
+            <p class="pdf-proj-text">빠른 F&amp;B 트렌드 변화를 알아채기 어려운 편의점 운영자의 효율적 수주를 위해 SNS 댓글 기반 소비자 분석 대시보드를 개발했습니다.</p>
           </div>
           <div>
             <div class="pdf-proj-sec-lbl">진행한 일</div>
-            <p class="pdf-proj-text">유튜브·틱톡 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 카테고리별 평가를 Figma 대시보드로 시각화.</p>
+            <p class="pdf-proj-text">유튜브·틱톡 댓글 수집 → HDBSCAN 카테고리 분류 → KcELECTRA 감성분석 End-to-End 파이프라인 설계. '가격', '맛' 등 카테고리별 평가를 Figma 대시보드로 시각화했습니다.</p>
           </div>
-        </div>
-        <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">주요 액션</div>
             <ul class="pdf-proj-ul">
-              <li>YouTube · TikTok · 인스티즈 크롤링 및 수집</li>
-              <li>한국어 구어체 KcELECTRA 파인튜닝</li>
-              <li>HDBSCAN 클러스터링 → 감성분석 파이프라인 설계</li>
-              <li>Python + AI 기반 EDA 자동화</li>
+              <li>YouTube · TikTok · 인스티즈 크롤링 및 데이터 수집</li>
+              <li>한국어 구어체 처리를 위한 KcELECTRA 파인튜닝</li>
+              <li>HDBSCAN 클러스터링 → 카테고리 분류 → 감성분석 전체 Data 파이프라인 설계</li>
+              <li>Python + AI 기반 EDA 자동화 및 반복 업무 OneClick 자동화</li>
             </ul>
           </div>
-          <div>
+          <!-- 기술 스택 푸터 -->
+          <div class="pdf-proj-footer">
             <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA · HDBSCAN · HuggingFace · Figma</p>
+            <p class="pdf-proj-stack">Python · Selenium · BeautifulSoup · KcELECTRA  · HuggingFace · Figma</p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 프로젝트 02: 립리딩 -->
+        <!-- 이미지 영역 (사진 준비 시 주석 해제) -->
+        <div class="pdf-proj-img-col">
+          <div class="pdf-proj-img-row">
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/lipreading1.png" alt=""> -->
+              스크린샷 1
+            </div>
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/lipreading2.png" alt=""> -->
+              스크린샷 2
+            </div>
+          </div>
+          <div class="pdf-proj-img-ph h-md">
+            <!-- <img src="images/lipreading3.png" alt=""> -->
+            스크린샷 3
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /프로젝트 01 -->
+
+    <!-- ===== 프로젝트 02: 립리딩 ===== -->
     <div class="pdf-proj-page">
+
       <div class="pdf-proj-hdr">
         <div class="pdf-proj-hdr-left">
           <div class="pdf-proj-badge">AI · Computer Vision · 대한산업공학회</div>
@@ -1815,37 +2160,55 @@
           <span class="pdf-proj-stat-pill">4 모델 비교 선정</span>
         </div>
       </div>
+
       <div class="pdf-proj-body">
+
         <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">개요</div>
-            <p class="pdf-proj-text">OTT 다중 화자 환경에서 화자를 구분하지 못하는 기존 자막 시스템의 한계를 인식. 청각 장애인 학습·사회 참여 개선을 목표로 립리딩 기반 스마트 자막 서비스 제안.</p>
+            <p class="pdf-proj-text">OTT 다중 화자 환경에서 화자를 구분하지 못하는 기존 자막 시스템의 한계를 인식했습니다. 청각 장애인의 학습·사회 참여 개선을 목표로 립리딩 기반 스마트 자막 서비스를 제안했습니다.</p>
           </div>
           <div>
             <div class="pdf-proj-sec-lbl">진행한 일</div>
-            <p class="pdf-proj-text">Inception · ResNet 등 4가지 딥러닝 모델 정확도 비교 → 최적 모델 선정. 안면 랜드마크로 화자 자동 탐지, 말풍선 형태 화자별 자막 배치 UX 구현.</p>
+            <p class="pdf-proj-text">Inception · ResNet 등 4가지 딥러닝 모델 정확도 비교 → 최적 모델 선정. 안면 랜드마크로 화자 자동 탐지, 말풍선 형태 화자별 자막 배치 UX를 구현했습니다.</p>
           </div>
-        </div>
-        <div class="pdf-proj-col">
           <div>
-            <div class="pdf-proj-sec-lbl">주요 액션</div>
+            <div class="pdf-proj-sec-lbl">주요 액션(기여한 일)</div>
             <ul class="pdf-proj-ul">
-              <li>Inception · ResNet 등 4 모델 정확도 실험 비교</li>
-              <li>최적 모델 선정 및 파인튜닝</li>
-              <li>안면 랜드마크 기반 화자 자동 탐지 구현</li>
-              <li>말풍선 형태 화자별 자막 배치 UX</li>
+              <li>욕설 Data 전처리 및 필터링 모델링</li>
+              <li>말풍선 형태 화자별 자막 배치 UX 프로토타입 구현</li>
             </ul>
           </div>
-          <div>
+          <div class="pdf-proj-footer">
             <div class="pdf-proj-sec-lbl">기술 스택</div>
-            <p class="pdf-proj-stack">Python · OpenCV · Inception · ResNet · Face Landmark Detection · MediaPipe</p>
+            <p class="pdf-proj-stack">Python · 정규화 </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 프로젝트 03: ESB -->
+        <!-- 이미지 영역 (사진 준비 시 주석 해제) -->
+        <div class="pdf-proj-img-col">
+          <div class="pdf-proj-img-row">
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/lipreading1.png" alt=""> -->
+              스크린샷 1
+            </div>
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/lipreading2.png" alt=""> -->
+              스크린샷 2
+            </div>
+          </div>
+          <div class="pdf-proj-img-ph h-md">
+            <!-- <img src="images/lipreading3.png" alt=""> -->
+            스크린샷 3
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /프로젝트 02 -->
+
+    <!-- ===== 프로젝트 03: ESB ===== -->
     <div class="pdf-proj-page">
+
       <div class="pdf-proj-hdr">
         <div class="pdf-proj-hdr-left">
           <div class="pdf-proj-badge">ML · Log Analysis · 산학협력 · PI-lab</div>
@@ -1861,37 +2224,56 @@
           <span class="pdf-proj-stat-pill">인과관계 규칙화</span>
         </div>
       </div>
+
       <div class="pdf-proj-body">
+
         <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">개요</div>
-            <p class="pdf-proj-text">대규모 ESB 로그를 분석해 장애 원인 추론 시스템 개발. 기존 수동 확인으로 인한 복구 지연 문제를 데이터 기반 자동 감지 규칙으로 전환.</p>
+            <p class="pdf-proj-text">대규모 ESB 로그를 분석해 장애 원인 자동 추론 시스템을 개발했습니다. 기존 수동 확인으로 인한 복구 지연 문제를 데이터 기반 자동 감지 규칙으로 전환했습니다.</p>
           </div>
           <div>
             <div class="pdf-proj-sec-lbl">진행한 일</div>
-            <p class="pdf-proj-text">시계열 로그 데이터를 Random Forest로 패턴화, PC 알고리즘으로 지표 간 인과관계 분석. DB Lock · Disk I/O 병목 등 구체적 원인 판단 알림 규칙 시스템화.</p>
+            <p class="pdf-proj-text">시계열 로그 데이터를 Random Forest로 패턴화하고, PC 알고리즘으로 지표 간 인과관계를 분석했습니다. DB Lock · Disk I/O 병목 등 구체적 원인을 자동 판단하는 알림 규칙을 시스템화했습니다.</p>
           </div>
-        </div>
-        <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">주요 액션</div>
             <ul class="pdf-proj-ul">
               <li>ESB 로그 시계열 데이터 Random Forest 패턴화</li>
-              <li>PC 알고리즘 지표 간 인과관계 분석</li>
+              <li>PC 알고리즘으로 지표 간 인과관계 분석</li>
               <li>DB Lock · Disk I/O 병목 원인 판단 알림 규칙 구축</li>
-              <li>직관 의존 대응 → 데이터 기반 규칙 전환</li>
+              <li>직관 의존 수동 대응 → 데이터 기반 자동 규칙 전환</li>
             </ul>
           </div>
-          <div>
+          <div class="pdf-proj-footer">
             <div class="pdf-proj-sec-lbl">기술 스택</div>
             <p class="pdf-proj-stack">Python · Random Forest · PC Algorithm · Time Series Analysis · SQL</p>
           </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 프로젝트 04: AI Health -->
+        <div class="pdf-proj-img-col">
+          <div class="pdf-proj-img-row">
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/esb1.png" alt=""> -->
+              스크린샷 1
+            </div>
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/esb2.png" alt=""> -->
+              스크린샷 2
+            </div>
+          </div>
+          <div class="pdf-proj-img-ph h-md">
+            <!-- <img src="images/esb3.png" alt=""> -->
+            스크린샷 3
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /프로젝트 03 -->
+
+    <!-- ===== 프로젝트 04: 정신건강 서비스 ===== -->
     <div class="pdf-proj-page">
+
       <div class="pdf-proj-hdr">
         <div class="pdf-proj-hdr-left">
           <div class="pdf-proj-badge">NLP · ML · IoT · 4개 기관 협력</div>
@@ -1907,18 +2289,18 @@
           <span class="pdf-proj-stat-pill">4개 기관 협력</span>
         </div>
       </div>
+
       <div class="pdf-proj-body">
+
         <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">개요 — 챗봇 고도화</div>
-            <p class="pdf-proj-text">협력사 요구(긍/부정 단순 출력) 대신 공감형 답변 방식으로 개선 제안 및 구현. 예상 반응률 차이 시각화로 이해관계자 설득 → 환자 만족도 66%→87% 달성.</p>
+            <p class="pdf-proj-text">협력사 요구(긍/부정 단순 출력) 대신 공감형 답변 방식으로 개선을 제안·구현했습니다. 예상 반응률 차이 시각화로 이해관계자를 설득해 환자 만족도 66%→87%를 달성했습니다.</p>
           </div>
           <div>
             <div class="pdf-proj-sec-lbl">개요 — 위험군 분류</div>
-            <p class="pdf-proj-text">IoT 라이프로그(걸음수·조도·소음) Raw 데이터를 Random Forest로 정신건강 위험군 분류. Excel 수작업 → SQL Server-Python 연동 전자동화 파이프라인 구축.</p>
+            <p class="pdf-proj-text">IoT 라이프로그(걸음수·조도·소음) Raw 데이터를 Random Forest로 정신건강 위험군 분류. Excel 수작업을 SQL Server–Python 연동 전자동화 파이프라인으로 전환했습니다.</p>
           </div>
-        </div>
-        <div class="pdf-proj-col">
           <div>
             <div class="pdf-proj-sec-lbl">주요 액션</div>
             <ul class="pdf-proj-ul">
@@ -1928,14 +2310,32 @@
               <li>데이터 추출 → 분류 → 저장 일괄 자동화</li>
             </ul>
           </div>
-          <div>
+          <div class="pdf-proj-footer">
             <div class="pdf-proj-sec-lbl">기술 스택</div>
             <p class="pdf-proj-stack">Python · KcELECTRA · LLM · Random Forest · SQL Server · SQLAlchemy · HuggingFace · IoT 라이프로그</p>
-            <p class="pdf-proj-stack" style="margin-top:0.3rem; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
+            <p class="pdf-proj-stack" style="margin-top:2px; color:#555;">협력 : 리테일테크 · 보건복지부 · 부산대병원 · 산업AI센터</p>
           </div>
         </div>
+
+        <div class="pdf-proj-img-col">
+          <div class="pdf-proj-img-row">
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/health1.png" alt=""> -->
+              스크린샷 1
+            </div>
+            <div class="pdf-proj-img-ph h-sm">
+              <!-- <img src="images/health2.png" alt=""> -->
+              스크린샷 2
+            </div>
+          </div>
+          <div class="pdf-proj-img-ph h-md">
+            <!-- <img src="images/health3.png" alt=""> -->
+            스크린샷 3
+          </div>
+        </div>
+
       </div>
-    </div>
+    </div><!-- /프로젝트 04 -->
 
   </div><!-- /portfolioPdfView -->
 
