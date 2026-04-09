@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 /dev/stdin:*)",
+      "Read(//usr/**)",
+      "Read(//usr/local/**)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
